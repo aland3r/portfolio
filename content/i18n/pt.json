@@ -448,8 +448,7 @@
       "shipPublic": "Enviar para produção",
       "readyOwner": "Colocar na fila (pronto, só owner)",
       "draft": "Voltar pra rascunho",
-      "deprecated": "Descontinuar",
-      "openUcFirst": "Abra essa UC primeiro pra mudar o status"
+      "deprecated": "Descontinuar"
     }
   },
   "kit": {

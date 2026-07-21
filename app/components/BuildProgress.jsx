@@ -99,7 +99,12 @@ function UcExpandPanel({ id, className, ariaLabel, open, onClosed, children }) {
     const finishClose = () => {
       if (finished) return
       finished = true
-      clearInlineStyles()
+      // Do NOT clearInlineStyles() here: the panel is about to unmount (via
+      // onClosed → mounted=false), which happens on React's next commit, not
+      // synchronously. Clearing height/overflow now drops the collapsed
+      // 0px/hidden state immediately, so the browser paints the full,
+      // unclipped content for a frame before React removes it — reads as the
+      // description card flashing back open right after you close it.
       outer.dataset.expandState = 'idle'
       onClosedRef.current?.()
     }
@@ -520,7 +525,6 @@ export default function BuildProgress({
                                       visibility={spec.visibility}
                                       className="build-progress__uc-beacon"
                                       onChange={(next) => onUpdateUcStatus(spec.id, next)}
-                                      interactive={isOpen}
                                     />
                                   ) : (
                                     <PublicationBeacon

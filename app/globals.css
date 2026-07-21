@@ -489,27 +489,6 @@ a {
   opacity: 0.6;
 }
 
-/*
- * Not interactive until the UC is open — communicated by the beacon's own
- * light going dim (opacity, glow off) rather than a separate disabled
- * treatment, per interaction-designer: the intensity of the status light
- * itself is the affordance.
- */
-.publication-beacon-menu--dim .publication-beacon-menu__trigger {
-  cursor: default;
-}
-
-.publication-beacon-menu--dim .publication-beacon-menu__trigger:hover,
-.publication-beacon-menu--dim .publication-beacon-menu__trigger:focus-visible {
-  background: transparent;
-}
-
-.publication-beacon-menu--dim .publication-beacon__core {
-  opacity: 0.55;
-  animation: none !important;
-  box-shadow: none !important;
-}
-
 .publication-beacon-menu__list {
   position: fixed;
   z-index: 10120;

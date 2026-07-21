@@ -448,8 +448,7 @@
       "shipPublic": "Ship to production",
       "readyOwner": "Queue it (ready, owner-only)",
       "draft": "Back to draft",
-      "deprecated": "Deprecate",
-      "openUcFirst": "Open this UC first to change its status"
+      "deprecated": "Deprecate"
     }
   },
   "kit": {
