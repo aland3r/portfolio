@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import {
   getActiveQuest,
   getAllProductsUseCaseProgress,
@@ -45,205 +45,6 @@ function UcChevronIcon({ className = '' }) {
       />
     </svg>
   )
-}
-
-const UC_EXPAND_EASE = 'cubic-bezier(0.22, 1, 0.36, 1)'
-const UC_EXPAND_DURATION = '0.46s'
-const UC_EXPAND_OPACITY_DURATION = '0.34s'
-const UC_EXPAND_OFFSET = '-0.4rem'
-
-function ucExpandTransition() {
-  return [
-    `height ${UC_EXPAND_DURATION} ${UC_EXPAND_EASE}`,
-    `opacity ${UC_EXPAND_OPACITY_DURATION} ease`,
-    `transform ${UC_EXPAND_DURATION} ${UC_EXPAND_EASE}`,
-  ].join(', ')
-}
-
-function UcExpandPanel({ id, className, ariaLabel, open, onClosed, children }) {
-  const outerRef = useRef(null)
-  const innerRef = useRef(null)
-  const wasOpenRef = useRef(false)
-  const onClosedRef = useRef(onClosed)
-  onClosedRef.current = onClosed
-
-  // Only `open` drives enter/exit. Do NOT depend on `children` — parent
-  // re-renders were restarting height 0→N and causing expand flicker.
-  useLayoutEffect(() => {
-    const outer = outerRef.current
-    const inner = innerRef.current
-    if (!outer || !inner) return undefined
-
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const wasOpen = wasOpenRef.current
-    wasOpenRef.current = open
-
-    const clearInlineStyles = () => {
-      outer.style.removeProperty('height')
-      outer.style.removeProperty('opacity')
-      outer.style.removeProperty('transform')
-      outer.style.removeProperty('transition')
-      outer.style.removeProperty('overflow')
-    }
-
-    if (reducedMotion) {
-      clearInlineStyles()
-      outer.dataset.expandState = open ? 'open' : 'idle'
-      if (!open && wasOpen) onClosedRef.current?.()
-      return undefined
-    }
-
-    let frame = 0
-    let finished = false
-
-    const finishClose = () => {
-      if (finished) return
-      finished = true
-      // Do NOT clearInlineStyles() here: the panel is about to unmount (via
-      // onClosed → mounted=false), which happens on React's next commit, not
-      // synchronously. Clearing height/overflow now drops the collapsed
-      // 0px/hidden state immediately, so the browser paints the full,
-      // unclipped content for a frame before React removes it — reads as the
-      // description card flashing back open right after you close it.
-      outer.dataset.expandState = 'idle'
-      onClosedRef.current?.()
-    }
-
-    const onTransitionEnd = (event) => {
-      if (event.target !== outer || event.propertyName !== 'height') return
-      if (open) {
-        outer.style.height = 'auto'
-        outer.style.overflow = 'visible'
-        outer.style.removeProperty('transition')
-        outer.style.removeProperty('transform')
-        outer.style.removeProperty('opacity')
-        outer.dataset.expandState = 'open'
-        return
-      }
-      finishClose()
-    }
-
-    outer.addEventListener('transitionend', onTransitionEnd)
-
-    if (open) {
-      const targetHeight = inner.scrollHeight
-      outer.dataset.expandState = wasOpen ? 'open' : 'opening'
-
-      if (wasOpen) {
-        // Already open — keep settled; ResizeObserver below adjusts height.
-        outer.style.height = 'auto'
-        outer.style.opacity = '1'
-        outer.style.transform = 'translateY(0)'
-        outer.style.overflow = 'visible'
-        return () => {
-          outer.removeEventListener('transitionend', onTransitionEnd)
-        }
-      }
-
-      outer.style.overflow = 'hidden'
-      outer.style.height = '0px'
-      outer.style.opacity = '0'
-      outer.style.transform = `translateY(${UC_EXPAND_OFFSET})`
-      outer.style.transition = ucExpandTransition()
-
-      frame = requestAnimationFrame(() => {
-        frame = requestAnimationFrame(() => {
-          outer.style.height = `${targetHeight}px`
-          outer.style.opacity = '1'
-          outer.style.transform = 'translateY(0)'
-        })
-      })
-
-      return () => {
-        cancelAnimationFrame(frame)
-        outer.removeEventListener('transitionend', onTransitionEnd)
-      }
-    }
-
-    if (!wasOpen) {
-      return () => {
-        outer.removeEventListener('transitionend', onTransitionEnd)
-      }
-    }
-
-    outer.dataset.expandState = 'closing'
-    const startHeight = outer.getBoundingClientRect().height || inner.scrollHeight
-    outer.style.overflow = 'hidden'
-    outer.style.height = `${startHeight}px`
-    outer.style.opacity = '1'
-    outer.style.transform = 'translateY(0)'
-    outer.style.transition = 'none'
-    void outer.offsetHeight
-    outer.style.transition = ucExpandTransition()
-
-    frame = requestAnimationFrame(() => {
-      outer.style.height = '0px'
-      outer.style.opacity = '0'
-      outer.style.transform = `translateY(${UC_EXPAND_OFFSET})`
-    })
-
-    const fallbackTimer = window.setTimeout(finishClose, 520)
-
-    return () => {
-      cancelAnimationFrame(frame)
-      clearTimeout(fallbackTimer)
-      outer.removeEventListener('transitionend', onTransitionEnd)
-    }
-  }, [open])
-
-  // While open, grow/shrink with content without replaying enter animation.
-  useLayoutEffect(() => {
-    if (!open) return undefined
-    const outer = outerRef.current
-    const inner = innerRef.current
-    if (!outer || !inner || typeof ResizeObserver === 'undefined') return undefined
-
-    const syncHeight = () => {
-      if (outer.dataset.expandState !== 'open') return
-      if (outer.style.height === 'auto' || !outer.style.height) return
-      outer.style.height = `${inner.scrollHeight}px`
-    }
-
-    const ro = new ResizeObserver(syncHeight)
-    ro.observe(inner)
-    return () => ro.disconnect()
-  }, [open])
-
-  return (
-    <div
-      ref={outerRef}
-      id={id}
-      className={className}
-      role="region"
-      aria-label={ariaLabel}
-      data-expand-state="idle"
-    >
-      <div ref={innerRef} className="build-progress__uc-expand-inner">
-        {children}
-      </div>
-    </div>
-  )
-}
-
-// Row shell must stay visually "active" (sticky, highlighted) for as long as
-// the panel is still animating closed — isOpen flips instantly on click, but
-// the panel takes ~460ms to collapse. Snapping the row's sticky/background
-// state off in that same instant, while the still-visible panel keeps
-// smoothly shrinking below it, is what reads as a blink/jump on close.
-// `mounted` (from UcExpandPanel's own onClosed) tracks the real animation
-// end, not just the logical selection change.
-function UcListItemActive({ isOpen, children }) {
-  const [mounted, setMounted] = useState(isOpen)
-
-  useLayoutEffect(() => {
-    if (isOpen) setMounted(true)
-  }, [isOpen])
-
-  const handleClosed = useCallback(() => {
-    setMounted(false)
-  }, [])
-
-  return children({ showActive: isOpen || mounted, mounted, handleClosed })
 }
 
 function formatUcRowId(entry, spec, productFilter) {
@@ -495,127 +296,122 @@ export default function BuildProgress({
                   const rowId = formatUcRowId(entry, spec, productFilter)
                   const canEdit = hasEditColumn && onEditUc && canOpen
 
-                  return (
-                    <UcListItemActive key={`uc-${rowKey}`} isOpen={isOpen}>
-                      {({ showActive, mounted, handleClosed }) => {
-                        const shellClass = [
-                          'build-progress__uc-row-shell',
-                          hasEditColumn && 'build-progress__uc-row-shell--product',
-                          showActive && 'build-progress__uc-row-shell--active',
-                          canEdit && 'build-progress__uc-row-shell--editable',
-                          !canOpen && 'build-progress__uc-row-shell--disabled',
-                        ]
-                          .filter(Boolean)
-                          .join(' ')
-                        const itemClass = [
-                          'build-progress__uc-item',
-                          showActive && 'build-progress__uc-item--open',
-                        ]
-                          .filter(Boolean)
-                          .join(' ')
+                  const shellClass = [
+                    'build-progress__uc-row-shell',
+                    hasEditColumn && 'build-progress__uc-row-shell--product',
+                    isOpen && 'build-progress__uc-row-shell--active',
+                    canEdit && 'build-progress__uc-row-shell--editable',
+                    !canOpen && 'build-progress__uc-row-shell--disabled',
+                  ]
+                    .filter(Boolean)
+                    .join(' ')
+                  const itemClass = [
+                    'build-progress__uc-item',
+                    isOpen && 'build-progress__uc-item--open',
+                  ]
+                    .filter(Boolean)
+                    .join(' ')
 
-                        return (
-                          <li className={itemClass}>
-                            <div className={shellClass}>
-                              <span className="build-progress__uc-id">
-                                {spec ? (
-                                  onUpdateUcStatus && spec.id ? (
-                                    <PublicationBeaconMenu
-                                      status={spec.status}
-                                      visibility={spec.visibility}
-                                      className="build-progress__uc-beacon"
-                                      onChange={(next) => onUpdateUcStatus(spec.id, next)}
-                                    />
-                                  ) : (
-                                    <PublicationBeacon
-                                      status={spec.status}
-                                      visibility={spec.visibility}
-                                      className="build-progress__uc-beacon"
-                                    />
-                                  )
-                                ) : null}
-                                {rowId}
-                              </span>
+                  return (
+                    <li key={`uc-${rowKey}`} className={itemClass}>
+                      <div className={shellClass}>
+                        <span className="build-progress__uc-id">
+                          {spec ? (
+                            onUpdateUcStatus && spec.id ? (
+                              <PublicationBeaconMenu
+                                status={spec.status}
+                                visibility={spec.visibility}
+                                className="build-progress__uc-beacon"
+                                onChange={(next) => onUpdateUcStatus(spec.id, next)}
+                              />
+                            ) : (
+                              <PublicationBeacon
+                                status={spec.status}
+                                visibility={spec.visibility}
+                                className="build-progress__uc-beacon"
+                              />
+                            )
+                          ) : null}
+                          {rowId}
+                        </span>
+                        <button
+                          type="button"
+                          className="build-progress__uc-row"
+                          disabled={!canOpen}
+                          aria-expanded={isOpen}
+                          aria-controls={canOpen ? `uc-expand-${rowKey}` : undefined}
+                          onClick={() => {
+                            if (!canOpen) return
+                            onSelectUc?.(
+                              entry.uc,
+                              productFilter === 'all' ? entry.productCode : undefined,
+                            )
+                          }}
+                        >
+                          <span className="build-progress__uc-label">
+                            {spec?.title ? spec.title : `UC${entry.uc}`}
+                          </span>
+                          <span className="build-progress__uc-bar" aria-hidden="true">
+                            <span style={{ width: `${entry.percent}%` }} />
+                          </span>
+                          <span className="build-progress__uc-xp">{entry.done}/{entry.total}</span>
+                        </button>
+                        {hasEditColumn ? (
+                          <>
+                            {canEdit ? (
                               <button
                                 type="button"
-                                className="build-progress__uc-row"
-                                disabled={!canOpen}
-                                aria-expanded={isOpen}
-                                aria-controls={canOpen ? `uc-expand-${rowKey}` : undefined}
-                                onClick={() => {
-                                  if (!canOpen) return
-                                  onSelectUc?.(
+                                className="build-progress__uc-edit"
+                                aria-label={t('useCasesSpec.edit')}
+                                title={t('useCasesSpec.edit')}
+                                onClick={(event) => {
+                                  event.stopPropagation()
+                                  onEditUc?.(
                                     entry.uc,
                                     productFilter === 'all' ? entry.productCode : undefined,
                                   )
                                 }}
                               >
-                                <span className="build-progress__uc-label">
-                                  {spec?.title ? spec.title : `UC${entry.uc}`}
-                                </span>
-                                <span className="build-progress__uc-bar" aria-hidden="true">
-                                  <span style={{ width: `${entry.percent}%` }} />
-                                </span>
-                                <span className="build-progress__uc-xp">{entry.done}/{entry.total}</span>
+                                <UcEditIcon className="build-progress__uc-edit-icon" />
                               </button>
-                              {hasEditColumn ? (
-                                <>
-                                  {canEdit ? (
-                                    <button
-                                      type="button"
-                                      className="build-progress__uc-edit"
-                                      aria-label={t('useCasesSpec.edit')}
-                                      title={t('useCasesSpec.edit')}
-                                      onClick={(event) => {
-                                        event.stopPropagation()
-                                        onEditUc?.(
-                                          entry.uc,
-                                          productFilter === 'all' ? entry.productCode : undefined,
-                                        )
-                                      }}
-                                    >
-                                      <UcEditIcon className="build-progress__uc-edit-icon" />
-                                    </button>
-                                  ) : (
-                                    <span className="build-progress__uc-edit-slot" aria-hidden="true" />
-                                  )}
-                                  <span
-                                    className={`build-progress__uc-chevron${isOpen ? ' build-progress__uc-chevron--open' : ''}`}
-                                    aria-hidden="true"
-                                    onClick={() => {
-                                      if (!canOpen) return
-                                      onSelectUc?.(
-                                        entry.uc,
-                                        productFilter === 'all' ? entry.productCode : undefined,
-                                      )
-                                    }}
-                                  >
-                                    <UcChevronIcon className="build-progress__uc-chevron-icon" />
-                                  </span>
-                                </>
-                              ) : null}
+                            ) : (
+                              <span className="build-progress__uc-edit-slot" aria-hidden="true" />
+                            )}
+                            <span
+                              className={`build-progress__uc-chevron${isOpen ? ' build-progress__uc-chevron--open' : ''}`}
+                              aria-hidden="true"
+                              onClick={() => {
+                                if (!canOpen) return
+                                onSelectUc?.(
+                                  entry.uc,
+                                  productFilter === 'all' ? entry.productCode : undefined,
+                                )
+                              }}
+                            >
+                              <UcChevronIcon className="build-progress__uc-chevron-icon" />
+                            </span>
+                          </>
+                        ) : null}
+                      </div>
+                      {spec && renderUcFolio && isOpen ? (
+                        <div className="build-progress__uc-expand-item">
+                          <div
+                            id={`uc-expand-${rowKey}`}
+                            className="build-progress__uc-expand"
+                            role="region"
+                            aria-label={spec.title}
+                          >
+                            <div className="build-progress__uc-expand-inner">
+                              {renderUcFolio(
+                                entry.uc,
+                                spec,
+                                productFilter === 'all' ? entry.productCode : undefined,
+                              )}
                             </div>
-                            {spec && renderUcFolio && mounted ? (
-                              <div className="build-progress__uc-expand-item">
-                                <UcExpandPanel
-                                  id={`uc-expand-${rowKey}`}
-                                  className="build-progress__uc-expand"
-                                  ariaLabel={spec.title}
-                                  open={isOpen}
-                                  onClosed={handleClosed}
-                                >
-                                  {renderUcFolio(
-                                    entry.uc,
-                                    spec,
-                                    productFilter === 'all' ? entry.productCode : undefined,
-                                  )}
-                                </UcExpandPanel>
-                              </div>
-                            ) : null}
-                          </li>
-                        )
-                      }}
-                    </UcListItemActive>
+                          </div>
+                        </div>
+                      ) : null}
+                    </li>
                   )
                 })}
               </ul>

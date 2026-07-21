@@ -3379,12 +3379,6 @@ a {
     0 0 6px var(--cases-bar-seg-glow);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .build-progress--cases .build-progress__uc-expand {
-    overflow: visible;
-  }
-}
-
 .build-progress--cases .build-progress__uc-expand {
   box-shadow: none;
   position: relative;
