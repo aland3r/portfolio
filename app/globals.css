@@ -5234,21 +5234,12 @@ code {
 }
 
 .uc-editor__insert-row td.uc-editor__insert-cell {
-  height: 0;
+  height: 0.7rem;
   padding: 0;
   border: 0;
   line-height: 0;
   position: relative;
   overflow: visible;
-}
-
-.uc-editor__insert-cell::after {
-  content: '';
-  position: absolute;
-  inset-inline: 0;
-  top: -0.4rem;
-  bottom: -0.4rem;
-  pointer-events: auto;
 }
 
 .uc-editor__insert-cell::before {
@@ -5271,7 +5262,6 @@ code {
 
 .uc-editor__insert-btn {
   position: absolute;
-  left: 0.35rem;
   top: 50%;
   transform: translate(-50%, -50%) scale(0.7);
   display: inline-flex;
@@ -5289,8 +5279,19 @@ code {
   cursor: pointer;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.12s ease, transform 0.12s ease, background-color 0.12s ease;
+  transition: opacity 0.12s ease, transform 0.12s ease, background-color 0.12s ease, left 0.12s ease, right 0.12s ease;
   z-index: 1;
+}
+
+.uc-editor__insert-row--left .uc-editor__insert-btn {
+  left: 0.35rem;
+  right: auto;
+}
+
+.uc-editor__insert-row--right .uc-editor__insert-btn {
+  left: auto;
+  right: 0.35rem;
+  transform: translate(50%, -50%) scale(0.7);
 }
 
 .uc-editor__insert-row:hover .uc-editor__insert-btn,
@@ -5298,7 +5299,18 @@ code {
 .uc-editor__insert-btn:focus-visible {
   opacity: 1;
   pointer-events: auto;
+}
+
+.uc-editor__insert-row--left:hover .uc-editor__insert-btn,
+.uc-editor__insert-row--left:focus-within .uc-editor__insert-btn,
+.uc-editor__insert-row--left .uc-editor__insert-btn:focus-visible {
   transform: translate(-50%, -50%) scale(1);
+}
+
+.uc-editor__insert-row--right:hover .uc-editor__insert-btn,
+.uc-editor__insert-row--right:focus-within .uc-editor__insert-btn,
+.uc-editor__insert-row--right .uc-editor__insert-btn:focus-visible {
+  transform: translate(50%, -50%) scale(1);
 }
 
 .uc-editor__insert-btn:hover,

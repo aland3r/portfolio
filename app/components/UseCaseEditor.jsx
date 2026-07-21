@@ -34,9 +34,21 @@ function serializeForm(form) {
 }
 
 function InsertStepDivider({ onInsert, label }) {
+  const [side, setSide] = useState('left')
+
+  function handlePointerMove(event) {
+    const rect = event.currentTarget.getBoundingClientRect()
+    const nextSide = event.clientX - rect.left > rect.width / 2 ? 'right' : 'left'
+    setSide((current) => (current === nextSide ? current : nextSide))
+  }
+
   return (
-    <tr className="uc-editor__insert-row">
-      <td colSpan={4} className="uc-editor__insert-cell">
+    <tr className={`uc-editor__insert-row uc-editor__insert-row--${side}`}>
+      <td
+        colSpan={4}
+        className="uc-editor__insert-cell"
+        onMouseMove={handlePointerMove}
+      >
         <button
           type="button"
           className="uc-editor__insert-btn"
