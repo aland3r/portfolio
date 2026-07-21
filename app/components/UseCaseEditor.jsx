@@ -33,6 +33,24 @@ function serializeForm(form) {
   return JSON.stringify(rest)
 }
 
+function InsertStepDivider({ onInsert, label }) {
+  return (
+    <tr className="uc-editor__insert-row">
+      <td colSpan={4} className="uc-editor__insert-cell">
+        <button
+          type="button"
+          className="uc-editor__insert-btn"
+          onClick={onInsert}
+          aria-label={label}
+          title={label}
+        >
+          <span aria-hidden="true">+</span>
+        </button>
+      </td>
+    </tr>
+  )
+}
+
 function flowSectionLabel(kind, labels) {
   if (kind === 'alternative') return labels.stepsAlternatives ?? 'Alternatives'
   if (kind === 'exception') return labels.stepsExceptions ?? 'Exceptions'
@@ -102,6 +120,17 @@ export default function UseCaseEditor({
       ...current,
       steps: [...current.steps, emptyStep(current.steps.length)],
     }))
+  }
+
+  function insertStepAt(index) {
+    setForm((current) => {
+      const steps = [...current.steps]
+      steps.splice(index, 0, emptyStep(index))
+      return {
+        ...current,
+        steps: steps.map((step, stepIndex) => ({ ...step, sortOrder: stepIndex })),
+      }
+    })
   }
 
   function removeStep(index) {
@@ -315,6 +344,10 @@ export default function UseCaseEditor({
 
                 return (
                   <Fragment key={`step-${index}`}>
+                    <InsertStepDivider
+                      onInsert={() => insertStepAt(index)}
+                      label={labels.insertStep ?? 'Insert step here'}
+                    />
                     {showBand ? (
                       <tr className={`uc-editor__flow-band uc-editor__flow-band--${flow}`}>
                         <th scope="colgroup" colSpan={4}>
@@ -362,6 +395,10 @@ export default function UseCaseEditor({
                   </Fragment>
                 )
               })}
+              <InsertStepDivider
+                onInsert={() => insertStepAt(form.steps.length)}
+                label={labels.insertStep ?? 'Insert step here'}
+              />
             </tbody>
           </table>
         </div>

@@ -422,6 +422,7 @@
     "steps": "Schritte",
     "stepsHint": "Hauptpfad: 1, 2 · Alternativen: 1a, 2b · Ausnahmen: 2.1, 2.2",
     "addStep": "Schritt hinzufügen",
+    "insertStep": "Schritt hier einfügen",
     "removeStep": "Schritt entfernen",
     "removeStepConfirm": "Diesen Schritt entfernen?",
     "addRequirement": "Kriterium hinzufügen",

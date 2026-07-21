@@ -5233,6 +5233,80 @@ code {
   color: color-mix(in srgb, #c47a3a 50%, var(--cases-label-color));
 }
 
+.uc-editor__insert-row td.uc-editor__insert-cell {
+  height: 0;
+  padding: 0;
+  border: 0;
+  line-height: 0;
+  position: relative;
+  overflow: visible;
+}
+
+.uc-editor__insert-cell::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  top: -0.4rem;
+  bottom: -0.4rem;
+  pointer-events: auto;
+}
+
+.uc-editor__insert-cell::before {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  top: 50%;
+  height: 1px;
+  transform: translateY(-50%);
+  background: transparent;
+  transition: background-color 0.12s ease, height 0.12s ease;
+  pointer-events: none;
+}
+
+.uc-editor__insert-row:hover .uc-editor__insert-cell::before,
+.uc-editor__insert-row:focus-within .uc-editor__insert-cell::before {
+  height: 2px;
+  background: color-mix(in srgb, var(--work-accent-purple) 65%, transparent);
+}
+
+.uc-editor__insert-btn {
+  position: absolute;
+  left: 0.35rem;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.7);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.15rem;
+  height: 1.15rem;
+  margin: 0;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--work-accent-purple) 70%, var(--cases-border-color));
+  background: var(--cases-panel-bg);
+  color: var(--work-accent-purple);
+  font-size: 0.85rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.12s ease, transform 0.12s ease, background-color 0.12s ease;
+  z-index: 1;
+}
+
+.uc-editor__insert-row:hover .uc-editor__insert-btn,
+.uc-editor__insert-row:focus-within .uc-editor__insert-btn,
+.uc-editor__insert-btn:focus-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.uc-editor__insert-btn:hover,
+.uc-editor__insert-btn:focus-visible {
+  background: color-mix(in srgb, var(--work-accent-purple) 22%, var(--cases-panel-bg));
+  color: var(--arcadia-fg);
+}
+
 .uc-editor__footer {
   display: flex;
   flex-wrap: wrap;

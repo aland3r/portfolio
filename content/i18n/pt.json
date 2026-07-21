@@ -422,6 +422,7 @@
     "steps": "Passos",
     "stepsHint": "Principal: 1, 2 · Alternativas: 1a, 2b · Exceções: 2.1, 2.2",
     "addStep": "Adicionar passo",
+    "insertStep": "Inserir passo aqui",
     "removeStep": "Remover passo",
     "removeStepConfirm": "Remover este passo?",
     "addRequirement": "Adicionar critério",

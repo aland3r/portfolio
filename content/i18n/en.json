@@ -422,6 +422,7 @@
     "steps": "Steps",
     "stepsHint": "Main: 1, 2 · Alternatives: 1a, 2b · Exceptions: 2.1, 2.2",
     "addStep": "Add step",
+    "insertStep": "Insert step here",
     "removeStep": "Remove step",
     "removeStepConfirm": "Remove this step?",
     "addRequirement": "Add criterion",
