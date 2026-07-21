@@ -448,8 +448,7 @@
       "shipPublic": "In Produktion bringen",
       "readyOwner": "In die Warteschlange (bereit, nur Owner)",
       "draft": "Zurück zu Entwurf",
-      "deprecated": "Veralten",
-      "openUcFirst": "Diese UC zuerst öffnen, um den Status zu ändern"
+      "deprecated": "Veralten"
     }
   },
   "kit": {

@@ -44,12 +44,7 @@ const QUICK_PRESETS = [
  * Clickable beacon — owner-only quick menu to publish/queue/draft/deprecate
  * without opening the full editor. `onChange({status, visibility})` persists
  * (caller owns the actual DB write); this component only picks the preset.
- *
- * `interactive` gates the click: only true while the UC row is open — the
- * owner should review the UC before changing its publication state, not
- * fire a status change from the collapsed list. The beacon's own glow
- * communicates this (full glow when interactive, dimmed when not) instead
- * of relying on a separate disabled-looking control.
+ * Available on every item in the list, open or collapsed.
  */
 export function PublicationBeaconMenu({
   status,
@@ -57,7 +52,6 @@ export function PublicationBeaconMenu({
   size = 'sm',
   className = '',
   onChange,
-  interactive = true,
 }) {
   const { t } = useLocale()
   const [open, setOpen] = useState(false)
@@ -95,10 +89,6 @@ export function PublicationBeaconMenu({
     }
   }, [open])
 
-  useEffect(() => {
-    if (!interactive && open) setOpen(false)
-  }, [interactive, open])
-
   async function pick(preset) {
     setOpen(false)
     if (preset.status === status && preset.visibility === visibility) return
@@ -111,29 +101,23 @@ export function PublicationBeaconMenu({
   }
 
   return (
-    <span
-      ref={rootRef}
-      className={`publication-beacon-menu${interactive ? '' : ' publication-beacon-menu--dim'}`}
-    >
+    <span ref={rootRef} className="publication-beacon-menu">
       <button
         type="button"
         className="publication-beacon-menu__trigger"
         aria-haspopup="menu"
         aria-expanded={open}
         aria-busy={saving || undefined}
-        aria-disabled={!interactive || undefined}
-        title={interactive ? undefined : t('publicationBeacon.menu.openUcFirst')}
         disabled={saving}
         onClick={(event) => {
           event.stopPropagation()
           event.preventDefault()
-          if (!interactive) return
           setOpen((current) => !current)
         }}
       >
         <PublicationBeacon status={status} visibility={visibility} size={size} className={className} />
       </button>
-      {open && interactive && menuStyle ? (
+      {open && menuStyle ? (
         <ul
           className="publication-beacon-menu__list"
           role="menu"

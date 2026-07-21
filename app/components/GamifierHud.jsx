@@ -111,6 +111,7 @@ export default function GamifierHud({ products, label = 'QUEST LOG', gestaltVers
         aria-label={open ? 'Fechar quest log' : 'Abrir quest log'}
       >
         <span className="gamifier-hud__toggle-label">{label}</span>
+        <span className="gamifier-hud__toggle-version">GESTALT {versionLabel}</span>
         <span className="gamifier-hud__toggle-xp">{percent}%</span>
       </button>
 

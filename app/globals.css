@@ -489,27 +489,6 @@ a {
   opacity: 0.6;
 }
 
-/*
- * Not interactive until the UC is open — communicated by the beacon's own
- * light going dim (opacity, glow off) rather than a separate disabled
- * treatment, per interaction-designer: the intensity of the status light
- * itself is the affordance.
- */
-.publication-beacon-menu--dim .publication-beacon-menu__trigger {
-  cursor: default;
-}
-
-.publication-beacon-menu--dim .publication-beacon-menu__trigger:hover,
-.publication-beacon-menu--dim .publication-beacon-menu__trigger:focus-visible {
-  background: transparent;
-}
-
-.publication-beacon-menu--dim .publication-beacon__core {
-  opacity: 0.55;
-  animation: none !important;
-  box-shadow: none !important;
-}
-
 .publication-beacon-menu__list {
   position: fixed;
   z-index: 10120;
@@ -2560,12 +2539,14 @@ a {
 }
 
 @media (max-width: 767px) {
+  /* Quest log now owns the true bottom edge as a full-width bar — the dock
+     stacks above it instead of sharing the same edge. */
   .floating-dock {
-    bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+    bottom: calc(var(--floating-questlog-bar-height) + var(--floating-stack-gap));
   }
 
   .floating-dock:not(:has(.floating-sc-player)) {
-    bottom: calc(2.6875rem + env(safe-area-inset-bottom, 0px));
+    bottom: calc(var(--floating-questlog-bar-height) + var(--floating-stack-gap) + 1.6875rem);
   }
 
   .floating-sc-player {
@@ -5176,6 +5157,9 @@ code {
   line-height: var(--cases-type-line);
   font-weight: var(--cases-type-body-weight);
   letter-spacing: var(--cases-body-track);
+  font-style: normal;
+  font-variation-settings: 'slnt' 0;
+  font-synthesis: none;
   text-align: left;
   text-transform: none;
   cursor: pointer;
@@ -6153,6 +6137,9 @@ code {
   line-height: var(--prose-body-line-height);
   letter-spacing: var(--prose-body-letter-spacing);
   font-weight: var(--prose-body-weight);
+  font-style: normal;
+  font-variation-settings: var(--font-prose-variation, 'slnt' 0);
+  font-synthesis: none;
   text-transform: none;
   color: var(--arcadia-fg);
   background: var(--arcadia-bg);
@@ -6223,8 +6210,7 @@ code {
     --floating-clearance-bottom: calc(
       var(--floating-player-stack-height)
       + var(--floating-stack-gap)
-      + 3.75rem
-      + max(1rem, env(safe-area-inset-bottom, 0px))
+      + var(--floating-questlog-bar-height)
     );
   }
 }

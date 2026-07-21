@@ -18,7 +18,11 @@ import {
 import { useAuth } from './AuthProvider'
 import { useLocale } from './LocaleProvider'
 import AutoGrowTextarea from './AutoGrowTextarea'
+import EditorSelect from './EditorSelect'
 import { PublicationBeacon, PublicationBeaconLegend } from './PublicationBeacon'
+
+const STATUS_OPTIONS = ['draft', 'ready', 'shipped', 'deprecated']
+const VISIBILITY_OPTIONS = ['public', 'owner', 'member']
 
 const KIND_ORDER = ['agent', 'skill', 'command', 'partial', 'architecture']
 const CARD_KINDS = new Set(['agent', 'skill', 'partial'])
@@ -375,19 +379,23 @@ function KitDocEditor({
           </label>
           <label className="kit-doc-editor__field">
             <span>{labels.status}</span>
-            <select value={status} onChange={(e) => setStatus(e.target.value)} disabled={saving}>
-              {['draft', 'ready', 'shipped', 'deprecated'].map((s) => (
-                <option key={s} value={s}>{s}</option>
-              ))}
-            </select>
+            <EditorSelect
+              value={status}
+              onChange={setStatus}
+              aria-label={labels.status}
+              disabled={saving}
+              options={STATUS_OPTIONS.map((s) => ({ value: s, label: s }))}
+            />
           </label>
           <label className="kit-doc-editor__field">
             <span>{labels.visibility}</span>
-            <select value={visibility} onChange={(e) => setVisibility(e.target.value)} disabled={saving}>
-              {['public', 'owner', 'member'].map((s) => (
-                <option key={s} value={s}>{s}</option>
-              ))}
-            </select>
+            <EditorSelect
+              value={visibility}
+              onChange={setVisibility}
+              aria-label={labels.visibility}
+              disabled={saving}
+              options={VISIBILITY_OPTIONS.map((s) => ({ value: s, label: s }))}
+            />
           </label>
         </div>
 

@@ -22,16 +22,33 @@
 }
 
 @media (max-width: 767px) {
+  /* Bar hugging the true bottom edge — inset left/right to match the
+     content column and the CV/dock buttons above it, not edge-to-edge.
+     The dock (audio player) stacks above it, see .floating-dock's mobile
+     bottom offset. */
   .gamifier-hud {
-    left: 50%;
-    transform: translateX(-50%);
-    align-items: center;
-    bottom: calc(var(--floating-clearance-bottom, 7rem) + 0.25rem);
+    left: var(--site-inline-pad, 1.25rem);
+    right: var(--site-inline-pad, 1.25rem);
+    bottom: 0;
+    transform: none;
+    align-items: stretch;
+    max-width: none;
+    width: auto;
+    gap: 0;
   }
 
   .gamifier-hud--open {
-    /* Keep panel above dock but centered */
-    max-width: min(94vw, 24rem);
+    max-width: none;
+  }
+
+  .gamifier-hud__toggle {
+    width: 100%;
+    justify-content: space-between;
+    padding: 0.75rem 1rem calc(0.75rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .gamifier-hud__panel {
+    margin: 0;
   }
 }
 
@@ -59,6 +76,13 @@
 
 .gamifier-hud__toggle:active {
   transform: translateY(1px);
+}
+
+.gamifier-hud__toggle-version {
+  opacity: 0.85;
+  font-weight: 400;
+  flex: 1;
+  text-align: center;
 }
 
 .gamifier-hud__toggle-xp {
