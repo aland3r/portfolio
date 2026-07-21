@@ -6153,6 +6153,9 @@ code {
   line-height: var(--prose-body-line-height);
   letter-spacing: var(--prose-body-letter-spacing);
   font-weight: var(--prose-body-weight);
+  font-style: normal;
+  font-variation-settings: var(--font-prose-variation, 'slnt' 0);
+  font-synthesis: none;
   text-transform: none;
   color: var(--arcadia-fg);
   background: var(--arcadia-bg);

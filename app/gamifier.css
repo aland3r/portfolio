@@ -61,6 +61,11 @@
   transform: translateY(1px);
 }
 
+.gamifier-hud__toggle-version {
+  opacity: 0.65;
+  font-weight: 400;
+}
+
 .gamifier-hud__toggle-xp {
   padding: 0.15rem 0.4rem;
   border: 1px solid var(--cases-border-color, var(--arcadia-line, #222));
