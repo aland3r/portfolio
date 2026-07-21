@@ -9,7 +9,6 @@ import {
   updateUseCaseStatus,
 } from '@gestalt/auth'
 import BuildProgress from './BuildProgress'
-import { PublicationBeaconLegend } from './PublicationBeacon'
 import UseCaseFolioDetail from './UseCaseFolioDetail'
 import { useAuth } from './AuthProvider'
 import { useLocale } from './LocaleProvider'
@@ -226,7 +225,6 @@ export default function OwnerUseCasesPanel() {
 
   const ucListPrefix = (
     <>
-      {ownerDbAccess ? <PublicationBeaconLegend className="cases-beacon-legend" /> : null}
       {!loading && loadError ? (
         <p className="alert uc-folio-panel__hint">{loadError}</p>
       ) : null}
