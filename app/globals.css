@@ -4835,6 +4835,7 @@ code {
 .uc-editor__form {
   display: grid;
   gap: 0.85rem;
+  padding-inline: 1.5rem;
 }
 
 .uc-editor__description {
@@ -4923,6 +4924,10 @@ code {
   max-width: 100%;
   min-width: 0;
   overflow-x: clip;
+}
+
+.uc-editor__table-wrap--steps {
+  overflow: visible;
 }
 
 .uc-editor__table {
@@ -5263,7 +5268,7 @@ code {
 .uc-editor__insert-btn {
   position: absolute;
   top: 50%;
-  transform: translate(-50%, -50%) scale(0.7);
+  transform: translateY(-50%) scale(0.7);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -5279,19 +5284,19 @@ code {
   cursor: pointer;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.12s ease, transform 0.12s ease, background-color 0.12s ease, left 0.12s ease, right 0.12s ease;
+  transition: opacity 0.12s ease, transform 0.12s ease, background-color 0.12s ease;
   z-index: 1;
 }
 
+/* Sits just outside the table's own border, in the editor's inline padding gutter. */
 .uc-editor__insert-row--left .uc-editor__insert-btn {
-  left: 0.35rem;
+  left: -1.3rem;
   right: auto;
 }
 
 .uc-editor__insert-row--right .uc-editor__insert-btn {
   left: auto;
-  right: 0.35rem;
-  transform: translate(50%, -50%) scale(0.7);
+  right: -1.3rem;
 }
 
 .uc-editor__insert-row:hover .uc-editor__insert-btn,
@@ -5299,18 +5304,7 @@ code {
 .uc-editor__insert-btn:focus-visible {
   opacity: 1;
   pointer-events: auto;
-}
-
-.uc-editor__insert-row--left:hover .uc-editor__insert-btn,
-.uc-editor__insert-row--left:focus-within .uc-editor__insert-btn,
-.uc-editor__insert-row--left .uc-editor__insert-btn:focus-visible {
-  transform: translate(-50%, -50%) scale(1);
-}
-
-.uc-editor__insert-row--right:hover .uc-editor__insert-btn,
-.uc-editor__insert-row--right:focus-within .uc-editor__insert-btn,
-.uc-editor__insert-row--right .uc-editor__insert-btn:focus-visible {
-  transform: translate(50%, -50%) scale(1);
+  transform: translateY(-50%) scale(1);
 }
 
 .uc-editor__insert-btn:hover,

@@ -328,7 +328,7 @@ export default function UseCaseEditor({
           </table>
         </div>
 
-        <div className="uc-editor__table-wrap">
+        <div className="uc-editor__table-wrap uc-editor__table-wrap--steps">
           <table className="uc-editor__table uc-editor__table--steps">
             <colgroup>
               <col className="uc-editor__col--step" />
