@@ -273,6 +273,9 @@
     --nav-mobile-toggle-bar-gap: 0.42rem;
     --floating-sc-player-art-size-mobile: clamp(5.5rem, 22vw, 7rem);
     --floating-player-stack-height: calc(var(--floating-sc-player-art-size-mobile) + 0.35rem);
+    /* Quest log is now a full-width bar on the true bottom edge — dock
+       (audio player) and page content clearance both stack above it. */
+    --floating-questlog-bar-height: calc(2.6rem + env(safe-area-inset-bottom, 0px));
     --cases-uc-grid-columns:
       minmax(0, 1fr)
       minmax(2.25rem, 5.5rem)

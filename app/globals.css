@@ -2539,12 +2539,14 @@ a {
 }
 
 @media (max-width: 767px) {
+  /* Quest log now owns the true bottom edge as a full-width bar — the dock
+     stacks above it instead of sharing the same edge. */
   .floating-dock {
-    bottom: max(1rem, env(safe-area-inset-bottom, 0px));
+    bottom: calc(var(--floating-questlog-bar-height) + var(--floating-stack-gap));
   }
 
   .floating-dock:not(:has(.floating-sc-player)) {
-    bottom: calc(2.6875rem + env(safe-area-inset-bottom, 0px));
+    bottom: calc(var(--floating-questlog-bar-height) + var(--floating-stack-gap) + 1.6875rem);
   }
 
   .floating-sc-player {
@@ -5155,6 +5157,9 @@ code {
   line-height: var(--cases-type-line);
   font-weight: var(--cases-type-body-weight);
   letter-spacing: var(--cases-body-track);
+  font-style: normal;
+  font-variation-settings: 'slnt' 0;
+  font-synthesis: none;
   text-align: left;
   text-transform: none;
   cursor: pointer;
@@ -6205,8 +6210,7 @@ code {
     --floating-clearance-bottom: calc(
       var(--floating-player-stack-height)
       + var(--floating-stack-gap)
-      + 3.75rem
-      + max(1rem, env(safe-area-inset-bottom, 0px))
+      + var(--floating-questlog-bar-height)
     );
   }
 }
