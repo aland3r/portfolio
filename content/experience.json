@@ -1,0 +1,104 @@
+[
+  {
+    "id": "tce-pr",
+    "kind": "work",
+    "cardSpan": "wide",
+    "currentRole": true,
+    "showOnPage": true,
+    "startDate": "2025-07",
+    "endDate": null,
+    "presence": "onsite",
+    "locationKey": "curitiba"
+  },
+  {
+    "id": "furia",
+    "kind": "freelance",
+    "cardSpan": "wide",
+    "showOnPage": true,
+    "startDate": "2021-01",
+    "endDate": "2023-03",
+    "presence": "remote",
+    "locationKey": null
+  },
+  {
+    "id": "freelang-teacher",
+    "kind": "freelance",
+    "cardSpan": "compact",
+    "startDate": "2015-02",
+    "endDate": null,
+    "presence": "remote",
+    "locationKey": null
+  },
+  {
+    "id": "bpartners",
+    "kind": "freelance",
+    "cardSpan": "compact",
+    "startDate": "2024-02",
+    "endDate": "2024-05",
+    "presence": "remote",
+    "locationKey": null
+  },
+  {
+    "id": "esfer-spfw",
+    "kind": "project",
+    "cardSpan": "compact",
+    "startDate": "2022-06",
+    "endDate": "2022-06",
+    "presence": "hybrid",
+    "locationKey": "saoPaulo"
+  },
+  {
+    "id": "cei-flora",
+    "kind": "work",
+    "cardSpan": "compact",
+    "startDate": "2018-01",
+    "endDate": "2019-02",
+    "presence": "onsite",
+    "locationKey": "goiania"
+  },
+  {
+    "id": "skill-idiomas",
+    "kind": "work",
+    "cardSpan": "compact",
+    "startDate": "2016-02",
+    "endDate": "2017-09",
+    "presence": "onsite",
+    "locationKey": "goiania"
+  },
+  {
+    "id": "wizard",
+    "kind": "work",
+    "cardSpan": "compact",
+    "startDate": "2015-10",
+    "endDate": "2016-11",
+    "presence": "onsite",
+    "locationKey": "goiania"
+  },
+  {
+    "id": "salto-publicidade",
+    "kind": "work",
+    "cardSpan": "compact",
+    "startDate": "2014-06",
+    "endDate": "2015-02",
+    "presence": "onsite",
+    "locationKey": "goiania"
+  },
+  {
+    "id": "cicopal",
+    "kind": "work",
+    "cardSpan": "compact",
+    "startDate": "2013-03",
+    "endDate": "2014-06",
+    "presence": "onsite",
+    "locationKey": "senadorCanedo"
+  },
+  {
+    "id": "au-pair-germany",
+    "kind": "life",
+    "cardSpan": "compact",
+    "startDate": "2015-03",
+    "endDate": "2015-10",
+    "presence": "onsite",
+    "locationKey": "haagGermany"
+  }
+]

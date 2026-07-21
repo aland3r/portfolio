@@ -1,0 +1,66 @@
+/* GT Planar — readable publication copy (cards + detail). Meta labels stay Carbonot. */
+
+.publication-prose,
+.publication-prose p,
+.publication-prose h1,
+.publication-prose h2,
+.publication-prose a {
+  text-transform: none;
+}
+
+.publication-prose {
+  font-family: var(--font-prose);
+  font-size: var(--prose-body-size);
+  line-height: var(--prose-body-line-height);
+  font-weight: var(--prose-body-weight);
+  letter-spacing: var(--prose-body-letter-spacing);
+  font-variation-settings: var(--font-prose-variation, 'slnt' 0);
+  font-synthesis: none;
+  font-style: normal;
+  text-transform: none;
+  color: var(--arcadia-fg);
+}
+
+.publication-prose--title {
+  font-size: clamp(1.125rem, 2.5vw, 1.35rem);
+  line-height: 1.35;
+  font-weight: 500;
+  margin: 0;
+}
+
+.publication-prose--excerpt {
+  color: var(--arcadia-muted);
+  font-size: var(--prose-body-size);
+  line-height: var(--prose-body-line-height);
+  font-weight: var(--prose-body-weight);
+  letter-spacing: var(--prose-body-letter-spacing);
+  margin: 0;
+}
+
+.publication-prose--lead {
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  color: color-mix(in srgb, var(--arcadia-fg) 88%, var(--arcadia-muted));
+  margin: 0 0 1.5rem;
+  max-width: min(42rem, 100%);
+}
+
+.publication-prose--body {
+  max-width: 38rem;
+}
+
+.publication-prose--body p {
+  margin: 0 0 1.15rem;
+}
+
+.publication-prose--body p:last-child {
+  margin-bottom: 0;
+}
+
+.publication-detail__title {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  line-height: 1.25;
+  font-weight: 500;
+  margin: 0 0 1rem;
+  max-width: 40rem;
+}

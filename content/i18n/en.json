@@ -1,0 +1,494 @@
+{
+  "nav": {
+    "work": "Work",
+    "apps": "Apps",
+    "publications": "Publications",
+    "products": "Products",
+    "cases": "Cases",
+    "useCases": "Cases",
+    "kit": "Kit",
+    "artifacts": "Artifacts",
+    "tracks": "Tracks",
+    "cv": "CV",
+    "downloadCv": "Download CV",
+    "cvInEnglish": "In English",
+    "cvInPortuguese": "In Portuguese",
+    "cvInGerman": "In German",
+    "admin": "Admin",
+    "adminGovernance": "Total governance",
+    "in": "In",
+    "out": "Out",
+    "soon": "Soon",
+    "social": "Social links",
+    "github": "GitHub",
+    "soundcloud": "SoundCloud",
+    "x": "X",
+    "email": "Email",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "menuLabel": "Site menu"
+  },
+  "resume": {
+    "panelLabel": "CV download",
+    "openPanel": "Open CV download",
+    "closePanel": "Close CV download",
+    "eyebrow": "Download CV",
+    "title": "Curriculum vitae",
+    "localeHintUnavailable": "Pick a language below when a PDF is ready.",
+    "localeHint": {
+      "en": "English PDF ready for this site language.",
+      "pt": "Portuguese PDF ready for this site language.",
+      "de": "German PDF ready for this site language."
+    }
+  },
+  "home": {
+    "eyebrow": "Portfolio",
+    "lead": "Product · design · engineering",
+    "apps": "Apps"
+  },
+  "progress": {
+    "label": "Gestalt 1.0 build progress",
+    "allClear": "ALL CLEAR",
+    "byUc": "By use case",
+    "byProduct": "By product",
+    "filterAll": "All",
+    "designingPhase": "Designing phase",
+    "designingNote": "Product in designing — ORCA / scope before dev quests.",
+    "lifecycle": {
+      "designing": "Designing",
+      "developing": "Developing"
+    },
+    "questLog": "Quest log",
+    "status": {
+      "done": "done",
+      "active": "active",
+      "locked": "locked"
+    }
+  },
+  "work": {
+    "eyebrow": "Work",
+    "title": "Work",
+    "currently": "Currently",
+    "now": "Now",
+    "currentRoleBadge": "Current role",
+    "readStory": "Read story",
+    "back": "All work",
+    "notFound": "Experience not found.",
+    "bodySoon": "Story coming soon — this page is reserved for the narrative version of this role.",
+    "present": "Present",
+    "kinds": {
+      "work": "Employment",
+      "freelance": "Freelance",
+      "project": "Project",
+      "life": "Life"
+    },
+    "presence": {
+      "onsite": "On-site",
+      "remote": "Remote",
+      "hybrid": "Hybrid"
+    },
+    "locations": {
+      "curitiba": "Curitiba, PR",
+      "saoPaulo": "São Paulo, SP",
+      "goiania": "Goiânia, GO",
+      "senadorCanedo": "Senador Canedo, GO",
+      "haagGermany": "Haag, Germany"
+    },
+    "items": {
+      "tce-pr": {
+        "role": "Software engineering intern",
+        "org": "Tribunal de Contas do Paraná",
+        "orgHandle": "@TCE-PR",
+        "headline": "From UX research to shipped front-end inside public governance software",
+        "story": "I joined the software engineering team at the Court of Accounts of Paraná to work across the full product loop — user research, prototyping, system modeling, and front-end implementation. It is where design decisions meet audit and governance constraints, and where I learn what it means to ship inside a public institution.",
+        "teaser": "From UX research and prototyping to front-end implementation inside a public audit institution — where design decisions meet governance constraints."
+      },
+      "furia": {
+        "role": "Translator & media localizer",
+        "org": "FURIA e-Sports",
+        "orgHandle": "@FURIA",
+        "headline": "Two years localizing esports at film scale for Brazil's biggest gaming brand",
+        "story": "Over two years I translated scripts, subtitles, films, and sponsor decks for FURIA — from Nike and Santander to PokerStars. The work sat between advertising and broadcast: tight deadlines, brand voice, and international negotiations that had to land perfectly in Portuguese.",
+        "teaser": "Two years translating scripts, subtitles, and sponsor decks for one of Brazil's biggest esports brands — Nike, Santander, PokerStars, and production at film scale."
+      },
+      "freelang-teacher": {
+        "role": "Private language teacher",
+        "org": "Independent",
+        "orgHandle": "@Independent",
+        "headline": "A decade teaching adults English and German — the root of Milebrick",
+        "story": "Since 2015 I have taught English and German privately to adults at every level. It is the long experiment in how people actually acquire language — what motivates them, what bores them, and what a product like Milebrick would need to respect.",
+        "teaser": "Teaching English and German to adults since 2015 — the long experiment in how people actually acquire language, which later feeds Milebrick."
+      },
+      "bpartners": {
+        "role": "Translator",
+        "org": "B&Partners",
+        "orgHandle": "@B&Partners",
+        "headline": "Translating sponsor decks for a Jonas Brothers São Paulo campaign",
+        "story": "A short PJ contract translating presentations and documents for live negotiations — including the Jonas Brothers show in São Paulo, executed with agency BFerraz. High stakes, fast turnaround, zero room for tone mistakes.",
+        "teaser": "Short contract translating negotiation decks — including the Jonas Brothers São Paulo show campaign produced with BFerraz."
+      },
+      "esfer-spfw": {
+        "role": "Music producer",
+        "org": "Esfér · São Paulo Fashion Week",
+        "orgHandle": "@SPFW",
+        "headline": "Producing the runway theme for São Paulo Fashion Week",
+        "story": "I composed and produced the runway theme for SPFW — fashion tempo, a different kind of client sign-off, and the pressure of a single moment when the collection walks. I also scored other audiovisual pieces, including a FURIA jersey launch teaser.",
+        "teaser": "Composed and produced the runway theme for SPFW — fashion tempo, deadline pressure, and a different kind of client sign-off."
+      },
+      "cei-flora": {
+        "role": "Editorial designer",
+        "org": "CEI Flora",
+        "orgHandle": "@CEI-Flora",
+        "headline": "Editorial design for classroom materials at scale",
+        "story": "At one of Goiânia's largest English schools for children, I supported teachers with didactic materials, classroom graphics, and book editorial — design in service of educators, not just the brand on the cover.",
+        "teaser": "Editorial graphics and classroom materials for one of Goiânia's largest English schools for children — design in service of teachers, not just the brand."
+      },
+      "skill-idiomas": {
+        "role": "Language teacher",
+        "org": "Skill Idiomas",
+        "orgHandle": "@Skill-Idiomas",
+        "headline": "Group classes in English and German for teens and adults",
+        "story": "I taught English and German in group settings for teenagers and adults — early training in reading a room, adapting explanation on the fly, and keeping a whole class moving together.",
+        "teaser": "English and German in group classes for teens and adults — early training in reading a room and adapting explanation on the fly."
+      },
+      "wizard": {
+        "role": "English & German teacher",
+        "org": "Wizard Language Institute",
+        "orgHandle": "@Wizard",
+        "headline": "First franchise teaching rhythm — English in groups, German one-to-one",
+        "story": "Wizard was my first stable income from teaching: English in groups for teens and adults, German in individual lessons. The franchise rhythm taught me structure, pacing, and how to repeat a method without sounding robotic.",
+        "teaser": "Franchise classroom rhythm: group English, one-to-one German, and the first stable income from teaching."
+      },
+      "salto-publicidade": {
+        "role": "Graphic designer",
+        "org": "Salto Publicidade",
+        "orgHandle": "@Salto",
+        "headline": "Advertising studio work and mentoring designers on Adobe workflows",
+        "story": "At Salto Publicidade I built campaign assets and brand identities in Photoshop and Illustrator — and trained new designers on the studio's Adobe workflows. My first agency environment with real client pressure.",
+        "teaser": "Advertising studio work in Photoshop and Illustrator — brand identity, campaign assets, and mentoring new designers on Adobe workflows."
+      },
+      "cicopal": {
+        "role": "Graphic designer",
+        "org": "Cicopal",
+        "orgHandle": "@Cicopal",
+        "headline": "In-house packaging and retail campaigns for a food-industry group",
+        "story": "Cicopal's internal agency served multiple food brands across Brazil's center-west. I designed packaging and retail campaigns where consistency across product lines mattered as much as any single hero visual.",
+        "teaser": "In-house agency for a food-industry group — multi-brand packaging and retail campaigns across Brazil's center-west."
+      },
+      "au-pair-germany": {
+        "role": "Au-pair",
+        "org": "Host family · Bavaria",
+        "orgHandle": "@Bavaria",
+        "headline": "Ten months of German immersion in Bavaria",
+        "story": "I spent ten months as an au-pair in Haag, Bavaria — living with a host family while studying German. Cultural friction, daily conversation, and the decision to keep German in my professional life afterward.",
+        "teaser": "Ten months in Haag, Germany — language immersion, cultural friction, and the decision to keep German in my life professionally."
+      }
+    }
+  },
+  "publications": {
+    "eyebrow": "Publications",
+    "title": "Publications",
+    "lead": "Social posts, university work, and scientific research — grouped by type.",
+    "filterLabel": "Filter by type",
+    "productEyebrow": "{0}",
+    "productTitle": "Publications · {0}",
+    "productLead": "Writing and deliverables about {0}.",
+    "empty": "Nothing here yet for this filter.",
+    "emptyProduct": "No publications for this product yet.",
+    "open": "Open",
+    "openExternal": "Open original",
+    "openOnPlatform": "View on {0}",
+    "back": "All publications",
+    "notFound": "Publication not found.",
+    "bodySoon": "Full text coming soon.",
+    "downloadPdf": "Download PDF",
+    "externalSoon": "{0} link when published",
+    "academicSoon": "PDF when the university deliverable is available",
+    "scientificSoon": "PDF when the research deliverable is available",
+    "filters": {
+      "all": "All",
+      "social": "Social media",
+      "academic": "Academic",
+      "scientific": "Scientific"
+    },
+    "venues": {
+      "social": "Social media",
+      "academic": "Academic",
+      "scientific": "Scientific",
+      "portfolio": "Portfolio"
+    },
+    "platforms": {
+      "linkedin": "LinkedIn",
+      "instagram": "Instagram",
+      "x": "X"
+    },
+    "readTime": "{0} min read",
+    "fromDb": "Synced from Supabase",
+    "statusLabel": {
+      "draft": "Draft"
+    },
+    "items": {
+      "deviante-building": {
+        "title": "Building Deviante: process mining for maintenance teams",
+        "excerpt": "How we turn event logs into drift signals operators can trust — from PIBITI research to a Gestalt product with a real landing and auth flow.",
+        "body": [
+          "Maintenance managers rarely lack data — they lack a readable story of what changed on the shop floor. Deviante starts from event logs: every start and complete of a machine activity becomes a trace we can compare over time.",
+          "Our PIBITI work combines process mining with adaptive windowing (ADWIN) to flag when sojourn times drift before equipment fails. The research scripts are real; the product goal is to wrap that rigor in a UX a manager can act on without reading a thesis.",
+          "This post is the short version of that arc. The partial PIBITI report (~25 pages) lives under Scientific as a formal research deliverable — same project, different filter."
+        ]
+      },
+      "deviante-pibiti-partial": {
+        "title": "Deviante — partial PIBITI report",
+        "excerpt": "Formal research deliverable: IPDD/ADWIN experiments on synthetic and real manufacturing logs (~25 pages).",
+        "body": []
+      },
+      "deviante-pibiti-final": {
+        "title": "Deviante — final PIBITI report",
+        "excerpt": "Full scientific deliverable for the PIBITI program — reserved for the completed research report and PDF.",
+        "body": []
+      },
+      "milebrick-discovery": {
+        "title": "Milebrick: language learning from the stories you already love",
+        "excerpt": "OOUX-first discovery for a product that pulls vocabulary from books, films, and series instead of generic decks.",
+        "body": []
+      },
+      "harpia-placeholder": {
+        "title": "Harpia: a reserved slot in the Gestalt lineup",
+        "excerpt": "Placeholder for the next product story — scope and case study land here when Harpia moves out of designing.",
+        "body": []
+      }
+    }
+  },
+  "apps": {
+    "designing": "Designing",
+    "developing": "Developing",
+    "soon": "Soon",
+    "offline": "Host not live yet",
+    "landing": "Landing page",
+    "publications": "Publications",
+    "try": "Try this app",
+    "contact": "Contact for access",
+    "inOpen": "In → open",
+    "open": "Open"
+  },
+  "cases": {
+    "eyebrow": "Owner",
+    "title": "Cases",
+    "filterLabel": "Filter by product",
+    "items": {
+      "deviante": { "title": "Deviante", "status": "Active" },
+      "milebrick": { "title": "Milebrick", "status": "Dev" },
+      "hub": { "title": "Portfolio hub", "status": "Live" }
+    }
+  },
+  "artifacts": {
+    "eyebrow": "Archive",
+    "title": "Artifacts",
+    "empty": "No public artifacts yet. Owner marks entries public in portfolio.artifacts.",
+    "open": "Open",
+    "apps": "Apps",
+    "fromDb": "Synced from Supabase",
+    "types": {
+      "use_case": "Use case",
+      "scope": "Scope",
+      "roadmap": "Roadmap",
+      "spec": "Spec",
+      "diagram": "Diagram",
+      "report": "Report",
+      "other": "Other"
+    }
+  },
+  "tracks": {
+    "eyebrow": "Music",
+    "title": "Tracks",
+    "lead": "Public releases on SoundCloud.",
+    "playerHint": "Press play — the track keeps going while you browse the site.",
+    "playerLabel": "Floating SoundCloud player",
+    "nowPlaying": "Now playing",
+    "play": "Play",
+    "pause": "Pause",
+    "next": "Next track",
+    "previous": "Previous track",
+    "closePlayer": "Close player",
+    "seek": "Seek track position",
+    "defaultBadge": "Default",
+    "playlistPosition": "Now at {0} of {1} in the playlist.",
+    "nowPlayingIndexed": "Now playing {0}/{1}"
+  },
+  "products": {
+    "eyebrow": "Products",
+    "title": "Products",
+    "soon": "Soon",
+    "designing": "Designing",
+    "developing": "Developing",
+    "offline": "App host not live yet — DNS or deploy pending.",
+    "inOpen": "In → open",
+    "open": "Open",
+    "contact": "Contact for access"
+  },
+  "contact": {
+    "eyebrow": "Access",
+    "title": "Contact",
+    "lead": "Product access is by invitation. Reach out and I will grant access manually."
+  },
+  "welcome": {
+    "eyebrow": "Owner",
+    "title": "Welcome",
+    "lead": "You are signed in with full owner permissions on Gestalt.",
+    "productOffline": "Cannot open yet — host not configured:",
+    "step1Title": "Grant access",
+    "step1Body": "Search by e-mail in Admin and assign Deviante or Milebrick.",
+    "step2Title": "Manage products",
+    "step2Body": "When subdomains are live, open apps from Apps.",
+    "step3Title": "Recruiter keys",
+    "step3Body": "UC6/UC7 — guest access keys come later.",
+    "admin": "Admin",
+    "apps": "Apps"
+  },
+  "login": {
+    "eyebrow": "Access",
+    "title": "Sign in",
+    "google": "Google",
+    "loading": "…"
+  },
+  "request": {
+    "eyebrow": "Access",
+    "title": "Request",
+    "note": "Note",
+    "send": "Send",
+    "sent": "Sent.",
+    "loading": "…"
+  },
+  "admin": {
+    "eyebrow": "Owner",
+    "title": "Admin"
+  },
+  "useCasesSpec": {
+    "eyebrow": "Specs",
+    "title": "Use cases",
+    "lead": "Structured user stories for IO and each Gestalt product — same shape as the vault template.",
+    "backHub": "All products",
+    "new": "New use case",
+    "fieldProduct": "Product",
+    "newTitle": "Create use case",
+    "edit": "Edit",
+    "view": "View",
+    "delete": "Delete",
+    "deleteConfirm": "Delete this use case and all steps and acceptance criteria?",
+    "deleted": "Use case deleted.",
+    "deleteFailed": "Could not delete use case.",
+    "saved": "Saved.",
+    "saveFailed": "Could not save.",
+    "loadFailed": "Could not load use cases.",
+    "reorderFailed": "Could not save order.",
+    "reordering": "Saving order…",
+    "empty": "No use cases yet.",
+    "notFound": "Use case not found.",
+    "productNotFound": "Unknown product.",
+    "noDb": "Supabase is not configured — use cases need the portfolio database.",
+    "pickOne": "Pick a use case from the list.",
+    "pickProduct": "Pick a product tab above to browse and edit use case specs from Supabase.",
+    "pickUc": "Select a use case above to open the spec.",
+    "openUcHint": "Click a row to open the use case spec from the database.",
+    "signInHint": "Sign in with Google to load owner-only drafts from Supabase.",
+    "ownerOnlyHint": "Use cases are owner-only in Supabase — sign in with the owner Google account to open specs.",
+    "sectionTitle": "{0} — specs",
+    "count": "{0} use cases",
+    "dragHint": "Drag rows to set priority order.",
+    "description": "Description",
+    "why": "Why:",
+    "what": "What:",
+    "bounds": "Bounds:",
+    "useCaseId": "Use Case ID",
+    "useCaseName": "Use Case Name",
+    "actor": "Actor",
+    "object": "Object",
+    "preCondition": "Pre-Condition",
+    "postCondition": "Post-Condition",
+    "step": "Step",
+    "stepsMain": "Main path",
+    "stepsAlternatives": "Alternatives",
+    "stepsExceptions": "Exceptions",
+    "actorAction": "Actor Trigger Action",
+    "systemResponse": "Black Box System Response",
+    "acceptanceCriteria": "Acceptance Criteria",
+    "fieldTitle": "Title",
+    "slug": "Slug",
+    "abpId": "ABP ID",
+    "ucNumber": "UC number",
+    "status": "Status",
+    "visibility": "Visibility",
+    "metadata": "Metadata",
+    "steps": "Steps",
+    "stepsHint": "Main: 1, 2 · Alternatives: 1a, 2b · Exceptions: 2.1, 2.2",
+    "addStep": "Add step",
+    "removeStep": "Remove step",
+    "removeStepConfirm": "Remove this step?",
+    "addRequirement": "Add criterion",
+    "removeRequirement": "Remove criterion",
+    "reqCode": "Code",
+    "reqTitle": "Title",
+    "reqBody": "Body",
+    "bodyMd": "Extra sections (markdown)",
+    "bodyMdHint": "### Extension Points\\n* bullet…",
+    "save": "Save",
+    "saving": "Saving…",
+    "cancel": "Cancel",
+    "preview": "Preview"
+  },
+  "misc": {
+    "loading": "…",
+    "redirect": "…"
+  },
+  "publicationBeacon": {
+    "live": "Live — public on site",
+    "private": "Private — owner or members",
+    "offline": "Offline — draft or deprecated",
+    "menu": {
+      "shipPublic": "Ship to production",
+      "readyOwner": "Queue it (ready, owner-only)",
+      "draft": "Back to draft",
+      "deprecated": "Deprecate",
+      "openUcFirst": "Open this UC first to change its status"
+    }
+  },
+  "kit": {
+    "heading": "Gestalt Kit",
+    "lede": "Agents, skills, partials, and architecture — the AI toolkit that powers this report. Public evidence; owner can edit like Cases.",
+    "kindsNav": "Kit kinds",
+    "pick": "Pick a document from the list.",
+    "empty": "No documents match this filter.",
+    "needSupabase": "Supabase is not configured.",
+    "edit": "Edit",
+    "save": "Save changes",
+    "saving": "Saving…",
+    "cancel": "Cancel",
+    "titleField": "Title",
+    "summary": "Summary",
+    "body": "Body (markdown)",
+    "status": "Status",
+    "visibility": "Visibility",
+    "source": "Source path",
+    "search": "Search by name…",
+    "filterAll": "All",
+    "back": "All kit",
+    "notFound": "Document not found.",
+    "uses": "Uses",
+    "usedBy": "Used by",
+    "noRelations": "No linked docs yet.",
+    "placeholders": "Placeholders",
+    "placeholdersHint": "Edit values only — structure stays fixed. Preview updates live. Optional source view is read-only.",
+    "preview": "Preview",
+    "copy": "Copy markdown",
+    "copied": "Copied",
+    "showSource": "Show source",
+    "hideSource": "Hide source",
+    "kinds": {
+      "agent": "Agents",
+      "skill": "Skills",
+      "command": "Commands",
+      "partial": "Partials",
+      "architecture": "Architecture"
+    }
+  }
+}

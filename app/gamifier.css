@@ -1,0 +1,249 @@
+/**
+ * Portfolio-themed public quest log (vendored from ui/gamifier).
+ * Uses Arcadia / Portfolio tokens — not a detached arcade skin.
+ * Keep in sync with GamifierHud.jsx markup; see gestalt-kit skill gamifier.
+ */
+
+.gamifier-hud {
+  position: fixed;
+  /* Desktop: viewport left — outside content column (not trapped by dock transform) */
+  left: var(--floating-edge, max(1rem, env(safe-area-inset-left, 0px)));
+  right: auto;
+  bottom: var(--floating-bottom, max(1.25rem, env(safe-area-inset-bottom, 0px)));
+  transform: none;
+  z-index: var(--floating-quest-z, 10040);
+  max-width: min(92vw, 22rem);
+  font-family: var(--font-prose, system-ui, sans-serif);
+  color: var(--arcadia-fg, #f0f0f0);
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+@media (max-width: 767px) {
+  .gamifier-hud {
+    left: 50%;
+    transform: translateX(-50%);
+    align-items: center;
+    bottom: calc(var(--floating-clearance-bottom, 7rem) + 0.25rem);
+  }
+
+  .gamifier-hud--open {
+    /* Keep panel above dock but centered */
+    max-width: min(94vw, 24rem);
+  }
+}
+
+.gamifier-hud__toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--cases-border-color, var(--arcadia-line, #222));
+  background: color-mix(in srgb, var(--arcadia-fg, #f0f0f0) 6%, var(--arcadia-bg, #000));
+  color: var(--arcadia-fg, #f0f0f0);
+  font-family: var(--font-carbonot, monospace);
+  font-size: var(--carbonot-size, 0.7rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 6px 18px color-mix(in srgb, black 45%, transparent);
+}
+
+.gamifier-hud__toggle:hover,
+.gamifier-hud__toggle:focus-visible {
+  border-color: var(--arcadia-fg, #f0f0f0);
+  outline: none;
+}
+
+.gamifier-hud__toggle:active {
+  transform: translateY(1px);
+}
+
+.gamifier-hud__toggle-xp {
+  padding: 0.15rem 0.4rem;
+  border: 1px solid var(--cases-border-color, var(--arcadia-line, #222));
+  background: var(--arcadia-bg, #000);
+  color: var(--arcadia-fg, #f0f0f0);
+  font-family: var(--font-carbonot, monospace);
+  font-size: var(--carbonot-size, 0.65rem);
+}
+
+.gamifier-hud__panel {
+  margin-bottom: 0;
+  max-height: min(70vh, 32rem);
+  overflow: auto;
+  padding: 1rem;
+  border: 1px solid var(--cases-border-color, var(--arcadia-line, #222));
+  background: color-mix(in srgb, var(--arcadia-fg, #f0f0f0) 4%, var(--arcadia-bg, #000));
+  box-shadow: 0 18px 40px color-mix(in srgb, black 55%, transparent);
+  backdrop-filter: blur(10px);
+}
+
+.gamifier-hud__header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+}
+
+.gamifier-hud__eyebrow {
+  font-family: var(--font-carbonot, monospace);
+  font-size: var(--carbonot-size, 0.65rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--arcadia-muted, #666);
+  margin: 0;
+}
+
+.gamifier-hud__version {
+  opacity: 0.6;
+  font-weight: 400;
+}
+
+.gamifier-hud__header h3 {
+  font-family: var(--font-prose, system-ui, sans-serif);
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0.35rem 0 0;
+  color: var(--arcadia-fg, #f0f0f0);
+}
+
+.gamifier-hud__score {
+  font-family: var(--font-carbonot, monospace);
+  font-size: var(--carbonot-size, 0.65rem);
+  color: var(--cases-label-color, var(--arcadia-muted, #666));
+  white-space: nowrap;
+}
+
+.gamifier-hud__xp {
+  height: 0.45rem;
+  margin-bottom: 1rem;
+  background: color-mix(in srgb, var(--arcadia-fg, #f0f0f0) 8%, var(--arcadia-bg, #000));
+  border: 1px solid var(--cases-border-color, var(--arcadia-line, #222));
+}
+
+.gamifier-hud__xp-fill {
+  display: block;
+  height: 100%;
+  background: var(--arcadia-fg, #f0f0f0);
+}
+
+.gamifier-hud__products {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.gamifier-hud__product + .gamifier-hud__product {
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--cases-border-color, var(--arcadia-line, #222));
+}
+
+.gamifier-hud__product-toggle {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  color: var(--arcadia-fg, #f0f0f0);
+}
+
+.gamifier-hud__product-name {
+  font-weight: 600;
+}
+
+.gamifier-hud__product-score {
+  font-family: var(--font-carbonot, monospace);
+  font-size: var(--carbonot-size, 0.6rem);
+  color: var(--cases-label-color, var(--arcadia-muted, #666));
+  white-space: nowrap;
+}
+
+.gamifier-hud__phases {
+  margin-top: 0.5rem;
+}
+
+.gamifier-hud__phase + .gamifier-hud__phase {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--cases-border-color, var(--arcadia-line, #222));
+}
+
+.gamifier-hud__phase h4 {
+  display: grid;
+  gap: 0.2rem;
+  font-size: 0.82rem;
+  margin: 0 0 0.5rem;
+  color: var(--arcadia-fg, #f0f0f0);
+}
+
+.gamifier-hud__phase h4 span {
+  font-family: var(--font-carbonot, monospace);
+  font-size: var(--carbonot-size, 0.65rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--arcadia-muted, #666);
+}
+
+.gamifier-hud__phase h4 small {
+  font-weight: 400;
+  color: var(--arcadia-muted, #666);
+}
+
+.gamifier-hud__phase ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.gamifier-hud__quest {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  gap: 0.35rem 0.5rem;
+  align-items: start;
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+.gamifier-hud__quest--done {
+  opacity: 0.72;
+}
+
+.gamifier-hud__quest--done .gamifier-hud__label {
+  text-decoration: line-through;
+}
+
+.gamifier-hud__quest--active .gamifier-hud__label {
+  color: var(--arcadia-fg, #f0f0f0);
+  font-weight: 600;
+}
+
+.gamifier-hud__quest--locked {
+  opacity: 0.55;
+}
+
+.gamifier-hud__icon {
+  width: 1rem;
+  text-align: center;
+  color: var(--arcadia-muted, #666);
+}
+
+.gamifier-hud__uc {
+  font-family: var(--font-carbonot, monospace);
+  font-size: var(--carbonot-size, 0.6rem);
+  padding: 0.1rem 0.35rem;
+  border: 1px solid var(--cases-border-color, var(--arcadia-line, #222));
+  border-radius: 0;
+  color: var(--cases-label-color, var(--arcadia-muted, #666));
+  white-space: nowrap;
+}

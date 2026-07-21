@@ -1,0 +1,182 @@
+{
+  "version": "1.0",
+  "products": [
+    {
+      "code": "IO",
+      "name": "Portfolio",
+      "lifecycle": "developing",
+      "phases": [
+        {
+          "id": "p0",
+          "codename": "PUBLIC",
+          "label": "Public surface",
+          "quests": [
+            { "id": "UC1-1a", "uc": 1, "label": "CV dropdown in nav", "status": "done" },
+            { "id": "UC1-1b", "uc": 1, "label": "Résumé registry + PDF", "status": "done" },
+            { "id": "UC1-1c", "uc": 1, "label": "UC1 documented", "status": "done" },
+            { "id": "UC1-2a", "uc": 1, "label": "Tracks page + SoundCloud", "status": "done" }
+          ]
+        },
+        {
+          "id": "p1",
+          "codename": "AUTH",
+          "label": "Sign-in hub",
+          "quests": [
+            { "id": "UC2-1a", "uc": 2, "label": "Supabase on static export", "status": "done" },
+            { "id": "UC2-1b", "uc": 2, "label": "Google OAuth", "status": "done" },
+            { "id": "UC2-1c", "uc": 2, "label": "Owner bootstrap", "status": "done" },
+            { "id": "UC2-1d", "uc": 2, "label": "Welcome hub", "status": "done" },
+            { "id": "UC2-1e", "uc": 2, "label": "UC2 documented", "status": "done" }
+          ]
+        },
+        {
+          "id": "p2",
+          "codename": "ACCESS",
+          "label": "Permissions",
+          "quests": [
+            { "id": "UC3-1a", "uc": 3, "label": "Request access at gates", "status": "active" },
+            { "id": "UC3-1b", "uc": 3, "label": "Admin pending queue", "status": "locked" },
+            { "id": "UC3-1c", "uc": 3, "label": "UC3 documented", "status": "done" },
+            { "id": "UC4-1a", "uc": 4, "label": "Admin approve + grant", "status": "done" },
+            { "id": "UC4-1b", "uc": 4, "label": "UC4 documented", "status": "done" }
+          ]
+        },
+        {
+          "id": "p3",
+          "codename": "LAUNCH",
+          "label": "Product hosts",
+          "quests": [
+            { "id": "UC5-1a", "uc": 5, "label": "Products hub + guards", "status": "done" },
+            { "id": "UC5-1b", "uc": 5, "label": "Offline host protection", "status": "done" },
+            { "id": "UC5-1c", "uc": 5, "label": "Deviante DNS + deploy", "status": "active" },
+            { "id": "UC5-1d", "uc": 5, "label": "Milebrick DNS + deploy", "status": "locked" },
+            { "id": "UC5-1e", "uc": 5, "label": "UC5 documented", "status": "done" }
+          ]
+        },
+        {
+          "id": "p4",
+          "codename": "GUEST",
+          "label": "Recruiter keys",
+          "quests": [
+            { "id": "UC7-1a", "uc": 7, "label": "Key schema + admin UI", "status": "locked" },
+            { "id": "UC7-1b", "uc": 7, "label": "UC7 documented", "status": "done" },
+            { "id": "UC6-1a", "uc": 6, "label": "Key prompt on products", "status": "locked" },
+            { "id": "UC6-1b", "uc": 6, "label": "Guest grant + launch", "status": "locked" },
+            { "id": "UC6-1c", "uc": 6, "label": "UC6 documented", "status": "done" }
+          ]
+        },
+        {
+          "id": "p5",
+          "codename": "OWNER",
+          "label": "Owner tools",
+          "quests": [
+            { "id": "UC8-1a", "uc": 8, "label": "Publish product admin UI", "status": "locked" },
+            { "id": "UC8-1b", "uc": 8, "label": "Registry API / DB", "status": "locked" },
+            { "id": "UC8-1c", "uc": 8, "label": "UC8 documented", "status": "done" },
+            { "id": "UC9-1a", "uc": 9, "label": "Artifacts JSON index", "status": "done" },
+            { "id": "UC9-1b", "uc": 9, "label": "Artifacts DB + upload", "status": "locked" },
+            { "id": "UC9-1c", "uc": 9, "label": "UC9 documented", "status": "done" }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "DV",
+      "name": "Deviante",
+      "lifecycle": "developing",
+      "source": "deviante/web/src/lib/roadmap.js",
+      "phases": [
+        {
+          "id": "P0",
+          "codename": "INSERT COIN",
+          "label": "Auth + foundation",
+          "quests": [
+            { "id": "0.1", "uc": null, "label": "DDL deviante on Supabase", "status": "done" },
+            { "id": "0.2", "uc": null, "label": "Testers in Supabase Auth + managers seed", "status": "done" },
+            { "id": "0.3", "uc": null, "label": ".env.example Supabase (web + API)", "status": "done" },
+            { "id": "UC1-0", "uc": 1, "label": "UI login + settings shell (mock)", "status": "done" },
+            { "id": "UC1-1a", "uc": 1, "label": "Web Supabase client", "status": "done" },
+            { "id": "UC1-1b", "uc": 1, "label": "Login e-mail/password", "status": "done" },
+            { "id": "UC1-1c", "uc": 1, "label": "Session persists on reload", "status": "done" },
+            { "id": "UC1-1d", "uc": 1, "label": "Logout", "status": "done" },
+            { "id": "UC1-1e", "uc": 1, "label": "ProtectedRoute with real session", "status": "done" },
+            { "id": "UC1-1f", "uc": 1, "label": "Google OAuth", "status": "done" },
+            { "id": "UC1-2a", "uc": 1, "label": "API JDBC → Supabase", "status": "locked" },
+            { "id": "UC1-2b", "uc": 1, "label": "Load deviante.managers", "status": "locked" },
+            { "id": "UC1-2c", "uc": 1, "label": "Save account settings", "status": "locked" },
+            { "id": "UC2-0", "uc": 2, "label": "UI dashboard + process CRUD (mock)", "status": "done" },
+            { "id": "UC2-1a", "uc": 2, "label": "API process CRUD", "status": "locked" },
+            { "id": "UC2-1b", "uc": 2, "label": "Web processes via API", "status": "locked" }
+          ]
+        },
+        {
+          "id": "P1",
+          "codename": "LOAD DATA",
+          "label": "Data ingestion",
+          "quests": [
+            { "id": "1.0", "uc": null, "label": "Inventory codigos_LuizPicolo", "status": "done" },
+            { "id": "UC4-1a", "uc": 4, "label": "Schema event_logs, operations, traces", "status": "locked" },
+            { "id": "UC4-1b", "uc": 4, "label": "Upload CSV/XES", "status": "locked" },
+            { "id": "UC4-1c", "uc": 4, "label": "Parse PM4Py + persist traces", "status": "locked" },
+            { "id": "UC3-1a", "uc": 3, "label": "Auto-create activities on parse", "status": "locked" },
+            { "id": "UC5-1a", "uc": 5, "label": "Bulk mapping screen", "status": "locked" },
+            { "id": "UC6-1a", "uc": 6, "label": "Match operation ↔ activity", "status": "locked" },
+            { "id": "UC4-1d", "uc": 4, "label": "mapping_complete flag", "status": "locked" }
+          ]
+        },
+        {
+          "id": "P2",
+          "codename": "BOSS FIGHT",
+          "label": "Drift (PIBITI)",
+          "quests": [
+            { "id": "UC12-1a", "uc": 12, "label": "ADWIN drift job + persist", "status": "locked" },
+            { "id": "UC13-1a", "uc": 13, "label": "Analysis parameters panel", "status": "locked" },
+            { "id": "UC7-1a", "uc": 7, "label": "Investigate flagged trace", "status": "locked" },
+            { "id": "UC8-1a", "uc": 8, "label": "Reference / dismiss baseline", "status": "locked" },
+            { "id": "UC11-1a", "uc": 11, "label": "Recommend maintenance", "status": "locked" }
+          ]
+        },
+        {
+          "id": "P3",
+          "codename": "GAME CLEAR",
+          "label": "Maintenance",
+          "quests": [
+            { "id": "UC14-1a", "uc": 14, "label": "Schedule maintenance", "status": "locked" },
+            { "id": "UC15-1a", "uc": 15, "label": "Record occurrence", "status": "locked" },
+            { "id": "3.1", "uc": null, "label": "Schema equipment", "status": "locked" }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "MB",
+      "name": "Milebrick",
+      "lifecycle": "designing",
+      "phases": [
+        {
+          "id": "p0",
+          "codename": "ACCOUNT",
+          "label": "User account",
+          "quests": [
+            { "id": "UC1-1a", "uc": 1, "label": "UC1 documented", "status": "done" }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "HA",
+      "name": "Harpia",
+      "lifecycle": "designing",
+      "phases": [
+        {
+          "id": "p0",
+          "codename": "ACCOUNT",
+          "label": "User account",
+          "quests": [
+            { "id": "UC1-1a", "uc": 1, "label": "UC1 documented", "status": "done" }
+          ]
+        }
+      ]
+    }
+  ]
+}

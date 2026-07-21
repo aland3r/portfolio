@@ -1,0 +1,195 @@
+/* GT Planar — readable prose on /work and /projects (cards + detail). */
+
+@font-face {
+  font-family: 'GT Planar';
+  src: url('/fonts/GT-Planar-VF.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/*
+ * Same file for italic requests — iOS/WebKit otherwise synthesizes oblique
+ * when only a normal VF face is registered (reads as “everything italic”).
+ */
+@font-face {
+  font-family: 'GT Planar';
+  src: url('/fonts/GT-Planar-VF.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  --font-prose: 'GT Planar', system-ui, sans-serif;
+  --font-prose-variation: 'slnt' 0;
+  --prose-body-size: 1.0625rem;
+  --prose-body-line-height: 1.68;
+  --prose-body-weight: 360;
+  --prose-body-letter-spacing: 0.015em;
+  --prose-teaser-size: 0.875rem;
+  --prose-teaser-line-height: 1.45;
+  --prose-teaser-letter-spacing: 0.02em;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --prose-body-size: 1.125rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --prose-body-size: 1.1875rem;
+  }
+}
+
+/* Upright lock — apply to every Planar reading surface */
+.work-prose,
+.publication-prose,
+.experience-card__headline,
+.experience-card__story,
+.experience-card__period,
+.experience-card__org,
+.uc-folio,
+.uc-folio-panel__id,
+.uc-folio-panel__title,
+.uc-folio__prose,
+.build-progress__uc-label,
+.kit-doc-reader,
+.kit-doc-reader__body,
+.kit-doc-editor__body,
+.kit-card__title,
+.kit-card__summary,
+.kit-panel__lede,
+.kit-doc-view__summary,
+.kit-panel__search input,
+.kit-md,
+.kit-md__p,
+.kit-md__list,
+.kit-placeholders__hint,
+.kit-rel-chip__title {
+  font-family: var(--font-prose);
+  font-style: normal;
+  font-variation-settings: var(--font-prose-variation);
+  font-synthesis: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Emphasis without slant — weight only (mobile italic flood) */
+.work-prose em,
+.work-prose i,
+.publication-prose em,
+.publication-prose i,
+.uc-folio em,
+.uc-folio i,
+.uc-folio__prose em,
+.uc-folio__prose i,
+.kit-md em,
+.kit-md i,
+.kit-doc-reader em,
+.kit-doc-reader i {
+  font-style: normal;
+  font-variation-settings: var(--font-prose-variation);
+  font-synthesis: none;
+  font-weight: 600;
+}
+
+@media (max-width: 767px) {
+  .work-prose,
+  .publication-prose,
+  .experience-card__headline,
+  .experience-card__story,
+  .uc-folio,
+  .uc-folio__prose,
+  .build-progress__uc-label,
+  .kit-doc-reader,
+  .kit-doc-reader__body,
+  .kit-doc-editor__body,
+  .kit-card__title,
+  .kit-card__summary,
+  .kit-panel__lede,
+  .kit-doc-view__summary,
+  .kit-panel__search input,
+  .kit-md,
+  .kit-md__p,
+  .kit-md__list,
+  .kit-placeholders__hint,
+  .kit-rel-chip__title {
+    font-style: normal !important;
+    font-variation-settings: 'slnt' 0 !important;
+    font-synthesis: none;
+  }
+
+  /* Nested markdown inside kit reader — WebKit may not inherit slnt lock */
+  .panel--kit .kit-md :where(p, li, span, a, strong, em, i, h1, h2, h3, h4) {
+    font-style: normal !important;
+    font-variation-settings: 'slnt' 0 !important;
+    font-synthesis: none;
+  }
+}
+
+.work-prose {
+  font-family: var(--font-prose);
+  font-size: var(--prose-body-size);
+  line-height: var(--prose-body-line-height);
+  font-weight: var(--prose-body-weight);
+  letter-spacing: var(--prose-body-letter-spacing);
+  font-variation-settings: var(--font-prose-variation);
+  font-synthesis: none;
+  font-style: normal;
+  text-transform: none;
+  color: var(--arcadia-fg);
+  max-width: 36rem;
+  margin: 0 0 2rem;
+}
+
+.work-prose--lead {
+  font-size: var(--type-body-size);
+  line-height: var(--type-body-line-height);
+  color: var(--arcadia-muted);
+  max-width: 24rem;
+}
+
+.work-prose--title {
+  margin: 0;
+  font-size: var(--type-body-size);
+  line-height: var(--type-body-line-height);
+  letter-spacing: var(--type-body-letter-spacing);
+}
+
+.work-prose--teaser {
+  margin: 0;
+  color: var(--arcadia-muted);
+  font-size: var(--prose-teaser-size);
+  line-height: var(--prose-teaser-line-height);
+  letter-spacing: var(--prose-teaser-letter-spacing);
+  max-width: 42rem;
+}
+
+.work-prose--body {
+  max-width: 42rem;
+}
+
+.work-prose--body p {
+  margin: 0 0 1rem;
+}
+
+.work-prose--body p:last-child {
+  margin-bottom: 0;
+}
+
+/* Experience cards — lock GT Planar upright (VF slnt skews on some mobile browsers). */
+.experience-card__link {
+  text-transform: none;
+}
+
+.experience-card__headline,
+.experience-card__story,
+.experience-card__period,
+.experience-card__org {
+  font-variation-settings: var(--font-prose-variation);
+  font-synthesis: none;
+  font-style: normal;
+}

@@ -1,0 +1,17 @@
+[
+  {
+    "id": "github",
+    "href": "https://github.com/aland3r",
+    "icon": "github-icon"
+  },
+  {
+    "id": "x",
+    "href": "https://x.com/aland3r",
+    "icon": "x-icon"
+  },
+  {
+    "id": "email",
+    "href": "mailto:design@alander.io",
+    "icon": "email-icon"
+  }
+]

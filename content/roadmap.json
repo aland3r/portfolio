@@ -1,0 +1,79 @@
+{
+  "product": "portfolio",
+  "code": "IO",
+  "version": "1.0",
+  "phases": [
+    {
+      "id": "p0",
+      "codename": "PUBLIC",
+      "label": "Public surface",
+      "quests": [
+        { "id": "UC1-1a", "uc": 1, "label": "CV dropdown in nav", "status": "done" },
+        { "id": "UC1-1b", "uc": 1, "label": "Résumé registry + PDF", "status": "done" },
+        { "id": "UC1-1c", "uc": 1, "label": "UC1 documented", "status": "done" },
+        { "id": "UC1-2a", "uc": 1, "label": "Tracks page + SoundCloud", "status": "done" }
+      ]
+    },
+    {
+      "id": "p1",
+      "codename": "AUTH",
+      "label": "Sign-in hub",
+      "quests": [
+        { "id": "UC2-1a", "uc": 2, "label": "Supabase on static export", "status": "done" },
+        { "id": "UC2-1b", "uc": 2, "label": "Google OAuth", "status": "done" },
+        { "id": "UC2-1c", "uc": 2, "label": "Owner bootstrap", "status": "done" },
+        { "id": "UC2-1d", "uc": 2, "label": "Welcome hub", "status": "done" },
+        { "id": "UC2-1e", "uc": 2, "label": "UC2 documented", "status": "done" }
+      ]
+    },
+    {
+      "id": "p2",
+      "codename": "ACCESS",
+      "label": "Permissions",
+      "quests": [
+        { "id": "UC3-1a", "uc": 3, "label": "Request access at gates", "status": "active" },
+        { "id": "UC3-1b", "uc": 3, "label": "Admin pending queue", "status": "locked" },
+        { "id": "UC3-1c", "uc": 3, "label": "UC3 documented", "status": "done" },
+        { "id": "UC4-1a", "uc": 4, "label": "Admin approve + grant", "status": "done" },
+        { "id": "UC4-1b", "uc": 4, "label": "UC4 documented", "status": "done" }
+      ]
+    },
+    {
+      "id": "p3",
+      "codename": "LAUNCH",
+      "label": "Product hosts",
+      "quests": [
+        { "id": "UC5-1a", "uc": 5, "label": "Products hub + guards", "status": "done" },
+        { "id": "UC5-1b", "uc": 5, "label": "Offline host protection", "status": "done" },
+        { "id": "UC5-1c", "uc": 5, "label": "Deviante DNS + deploy", "status": "active" },
+        { "id": "UC5-1d", "uc": 5, "label": "Milebrick DNS + deploy", "status": "locked" },
+        { "id": "UC5-1e", "uc": 5, "label": "UC5 documented", "status": "done" }
+      ]
+    },
+    {
+      "id": "p4",
+      "codename": "GUEST",
+      "label": "Recruiter keys",
+      "quests": [
+        { "id": "UC7-1a", "uc": 7, "label": "Key schema + admin UI", "status": "locked" },
+        { "id": "UC7-1b", "uc": 7, "label": "UC7 documented", "status": "done" },
+        { "id": "UC6-1a", "uc": 6, "label": "Key prompt on products", "status": "locked" },
+        { "id": "UC6-1b", "uc": 6, "label": "Guest grant + launch", "status": "locked" },
+        { "id": "UC6-1c", "uc": 6, "label": "UC6 documented", "status": "done" }
+      ]
+    },
+    {
+      "id": "p5",
+      "codename": "OWNER",
+      "label": "Owner tools",
+      "quests": [
+        { "id": "UC8-1a", "uc": 8, "label": "Publish product admin UI", "status": "locked" },
+        { "id": "UC8-1b", "uc": 8, "label": "Registry API / DB", "status": "locked" },
+        { "id": "UC8-1c", "uc": 8, "label": "UC8 documented", "status": "done" },
+        { "id": "UC9-1a", "uc": 9, "label": "Artifacts JSON index", "status": "done" },
+        { "id": "UC9-1b", "uc": 9, "label": "Artifacts DB + upload", "status": "locked" },
+        { "id": "UC9-1c", "uc": 9, "label": "UC9 documented", "status": "done" }
+      ]
+    }
+  ]
+}

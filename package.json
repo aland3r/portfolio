@@ -1,0 +1,23 @@
+{
+  "name": "portfolio-web",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --webpack",
+    "build": "next build --webpack",
+    "lint": "oxlint"
+  },
+  "dependencies": {
+    "@rive-app/react-canvas": "^4.29.3",
+    "@supabase/supabase-js": "^2.110.5",
+    "next": "^16.2.10",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "oxlint": "^1.69.0"
+  }
+}

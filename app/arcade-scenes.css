@@ -1,0 +1,116 @@
+/* ── Nav arcade portal (persists across routes) ─────────────────────────── */
+
+.arcade-portal {
+  flex-shrink: 0;
+  text-decoration: none;
+  color: var(--arcadia-fg);
+}
+
+.arcade-portal__frame {
+  position: relative;
+  display: block;
+  width: var(--nav-portal-width);
+  height: var(--nav-portal-height);
+}
+
+.arcade-portal__viewport {
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  top: 6px;
+  bottom: 6px;
+  overflow: hidden;
+  clip-path: path('M6 52 V26 C6 12 42 12 42 26 V52 Z');
+  background: #000;
+}
+
+.arcade-portal__canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+}
+
+.arcade-portal__arch {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* ── Home arcade dino scene ─────────────────────────────────────────────── */
+
+.home-lp {
+  display: grid;
+  gap: 2rem;
+}
+
+.home-lp__copy {
+  position: relative;
+  z-index: 1;
+}
+
+.home-lp__copy .lead {
+  font-family: var(--font-prose);
+  font-variation-settings: 'slnt' 0;
+  font-synthesis: none;
+  font-style: normal;
+  text-transform: none;
+  font-size: var(--cases-type-body-size);
+  line-height: var(--cases-type-line);
+  font-weight: var(--cases-type-body-weight);
+  letter-spacing: var(--cases-body-track);
+  color: var(--arcadia-muted);
+}
+
+.welcome-scene {
+  position: relative;
+  /* Full-bleed band — height must keep pace with viewport width or it reads as a ribbon. */
+  width: 100vw;
+  max-width: 100vw;
+  left: 50%;
+  margin-left: -50vw;
+  box-sizing: border-box;
+  height: clamp(18rem, 32vw, 28rem);
+  border-block: 1px solid var(--arcadia-line);
+  overflow: hidden;
+  background: #000;
+}
+
+@media (min-width: 1200px) {
+  .welcome-scene {
+    height: clamp(22rem, 28vw, 32rem);
+  }
+}
+
+.welcome-scene__insert-coin {
+  position: absolute;
+  top: clamp(0.85rem, 2.5vw, 1.35rem);
+  right: max(
+    var(--site-inline-pad),
+    calc(
+      50vw - min(var(--content-max), calc(100vw - 2 * var(--site-inline-pad))) / 2
+      + var(--welcome-insert-coin-gap)
+    )
+  );
+  left: auto;
+  transform: none;
+  z-index: 1;
+  margin: 0;
+  font-family: monospace;
+  font-size: clamp(0.5rem, 1.6vw, 0.625rem);
+  letter-spacing: 0.08em;
+  line-height: 1;
+  color: rgba(240, 240, 240, 0.15);
+  text-align: right;
+  pointer-events: none;
+  user-select: none;
+}
+
+.welcome-scene__canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+}

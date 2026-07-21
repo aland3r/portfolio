@@ -1,0 +1,348 @@
+@font-face {
+  font-family: Carbonot;
+  src:
+    url('/fonts/Carbonot-Bold.woff2') format('woff2'),
+    url('/fonts/Carbonot-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-carbonot: Carbonot, monospace;
+  /* Code / markdown — JetBrains Mono via next/font (--font-jetbrains-mono on <html>) */
+  --font-mono: var(--font-jetbrains-mono), 'JetBrains Mono', ui-monospace, Consolas, monospace;
+
+  --arcadia-bg: #000;
+  --arcadia-fg: #f0f0f0;
+  --arcadia-muted: #666;
+  --arcadia-line: #222;
+  --arcadia-border-strong: #666;
+
+  /* Work accent — purple / icy blue (work hero, cases hover) */
+  --work-accent-purple: #b59cf8;
+  --work-accent-blue: #7ec8e8;
+
+  /* Type scale (Portfolio contract — gestalt-kit/partials/portfolio-typography.md)
+     Carbonot: ONLY display (brand / currently @TCEPR / h1) + chrome (tables & UI).
+     Prose/read: GT Planar via --font-prose / --prose-body-* / --cases-read-*. */
+  --type-display-size: 2rem;
+  --type-display-line-height: 1.1;
+  --type-display-letter-spacing: 0.06em;
+
+  --type-body-size: 1rem;
+  --type-body-line-height: 1.5;
+  --type-body-letter-spacing: 0.1em;
+
+  /* small aliases body — no third Carbonot step */
+  --type-small-size: var(--type-body-size);
+  --type-small-line-height: var(--type-body-line-height);
+  --type-small-letter-spacing: var(--type-body-letter-spacing);
+
+  /* Brand name = display size (same large Carbonot as currently @TCEPR) */
+  --type-brand-size: var(--type-display-size);
+  --type-brand-letter-spacing: var(--type-display-letter-spacing);
+
+  /* Carbonot — display + chrome only */
+  --carbonot-display-size: var(--type-display-size);
+  --carbonot-display-line-height: var(--type-display-line-height);
+  --carbonot-display-letter-spacing: var(--type-display-letter-spacing);
+
+  --carbonot-size: calc(var(--type-body-size) * 1.06);
+  --carbonot-line-height: var(--type-body-line-height);
+  --carbonot-letter-spacing: var(--type-body-letter-spacing);
+
+  /* Cap/label aliases chrome — never a separate size */
+  --carbonot-cap-size: var(--carbonot-size);
+  --carbonot-cap-line-height: var(--carbonot-line-height);
+  --carbonot-cap-letter-spacing: var(--carbonot-letter-spacing);
+
+  --brand-copper-core: #5c0a12;
+  --brand-copper-bright: #a31621;
+  --brand-copper-hot: #ff4d4d;
+  --brand-copper-glow: rgba(255, 55, 55, 0.82);
+  --brand-copper-flame: rgba(200, 24, 40, 0.55);
+
+  /* Publication beacon — logo-style glow (live / private / offline) */
+  --beacon-live-core: #4dfa72;
+  --beacon-live-glow: rgba(77, 250, 114, 0.85);
+  --beacon-live-flame: rgba(30, 175, 80, 0.55);
+  --beacon-private-core: #6ec8ff;
+  --beacon-private-glow: rgba(110, 200, 255, 0.82);
+  --beacon-private-flame: rgba(40, 120, 220, 0.5);
+  --beacon-offline-core: #444;
+  --beacon-offline-glow: rgba(80, 80, 80, 0.25);
+
+  --nav-chip-height: 2.125rem;
+  --nav-social-link-size: 2.75rem;
+  --nav-social-icon-size: 1.35rem;
+  --nav-social-opacity: 0.42;
+  --nav-social-opacity-hover: 0.88;
+  --nav-locale-width: 5.85rem;
+  --nav-locale-btn-width: 1.45rem;
+  --nav-auth-slot-width: 7.5rem;
+  --nav-admin-avatar-size: 2.5rem;
+  --nav-chrome-edge-gap: clamp(0.6rem, 1.25vw, 0.875rem);
+  --gestalt-owner-avatar-breath: var(--nav-chrome-edge-gap);
+  --nav-header-pad-block: var(--nav-chrome-edge-gap);
+  --nav-header-gap: clamp(1rem, 2vw, 1.5rem);
+  --nav-header-brand-gap: clamp(2rem, 4.5vw, 3.5rem);
+  --nav-header-utilities-gap: clamp(0.9rem, 1.6vw, 1.35rem);
+  --nav-header-link-gap: clamp(1rem, 1.8vw, 1.4rem);
+  --nav-header-gap-compact: 0.875rem;
+  --nav-header-brand-gap-compact: 1.125rem;
+  --nav-mobile-links-gap: 1.125rem;
+  --nav-mobile-utilities-gap: 1.125rem;
+  --nav-mobile-panel-pad: 1.25rem;
+  --nav-mobile-toggle-size: var(--nav-chip-height);
+  --nav-mobile-toggle-icon-width: 0.95rem;
+  --nav-mobile-toggle-bar-thickness: 1px;
+  --nav-mobile-toggle-bar-gap: 0.38rem;
+  --nav-mobile-overlay-z: 10060;
+  --site-inline-pad: clamp(1.25rem, 3vw, 2.5rem);
+  --site-column-max: 960px;
+  /* Primary content column — work, tracks, floating dock */
+  --content-max: 50rem;
+  /* Cases folio needs more horizontal room for the 3-col step table */
+  --content-max-cases: min(60rem, calc(100vw - 2 * var(--site-inline-pad)));
+  --content-narrow: 28rem;
+  --floating-dock-width: var(--content-max);
+  --welcome-insert-coin-gap: clamp(2rem, 6vw, 4.5rem);
+  --header-bar-height: calc(var(--nav-chrome-edge-gap) * 2 + var(--type-brand-size));
+  --header-block-height: var(--header-bar-height);
+  --floating-stack-gap: 0.75rem;
+  --floating-player-stack-height: 4.95rem;
+  /* Floater harmony (ui-designer): quest left · dock center · save FAB right */
+  --floating-overlay-z: 10050;
+  --floating-quest-z: 10040;
+  --floating-fab-z: 10055;
+  --floating-edge: max(1rem, env(safe-area-inset-left, 0px));
+  --floating-edge-right: max(1rem, env(safe-area-inset-right, 0px));
+  --floating-bottom: max(1.25rem, env(safe-area-inset-bottom, 0px));
+  /* Keep page copy clear of centered dock (CV + player) */
+  --floating-clearance-bottom: calc(
+    var(--floating-player-stack-height)
+    + var(--floating-stack-gap)
+    + 3.25rem
+    + var(--floating-bottom)
+  );
+  --cases-uc-overlay-z: 10000;
+  --nav-portal-width: 3.5rem;
+  --nav-portal-height: 4.25rem;
+
+  /* Store icon masks — iOS squircle ~22.37%, Android legacy ~20% */
+  --app-icon-size: 5.125rem;
+  --app-icon-radius-ios: 26%;
+  --app-icon-radius-android: 24%;
+
+  /* Apps hub — glass primary CTA + column rhythm */
+  --app-cta-glass-bg: color-mix(in srgb, var(--arcadia-fg) 38%, transparent);
+  --app-cta-glass-bg-hover: color-mix(in srgb, var(--arcadia-fg) 48%, transparent);
+  --app-cta-glass-border: color-mix(in srgb, var(--arcadia-fg) 58%, transparent);
+  --app-cta-glass-border-hover: color-mix(in srgb, var(--arcadia-fg) 68%, transparent);
+  --app-cta-glass-fg: var(--arcadia-bg);
+  --app-hub-col-gap: clamp(1.25rem, 3.5vw, 2.5rem);
+
+  /* Cases legibility — GT Planar body size (not Carbonot chrome size) */
+  --cases-read-size: var(--prose-body-size);
+  --cases-read-weight: var(--prose-body-weight);
+  --cases-read-track: var(--prose-body-letter-spacing);
+  --cases-read-line: var(--prose-body-line-height);
+  --cases-table-read-size: var(--prose-body-size);
+  --cases-table-read-line: var(--prose-body-line-height);
+
+  /* Cases spacing — 8px grid */
+  --cases-space-8: 0.5rem;
+  --cases-space-16: 1rem;
+  --cases-space-24: 1.5rem;
+  --cases-space-32: 2rem;
+  --cases-uc-row-gap: var(--cases-space-8);
+  --cases-uc-inset: var(--cases-space-8);
+  --cases-uc-row-bg: transparent;
+  --cases-uc-row-bg-active: transparent;
+  --cases-uc-sticky-top: 0;
+
+  /* Cases chrome — stamp, filters, table headers, UC codes */
+  --cases-chrome-size: var(--carbonot-size);
+  --cases-chrome-track: var(--carbonot-letter-spacing);
+  --cases-chrome-line: var(--carbonot-line-height);
+
+  /* UC row title — bolder, more spaced than body */
+  --cases-uc-title-font: var(--font-prose);
+  --cases-uc-title-size: var(--cases-read-size);
+  --cases-uc-title-weight: 520;
+  --cases-uc-title-track: 0.048em;
+
+  /* Carbonot cap — editor field labels (O QUÊ:, POR QUÊ:, …) */
+  --cases-cap-size: var(--carbonot-cap-size);
+  --cases-cap-track: var(--carbonot-cap-letter-spacing);
+  --cases-cap-line: var(--carbonot-cap-line-height);
+
+  /* Aliases */
+  --cases-type-label-size: var(--carbonot-cap-size);
+  --cases-type-label-line: var(--carbonot-cap-line-height);
+  --cases-type-body-size: var(--cases-read-size);
+  --cases-type-body-weight: var(--cases-read-weight);
+  --cases-type-title-size: var(--cases-uc-title-size);
+  --cases-type-line: var(--cases-read-line);
+  --cases-label-track: var(--cases-cap-track);
+  --cases-body-track: var(--cases-read-track);
+  --cases-label-color: color-mix(in srgb, var(--arcadia-fg) 68%, var(--arcadia-muted));
+  --cases-uc-id-font: var(--font-carbonot);
+  --cases-uc-id-size: var(--carbonot-size);
+  --cases-uc-id-track: var(--carbonot-letter-spacing);
+  --cases-uc-chrome-color: var(--arcadia-muted);
+  --cases-uc-id-color: var(--cases-uc-chrome-color);
+  --cases-text-color: var(--arcadia-fg);
+  --cases-border-color: color-mix(in srgb, var(--arcadia-fg) 28%, var(--arcadia-line));
+  --cases-field-border: color-mix(in srgb, var(--arcadia-fg) 10%, var(--arcadia-line));
+  --cases-field-border-focus: color-mix(in srgb, var(--work-accent-purple) 58%, var(--cases-border-color));
+  --cases-field-shine-focus: color-mix(in srgb, var(--work-accent-purple) 24%, white);
+  --cases-field-glow-focus: 0 0 20px color-mix(in srgb, var(--work-accent-purple) 16%, transparent);
+  --cases-panel-bg: color-mix(in srgb, var(--arcadia-fg) 8%, var(--arcadia-bg));
+  --cases-code-bg: color-mix(in srgb, var(--arcadia-fg) 11%, var(--arcadia-bg));
+  --cases-code-fg: color-mix(in srgb, var(--arcadia-fg) 88%, #b8d4f0);
+  --cases-placeholder-color: color-mix(in srgb, var(--arcadia-muted) 72%, var(--arcadia-fg));
+  --cases-head-border-color: color-mix(in srgb, var(--arcadia-fg) 36%, var(--arcadia-line));
+  --cases-read-surface: color-mix(in srgb, var(--arcadia-fg) 4%, var(--arcadia-bg));
+  --cases-desc-border: color-mix(in srgb, var(--work-accent-purple) 42%, var(--cases-border-color));
+  --cases-desc-accent: color-mix(in srgb, var(--work-accent-purple) 72%, white);
+  --cases-desc-shine: color-mix(in srgb, var(--work-accent-purple) 24%, white);
+  --cases-desc-glow: color-mix(in srgb, var(--work-accent-purple) 14%, transparent);
+
+  /* Arcade progress — segmented squares */
+  --cases-bar-seg-gap: 2px;
+  --cases-bar-seg-min: 0.32rem;
+  --cases-bar-seg-max: 0.52rem;
+  --cases-bar-seg-height: 0.58rem;
+  --cases-bar-main-height: 0.68rem;
+  --cases-bar-track-radius: 0.2rem;
+  --cases-bar-glass-bg: color-mix(in srgb, var(--arcadia-fg) 24%, var(--arcadia-bg));
+  --cases-bar-glass-border: color-mix(in srgb, var(--arcadia-fg) 10%, var(--arcadia-line));
+  --cases-bar-glass-shine: color-mix(in srgb, white 8%, transparent);
+  --cases-bar-glass-blur: 10px;
+  --cases-bar-glass-outer-glow: 0 0 22px color-mix(in srgb, black 5%, transparent);
+  --cases-bar-glass-drop-shadow: 0 4px 20px color-mix(in srgb, black 14%, transparent);
+  --cases-bar-glass-gap: color-mix(in srgb, var(--arcadia-bg) 64%, var(--arcadia-fg) 9%);
+  --cases-bar-glass-slot-off: color-mix(in srgb, black 42%, var(--arcadia-bg));
+  --cases-bar-track-bg: color-mix(in srgb, var(--arcadia-fg) 6%, var(--arcadia-bg));
+  --cases-bar-track-border: color-mix(in srgb, var(--arcadia-fg) 22%, var(--arcadia-line));
+  --cases-bar-seg-off: color-mix(in srgb, var(--arcadia-fg) 10%, var(--arcadia-bg));
+  --cases-bar-seg-off-inset: color-mix(in srgb, var(--arcadia-bg) 70%, black);
+  --cases-bar-seg-on: var(--arcadia-fg);
+  --cases-bar-seg-on-hi: color-mix(in srgb, var(--arcadia-fg) 82%, white);
+  --cases-bar-seg-glow: color-mix(in srgb, var(--arcadia-fg) 28%, transparent);
+  --cases-bar-glass-seg-on-hi: color-mix(in srgb, white 90%, var(--arcadia-fg));
+  --cases-bar-glass-seg-on: var(--arcadia-fg);
+  --cases-bar-glass-seg-glow: color-mix(in srgb, var(--arcadia-fg) 22%, transparent);
+
+  /* UC row — fixed edit slot + progress bar width */
+  --cases-uc-edit-width: 2rem;
+  --cases-uc-action-slot-size: var(--cases-uc-edit-width);
+  --cases-uc-action-icon-size: calc(var(--carbonot-size) * 1.05);
+  --cases-uc-chevron-edit-gap: 0.65rem;
+  --cases-uc-bar-width: 15rem;
+  --cases-uc-bar-height: 0.25rem;
+  --cases-uc-xp-width: 2.85rem;
+  --cases-uc-grid-columns:
+    minmax(4.5rem, auto)
+    minmax(0, 1fr)
+    minmax(3rem, var(--cases-uc-bar-width))
+    minmax(2.25rem, var(--cases-uc-xp-width));
+  --cases-uc-grid-columns-product:
+    minmax(4.5rem, auto)
+    minmax(0, 1fr)
+    var(--cases-uc-action-slot-size)
+    var(--cases-uc-action-slot-size)
+    minmax(3rem, var(--cases-uc-bar-width))
+    minmax(2.25rem, var(--cases-uc-xp-width));
+
+  /* UC folio — meta key fits PRE-/POST-CONDITION; STEP stays compact */
+  --cases-table-step-width: 4.75rem;
+  --cases-table-key-col-width: var(--cases-table-step-width);
+  --cases-table-meta-key-width: 11.5rem;
+  --cases-table-meta-inline-key-width: 6.5rem;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --nav-admin-avatar-size: 3.35rem;
+    --nav-mobile-toggle-size: 2.5rem;
+    --nav-mobile-toggle-icon-width: 1.2rem;
+    --nav-mobile-toggle-bar-thickness: 2px;
+    --nav-mobile-toggle-bar-gap: 0.42rem;
+    --floating-sc-player-art-size-mobile: clamp(5.5rem, 22vw, 7rem);
+    --floating-player-stack-height: calc(var(--floating-sc-player-art-size-mobile) + 0.35rem);
+    --cases-uc-grid-columns:
+      minmax(0, 1fr)
+      minmax(2.25rem, 5.5rem)
+      minmax(2rem, var(--cases-uc-xp-width));
+    --cases-uc-grid-columns-product:
+      minmax(0, 1fr)
+      var(--cases-uc-action-slot-size)
+      var(--cases-uc-action-slot-size)
+      minmax(2.25rem, 5.5rem)
+      minmax(2rem, var(--cases-uc-xp-width));
+    --cases-table-key-col-width: 4.5rem;
+    --cases-table-meta-key-width: 10.75rem;
+    --cases-table-meta-inline-key-width: 6rem;
+    --cases-table-read-line: 1.72;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --type-display-size: 2.75rem;
+    --type-body-size: 1.125rem;
+    --nav-locale-width: 6.15rem;
+    --nav-locale-btn-width: 1.5rem;
+    --app-hub-col-gap: clamp(1.75rem, 5vw, 4rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --site-column-max: min(68rem, calc(100vw - 2.5rem));
+    --content-max-cases: min(68rem, calc(100vw - 2 * var(--site-inline-pad)));
+    --nav-admin-avatar-size: 3rem;
+    --nav-chrome-edge-gap: clamp(0.65rem, 1.1vw, 0.95rem);
+    --nav-header-brand-gap: clamp(2.75rem, 5vw, 4.5rem);
+    --nav-header-link-gap: clamp(1.35rem, 2.2vw, 2rem);
+    --app-hub-col-gap: clamp(2.5rem, 7vw, 5.5rem);
+    --cases-uc-grid-columns:
+      minmax(5.75rem, auto)
+      minmax(0, 1fr)
+      minmax(4rem, var(--cases-uc-bar-width))
+      minmax(2.25rem, var(--cases-uc-xp-width));
+    --cases-uc-grid-columns-product:
+      minmax(5.75rem, auto)
+      minmax(0, 1fr)
+      var(--cases-uc-action-slot-size)
+      var(--cases-uc-action-slot-size)
+      minmax(4rem, var(--cases-uc-bar-width))
+      minmax(2.25rem, var(--cases-uc-xp-width));
+  }
+}
+
+@media (min-width: 1200px) {
+  :root {
+    --site-column-max: min(72rem, calc(100vw - 2.5rem));
+    --content-max-cases: min(72rem, calc(100vw - 2 * var(--site-inline-pad)));
+    --nav-admin-avatar-size: 3.35rem;
+    --nav-header-brand-gap: clamp(3.25rem, 6vw, 5.5rem);
+    --nav-header-link-gap: clamp(1.5rem, 2.5vw, 2.75rem);
+    --app-hub-col-gap: clamp(3rem, 8.5vw, 7rem);
+  }
+}
+
+@media (min-width: 1600px) {
+  :root {
+    --site-column-max: min(80rem, calc(100vw - 3rem));
+    --content-max-cases: min(80rem, calc(100vw - 2 * var(--site-inline-pad)));
+    --nav-admin-avatar-size: 3.65rem;
+    --nav-chrome-edge-gap: clamp(0.7rem, 1vw, 1rem);
+    --nav-header-brand-gap: clamp(3.5rem, 7vw, 6.5rem);
+    --nav-header-link-gap: clamp(1.75rem, 2.8vw, 3.25rem);
+    --app-hub-col-gap: clamp(3.5rem, 10vw, 9rem);
+  }
+}
