@@ -65,8 +65,6 @@ function EditingShell({
   children,
   saveLabel,
   savingLabel,
-  onDelete,
-  deleteLabel,
 }) {
   return (
     <div className={`uc-folio-panel uc-folio-panel--editing${saveReady ? ' uc-folio-panel--dirty' : ''}`}>
@@ -81,19 +79,6 @@ function EditingShell({
             savingLabel={savingLabel}
             ready={saveReady}
           />
-          {onDelete ? (
-            <button
-              type="button"
-              className="button button--danger"
-              disabled={saving}
-              aria-label={deleteLabel}
-              title={deleteLabel}
-              onClick={onDelete}
-            >
-              <TrashGlyph />
-              <span>{deleteLabel}</span>
-            </button>
-          ) : null}
         </div>
       </div>
       {error ? <p className="alert" role="alert">{error}</p> : null}
@@ -219,8 +204,6 @@ export default function UseCaseFolioDetail({
         error={error}
         saveLabel={t('useCasesSpec.save')}
         savingLabel={t('useCasesSpec.saving')}
-        onDelete={handleDelete}
-        deleteLabel={t('useCasesSpec.delete')}
       >
         <UseCaseEditor
           initial={useCase}
@@ -229,6 +212,8 @@ export default function UseCaseFolioDetail({
           onDirtyChange={setFormDirty}
           onSave={handleSave}
           onCancel={handleCancelEdit}
+          onDelete={handleDelete}
+          deleteLabel={t('useCasesSpec.delete')}
         />
       </EditingShell>
     )

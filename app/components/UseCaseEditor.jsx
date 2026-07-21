@@ -63,6 +63,22 @@ function InsertStepDivider({ onInsert, label }) {
   )
 }
 
+function TrashGlyph() {
+  return (
+    <span className="button__glyph" aria-hidden="true">
+      <svg viewBox="0 0 16 16" fill="none">
+        <path
+          d="M3.5 4.5h9M6 4.5V3.25A.75.75 0 0 1 6.75 2.5h2.5a.75.75 0 0 1 .75.75V4.5m-5.5 0 .6 8.1a1 1 0 0 0 1 .9h3.3a1 1 0 0 0 1-.9l.6-8.1M6.75 7v4.5M9.25 7v4.5"
+          stroke="currentColor"
+          strokeWidth="1.25"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </span>
+  )
+}
+
 function flowSectionLabel(kind, labels) {
   if (kind === 'alternative') return labels.stepsAlternatives ?? 'Alternatives'
   if (kind === 'exception') return labels.stepsExceptions ?? 'Exceptions'
@@ -89,6 +105,8 @@ export default function UseCaseEditor({
   onDirtyChange,
   saving = false,
   allowProductPick = false,
+  onDelete,
+  deleteLabel,
 }) {
   const [form, setForm] = useState(() => normalizeFormState(initial))
   const [error, setError] = useState('')
@@ -251,6 +269,22 @@ export default function UseCaseEditor({
             </tbody>
           </table>
         </div>
+
+        {onDelete ? (
+          <div className="uc-editor__identity-actions">
+            <button
+              type="button"
+              className="button button--danger"
+              disabled={saving}
+              aria-label={deleteLabel}
+              title={deleteLabel}
+              onClick={onDelete}
+            >
+              <TrashGlyph />
+              <span>{deleteLabel}</span>
+            </button>
+          </div>
+        ) : null}
 
         <aside className="uc-editor__description" aria-label={labels.description}>
           <p className="uc-editor__description-label">{labels.description}</p>

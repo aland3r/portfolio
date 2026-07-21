@@ -25,6 +25,7 @@ export function getUseCaseLabels(t) {
     bounds: t('useCasesSpec.bounds'),
     useCaseId: t('useCasesSpec.useCaseId'),
     useCaseName: t('useCasesSpec.useCaseName'),
+    metaContext: t('useCasesSpec.metaContext'),
     actor: t('useCasesSpec.actor'),
     object: t('useCasesSpec.object'),
     preCondition: t('useCasesSpec.preCondition'),

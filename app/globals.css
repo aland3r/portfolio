@@ -4098,6 +4098,10 @@ a {
   margin-top: 0;
 }
 
+.uc-folio__table--meta {
+  border-top: 3px solid color-mix(in srgb, var(--arcadia-fg) 42%, var(--cases-border-color));
+}
+
 .uc-folio__table--steps {
   border-top: 2px solid var(--cases-head-border-color);
 }
@@ -5013,6 +5017,19 @@ code {
 .uc-editor__table--identity th,
 .uc-editor__table--identity td {
   border-color: color-mix(in srgb, var(--cases-border-color) 48%, transparent);
+}
+
+.uc-editor__identity-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin: -0.35rem 0 0.85rem;
+}
+
+.uc-editor__identity-actions .button--danger {
+  font-family: var(--font-carbonot, monospace);
+  font-size: var(--carbonot-size, 0.7rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .uc-editor__col--meta-key {

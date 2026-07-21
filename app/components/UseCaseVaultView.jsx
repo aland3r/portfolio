@@ -150,6 +150,11 @@ function FolioSpecTable({ useCase, labels, compact = false }) {
             ) : null}
           </colgroup>
           <tbody>
+            {labels.metaContext ? (
+              <tr className="uc-folio__table-flow-band uc-folio__table-flow-band--main">
+                <th scope="colgroup" colSpan={metaIsQuad ? 4 : 2}>{labels.metaContext}</th>
+              </tr>
+            ) : null}
             {headerRows.map(([label, value]) => (
               <tr key={label} className="uc-folio__table-meta-row">
                 <th scope="row" className="uc-folio__table-meta-label">{label}</th>

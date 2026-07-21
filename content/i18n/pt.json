@@ -401,6 +401,7 @@
     "bounds": "Limites:",
     "useCaseId": "Use Case ID",
     "useCaseName": "Nome do caso de uso",
+    "metaContext": "Contexto",
     "actor": "Ator",
     "object": "Objeto",
     "preCondition": "Pré-condição",
