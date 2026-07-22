@@ -1,6 +1,7 @@
 'use client'
 
-import { GESTALT_PRODUCTS } from '@gestalt/auth'
+import { useEffect, useState } from 'react'
+import { GESTALT_PRODUCTS, fetchAppProducts, isProductEntryLive } from '@gestalt/auth'
 import AppIcon, { AppTrackChip } from './AppIcon'
 import { TrackPlacement } from './TrackPlayChip'
 import { useLocale } from './LocaleProvider'
@@ -16,15 +17,30 @@ export default function AppHub() {
     hasProductAccess,
     getProductLandingUrl,
     getProductArticlesUrl,
-    isProductLive,
   } = useLaunchProduct()
+
+  // Names/lifecycle come from `portfolio.products` (show_in_apps); the static
+  // list is the fallback so the three slots persist if the fetch fails.
+  const [products, setProducts] = useState(GESTALT_PRODUCTS)
+
+  useEffect(() => {
+    let active = true
+    fetchAppProducts()
+      .then((rows) => {
+        if (active && rows?.length) setProducts(rows)
+      })
+      .catch(() => {})
+    return () => {
+      active = false
+    }
+  }, [])
 
   return (
     <div className="app-hub-page">
       <TrackPlacement placement="apps" hubOnly className="track-placement--apps" />
       <div className="app-hub" role="list">
-        {GESTALT_PRODUCTS.map((product) => {
-          const live = isProductLive(product.code)
+        {products.map((product) => {
+          const live = isProductEntryLive(product)
           const allowed = isOwner || hasProductAccess(product.code)
 
           return (
