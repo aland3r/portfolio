@@ -62,9 +62,6 @@ export function getUseCaseLabels(t) {
     cancel: t('useCasesSpec.cancel'),
     preview: t('useCasesSpec.preview'),
     empty: t('useCasesSpec.empty'),
-    dragHint: t('useCasesSpec.dragHint'),
-    reorderFailed: t('useCasesSpec.reorderFailed'),
-    reordering: t('useCasesSpec.reordering'),
   }
 }
 
@@ -139,7 +136,7 @@ export default function UseCasesSpecPanel({ productCode, basePath = '/cases' }) 
     setMessage('')
     setError('')
     try {
-      const payload = form.id ? form : { ...form, sortOrder: list.length }
+      const payload = form.id ? form : { ...form, sortOrder: form.ucNumber ?? list.length + 1 }
       const saved = form.id
         ? await updateUseCase(form.id, payload)
         : await createUseCase(payload)
@@ -220,14 +217,12 @@ export default function UseCasesSpecPanel({ productCode, basePath = '/cases' }) 
         <p className="muted">{t('misc.loading')}</p>
       ) : (
         <UseCaseDraggableList
-          productCode={productCode}
           items={list}
           labels={labels}
           editLabels={editLabels}
           isOwner={ownerDbAccess}
           selectedSlug={slugParam}
           editingSlug={editParam ? slugParam : null}
-          onReorder={setList}
           buildHref={(slug, opts) => buildHref(slug, opts)}
           onSave={handleSave}
           onDelete={handleDelete}
