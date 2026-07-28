@@ -3428,14 +3428,19 @@ a {
  * sticky top: gestalt-chrome-height pinned it at a DIFFERENT scroll
  * offset than the row above it — two nested sticky elements at mismatched
  * offsets, which read as a large empty gap (or overlap) between the row
- * and the SAVE/DELETE toolbar depending on scroll position. The toolbar
- * doesn't need its own stickiness here — the row above it already stays
- * pinned, so just let it sit in normal flow, no gap possible.
+ * and the SAVE/DELETE toolbar depending on scroll position. Edit mode must
+ * also carry --embedded (see EditingShell); --editing is a safety net so
+ * SAVE never paints over the identity row. Toolbar stays in normal flow —
+ * the list row above already pins.
  */
-.build-progress--cases .uc-folio-panel--embedded .uc-folio-panel__toolbar--sticky {
+.build-progress--cases .uc-folio-panel--embedded .uc-folio-panel__toolbar--sticky,
+.build-progress--cases .uc-folio-panel--editing .uc-folio-panel__toolbar--sticky {
   position: static;
   top: auto;
+  z-index: auto;
   backdrop-filter: none;
+  margin-bottom: var(--cases-space-8);
+  padding-bottom: var(--cases-space-8);
 }
 
 .build-progress--cases .uc-folio {
@@ -5019,10 +5024,12 @@ code {
   border-color: color-mix(in srgb, var(--cases-border-color) 48%, transparent);
 }
 
+/* Spec-panel / legacy editor delete cluster (folio edit uses toolbar). */
 .uc-editor__identity-actions {
   display: flex;
   justify-content: flex-end;
-  margin: -0.35rem 0 0.85rem;
+  margin: 0 0 var(--cases-space-8);
+  gap: var(--cases-space-8);
 }
 
 .uc-editor__identity-actions .button--danger {

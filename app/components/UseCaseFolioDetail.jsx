@@ -65,14 +65,42 @@ function EditingShell({
   children,
   saveLabel,
   savingLabel,
+  embedded = false,
+  onDelete,
+  deleteLabel,
 }) {
+  // Embedded accordion already pins the UC row (sticky top: 0). Keep the
+  // SAVE toolbar in normal flow there — a second sticky offset overlaps the
+  // identity row. Standalone folio may still use sticky chrome.
+  const panelClass = [
+    'uc-folio-panel',
+    'uc-folio-panel--editing',
+    embedded ? 'uc-folio-panel--embedded' : '',
+    saveReady ? 'uc-folio-panel--dirty' : '',
+  ]
+    .filter(Boolean)
+    .join(' ')
+
   return (
-    <div className={`uc-folio-panel uc-folio-panel--editing${saveReady ? ' uc-folio-panel--dirty' : ''}`}>
+    <div className={panelClass}>
       <div className="uc-folio-panel__toolbar uc-folio-panel__toolbar--sticky">
         <div
           className="uc-folio-panel__actions uc-folio-panel__actions--toolbar"
           aria-live="polite"
         >
+          {onDelete ? (
+            <button
+              type="button"
+              className="button button--danger"
+              disabled={saving}
+              aria-label={deleteLabel}
+              title={deleteLabel}
+              onClick={onDelete}
+            >
+              <TrashGlyph />
+              <span>{deleteLabel}</span>
+            </button>
+          ) : null}
           <UcEditorSaveButton
             saving={saving}
             saveLabel={saveLabel}
@@ -176,6 +204,7 @@ export default function UseCaseFolioDetail({
         error={error}
         saveLabel={t('useCasesSpec.save')}
         savingLabel={t('useCasesSpec.saving')}
+        embedded={embedded}
       >
         <UseCaseEditor
           initial={draft}
@@ -204,6 +233,9 @@ export default function UseCaseFolioDetail({
         error={error}
         saveLabel={t('useCasesSpec.save')}
         savingLabel={t('useCasesSpec.saving')}
+        embedded={embedded}
+        onDelete={handleDelete}
+        deleteLabel={t('useCasesSpec.delete')}
       >
         <UseCaseEditor
           initial={useCase}
@@ -212,8 +244,6 @@ export default function UseCaseFolioDetail({
           onDirtyChange={setFormDirty}
           onSave={handleSave}
           onCancel={handleCancelEdit}
-          onDelete={handleDelete}
-          deleteLabel={t('useCasesSpec.delete')}
         />
       </EditingShell>
     )
