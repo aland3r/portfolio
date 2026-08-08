@@ -8,7 +8,6 @@ import { useLocale } from './LocaleProvider'
 const CV_LABEL_KEYS = {
   en: 'nav.cvInEnglish',
   pt: 'nav.cvInPortuguese',
-  de: 'nav.cvInGerman',
 }
 
 function DownloadIcon({ className = '' }) {

@@ -13,7 +13,6 @@
     "downloadCv": "Download CV",
     "cvInEnglish": "In English",
     "cvInPortuguese": "In Portuguese",
-    "cvInGerman": "In German",
     "admin": "Admin",
     "adminGovernance": "Total governance",
     "in": "In",
@@ -37,8 +36,7 @@
     "localeHintUnavailable": "Pick a language below when a PDF is ready.",
     "localeHint": {
       "en": "English PDF ready for this site language.",
-      "pt": "Portuguese PDF ready for this site language.",
-      "de": "German PDF ready for this site language."
+      "pt": "Portuguese PDF ready for this site language."
     }
   },
   "home": {
@@ -228,34 +226,13 @@
       "draft": "Draft"
     },
     "items": {
-      "deviante-building": {
-        "title": "Building Deviante: process mining for maintenance teams",
-        "excerpt": "How we turn event logs into drift signals operators can trust — from PIBITI research to a Gestalt product with a real landing and auth flow.",
+      "deviante-suporte-decisao-manutencao": {
+        "title": "Sistema de suporte à decisão para manutenção industrial",
+        "excerpt": "Desenvolvimento de um sistema web que combina IPDD, ADWIN, aprendizado de máquina e avaliação humana para detectar desvios e apoiar a manutenção baseada em condição.",
         "body": [
-          "Maintenance managers rarely lack data — they lack a readable story of what changed on the shop floor. Deviante starts from event logs: every start and complete of a machine activity becomes a trace we can compare over time.",
-          "Our PIBITI work combines process mining with adaptive windowing (ADWIN) to flag when sojourn times drift before equipment fails. The research scripts are real; the product goal is to wrap that rigor in a UX a manager can act on without reading a thesis.",
-          "This post is the short version of that arc. The partial PIBITI report (~25 pages) lives under Scientific as a formal research deliverable — same project, different filter."
+          "O trabalho narra o desenvolvimento de um sistema de suporte à decisão em gestão de manutenção industrial. O produto de software origina-se do estudo e implantação do IPDD, um framework que recebe dados de máquinas e detecta pontos próximos ao início da degradação através de previsões facilitadas por aprendizado de máquina, permitindo a gestores direcionar anomalias para ações corretivas de inspeção e manutenção baseada em condição. A identificação estatística das mudanças cabe ao algoritmo de janelamento adaptativo ADWIN, que compara registros antigos e recentes em janelas ajustadas dinamicamente, sinalizando desvio quando a diferença entre elas ultrapassa um limiar estatístico definido por um parâmetro de sensibilidade configurável através de componentes da interface. Análises são geradas tanto sobre o tempo de permanência nos eventos quanto a parâmetros de condição do maquinário. Porém, as anomalias detectadas ainda exigem o ponderamento do gestor para a tomada de decisão. A detecção automatizada integrada à avaliação humana atende a princípios de centralidade humana previstos na Indústria 5.0. Partimos de uma lacuna encontrada na literatura: a ausência de estrutura hierárquica entre objetos e atributos do domínio de manutenção gera sobrecarga cognitiva para a interpretação. Foi aplicado o processo ORCA, da metodologia de OOUX, para estruturar objetos de valor do ecossistema de manutenção. O processo resultou em seis objetos de domínio que, aliados a oito casos de uso, compuseram a usabilidade da interface em ambiente web, desde o carregamento de dados até a execução de análises de desvio e o agendamento de ações proativas. O trabalho visa contribuir com a interação de parâmetros que devem ser analisados e ajustados dinamicamente, convergindo na interface o diagnóstico do equipamento, informações do processo e falhas detectadas. A estruturação semântica do domínio, aliada a requisitos funcionais especificado no caso de uso, foi o que viabilizou a implantação do sistema por meio de desenvolvimento em linguagem natural, otimizado por um repositório de componentes reutilizáveis de IA. Testes iniciais identificaram desvios em dados sintéticos e apresentaram bons resultados.",
+          "Palavras-chave: 1. Mineração de Processo; 2. Manutenção baseada em condição; 3. Experiência Orientada a Objetos; 4. Sistema de Suporte a Decisão."
         ]
-      },
-      "deviante-pibiti-partial": {
-        "title": "Deviante — partial PIBITI report",
-        "excerpt": "Formal research deliverable: IPDD/ADWIN experiments on synthetic and real manufacturing logs (~25 pages).",
-        "body": []
-      },
-      "deviante-pibiti-final": {
-        "title": "Deviante — final PIBITI report",
-        "excerpt": "Full scientific deliverable for the PIBITI program — reserved for the completed research report and PDF.",
-        "body": []
-      },
-      "milebrick-discovery": {
-        "title": "Milebrick: language learning from the stories you already love",
-        "excerpt": "OOUX-first discovery for a product that pulls vocabulary from books, films, and series instead of generic decks.",
-        "body": []
-      },
-      "harpia-placeholder": {
-        "title": "Harpia: a reserved slot in the Gestalt lineup",
-        "excerpt": "Placeholder for the next product story — scope and case study land here when Harpia moves out of designing.",
-        "body": []
       }
     }
   },
@@ -264,7 +241,6 @@
     "developing": "Developing",
     "soon": "Soon",
     "offline": "Host not live yet",
-    "landing": "Landing page",
     "publications": "Publications",
     "try": "Try this app",
     "contact": "Contact for access",
@@ -276,9 +252,18 @@
     "title": "Cases",
     "filterLabel": "Filter by product",
     "items": {
-      "deviante": { "title": "Deviante", "status": "Active" },
-      "milebrick": { "title": "Milebrick", "status": "Dev" },
-      "hub": { "title": "Portfolio hub", "status": "Live" }
+      "deviante": {
+        "title": "Deviante",
+        "status": "Active"
+      },
+      "milebrick": {
+        "title": "Milebrick",
+        "status": "Dev"
+      },
+      "hub": {
+        "title": "Portfolio hub",
+        "status": "Live"
+      }
     }
   },
   "artifacts": {

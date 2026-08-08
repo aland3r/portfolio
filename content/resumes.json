@@ -10,11 +10,5 @@
     "href": "/resume-ptbr.pdf",
     "downloadName": "Alander-Avila-Curriculo-PT.pdf",
     "available": true
-  },
-  {
-    "locale": "de",
-    "href": "/resume-de.pdf",
-    "downloadName": "Alander-Avila-Lebenslauf-DE.pdf",
-    "available": false
   }
 ]
