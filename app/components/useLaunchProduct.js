@@ -5,7 +5,6 @@ import {
   GESTALT_PRODUCTS,
   getProductAppUrl,
   getProductArticlesUrl,
-  getProductLandingUrl,
   getProductTryUrl,
   isProductLive,
 } from '@gestalt/auth'
@@ -53,7 +52,6 @@ export function useLaunchProduct() {
     isAuthenticated,
     isOwner,
     hasProductAccess,
-    getProductLandingUrl,
     getProductArticlesUrl,
     isProductLive,
   }

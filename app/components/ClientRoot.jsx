@@ -3,12 +3,10 @@
 import { usePathname } from 'next/navigation'
 import { AuthProvider } from './AuthProvider'
 import { LocaleProvider } from './LocaleProvider'
-import FloatingSoundCloudPlayer from './FloatingSoundCloudPlayer'
 import FloatingCvDownload from './FloatingCvDownload'
 import FloatingGamifierHud from './FloatingGamifierHud'
 import GestaltShell from './GestaltShell'
 import { RoadmapProvider } from './RoadmapProvider'
-import { SoundCloudPlayerProvider } from './SoundCloudPlayerProvider'
 import '../globals.css'
 import '../gamifier.css'
 
@@ -24,7 +22,6 @@ function FloatingDock() {
       <FloatingGamifierHud />
       <div className="floating-dock">
         <FloatingCvDownload />
-        <FloatingSoundCloudPlayer />
       </div>
     </>
   )
@@ -35,10 +32,8 @@ export default function ClientRoot({ children }) {
     <LocaleProvider>
       <AuthProvider>
         <RoadmapProvider>
-          <SoundCloudPlayerProvider>
-            <GestaltShell>{children}</GestaltShell>
-            <FloatingDock />
-          </SoundCloudPlayerProvider>
+          <GestaltShell>{children}</GestaltShell>
+          <FloatingDock />
         </RoadmapProvider>
       </AuthProvider>
     </LocaleProvider>

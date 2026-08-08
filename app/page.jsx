@@ -3,17 +3,20 @@
 import Link from 'next/link'
 import { useLocale } from './components/LocaleProvider'
 import WelcomeDinoScene from './components/WelcomeDinoScene'
-import { SITE_NAME } from '../lib/site'
 
 export default function HomePage() {
-  const { t } = useLocale()
+  const { t, locale } = useLocale()
+
+  // Hero title = the role being pursued (not the personal name, which stays the
+  // brand in the header). Easy to reword here.
+  const roleTitle = locale === 'pt' ? 'Engenheiro UX' : 'UX Engineer'
 
   return (
     <section className="home-lp">
       <WelcomeDinoScene />
       <div className="home-lp__copy panel">
         <p className="eyebrow">{t('home.eyebrow')}</p>
-        <h1>{SITE_NAME}</h1>
+        <h1>{roleTitle}</h1>
         <p className="lead">{t('home.lead')}</p>
 
         <div className="actions">

@@ -44,7 +44,6 @@ export default function GestaltShell({ children }) {
     { href: '/work', label: t('nav.work') },
     { href: '/apps', label: t('nav.apps') },
     { href: '/projects', label: t('nav.publications') },
-    ...(isOwner ? [{ href: '/tracks', label: t('nav.tracks') }] : []),
     { href: '/cases', label: t('nav.useCases') },
     { href: '/kit', label: t('nav.kit') },
   ]

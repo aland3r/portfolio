@@ -1,48 +1,11 @@
 [
   {
-    "id": "deviante-building",
-    "venue": "social",
-    "platform": "linkedin",
+    "id": "deviante-suporte-decisao-manutencao",
+    "venue": "scientific",
     "productCode": "deviante",
-    "publishedAt": "2026-07-01",
-    "readMinutes": 8,
+    "publishedAt": "2026-08-04",
+    "readMinutes": 4,
     "status": "published",
-    "externalUrl": null
-  },
-  {
-    "id": "deviante-pibiti-partial",
-    "venue": "scientific",
-    "productCode": "deviante",
-    "publishedAt": null,
-    "readMinutes": 25,
-    "status": "draft",
-    "externalUrl": null
-  },
-  {
-    "id": "deviante-pibiti-final",
-    "venue": "scientific",
-    "productCode": "deviante",
-    "publishedAt": null,
-    "status": "draft",
-    "externalUrl": null
-  },
-  {
-    "id": "milebrick-discovery",
-    "venue": "academic",
-    "productCode": "milebrick",
-    "publishedAt": null,
-    "readMinutes": 6,
-    "status": "draft",
-    "externalUrl": null
-  },
-  {
-    "id": "harpia-placeholder",
-    "venue": "social",
-    "platform": "linkedin",
-    "productCode": "harpia",
-    "publishedAt": null,
-    "readMinutes": 5,
-    "status": "draft",
     "externalUrl": null
   }
 ]
