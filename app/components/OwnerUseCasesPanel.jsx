@@ -33,7 +33,7 @@ function productFilterFromParams(searchParams) {
 export default function OwnerUseCasesPanel() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const { t } = useLocale()
+  const { t, locale } = useLocale()
   const { isOwner, isAuthenticated, authReady } = useAuth()
   const [productFilter, setProductFilter] = useState(() => productFilterFromParams(searchParams))
   const [useCases, setUseCases] = useState([])
@@ -95,13 +95,14 @@ export default function OwnerUseCasesPanel() {
     setLoadError('')
     try {
       if (productFilter === 'all') {
-        const rows = await fetchAllUseCases({ publicOnly })
+        const rows = await fetchAllUseCases({ publicOnly, locale })
         setUseCases(rows ?? [])
       } else if (specProductCode) {
         const rows = await fetchUseCasesByProduct(specProductCode, {
           publicOnly,
           withChildren: true,
           withRequirements: false,
+          locale,
         })
         setUseCases(rows ?? [])
       } else {
@@ -113,7 +114,7 @@ export default function OwnerUseCasesPanel() {
     } finally {
       setLoading(false)
     }
-  }, [authReady, productFilter, publicOnly, specProductCode, t])
+  }, [authReady, productFilter, publicOnly, specProductCode, t, locale])
 
   useEffect(() => {
     loadUseCases()

@@ -68,7 +68,7 @@ export function getUseCaseLabels(t) {
 export default function UseCasesSpecPanel({ productCode, basePath = '/cases' }) {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const { t } = useLocale()
+  const { t, locale } = useLocale()
   const { isOwner, isAuthenticated, authReady } = useAuth()
   const labels = useMemo(() => getUseCaseLabels(t), [t])
   const editLabels = useMemo(() => ({
@@ -112,14 +112,14 @@ export default function UseCasesSpecPanel({ productCode, basePath = '/cases' }) 
     setLoading(true)
     setError('')
     try {
-      const rows = await fetchUseCasesByProduct(productCode, { publicOnly, withChildren: true })
+      const rows = await fetchUseCasesByProduct(productCode, { publicOnly, withChildren: true, locale })
       setList(rows ?? [])
     } catch (err) {
       setError(err instanceof Error ? err.message : t('useCasesSpec.loadFailed'))
     } finally {
       setLoading(false)
     }
-  }, [authReady, productCode, publicOnly, t])
+  }, [authReady, productCode, publicOnly, t, locale])
 
   useEffect(() => {
     loadList()

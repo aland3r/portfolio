@@ -365,7 +365,20 @@ export default function BuildProgress({
   const ucProgress = useMemo(() => {
     const base =
       productFilter === 'all' ? getAllProductsUseCaseProgress(roadmap) : getUseCaseProgress(phases)
-    return mergeUseCaseProgressWithSpecs(base, useCases, productFilter)
+    const merged = mergeUseCaseProgressWithSpecs(base, useCases, productFilter)
+    // Render only UCs backed by a real DB spec — never quest-only ghost slots
+    // (e.g. legacy UC11–UC16 that no longer exist as use cases).
+    const specCode = Object.entries(SPEC_TO_GESTALT).find(([, code]) => code === productFilter)?.[0]
+    const specKeys = new Set(
+      useCases
+        .filter((item) => productFilter === 'all' || item.productCode === specCode)
+        .map((item) =>
+          productFilter === 'all'
+            ? `${SPEC_TO_GESTALT[item.productCode] ?? item.productCode}-${item.ucNumber}`
+            : String(item.ucNumber),
+        ),
+    )
+    return merged.filter((entry) => specKeys.has(ucRowKey(entry, productFilter)))
   }, [phases, productFilter, useCases, roadmap])
 
   const filteredUseCaseCount = useMemo(() => {
