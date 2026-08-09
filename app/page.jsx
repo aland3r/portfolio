@@ -34,7 +34,7 @@ export default function HomePage() {
 
         <div className="actions">
           <Link href="/apps" className="button">
-            {t('home.apps')}
+            {t('nav.products')}
           </Link>
         </div>
       </div>

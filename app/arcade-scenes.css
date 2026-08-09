@@ -55,8 +55,9 @@
   font-family: var(--font-carbonot);
   font-synthesis: none;
   font-style: normal;
-  text-transform: none;
-  font-size: clamp(0.95rem, 2.1vw, 1.5rem);
+  /* Carbonot is always uppercase — never smallcase. */
+  text-transform: uppercase;
+  font-size: clamp(0.85rem, 1.95vw, 1.4rem);
   line-height: 1.1;
   font-weight: 500;
   letter-spacing: var(--carbonot-letter-spacing);

@@ -42,7 +42,7 @@ export default function GestaltShell({ children }) {
 
   const navLinks = [
     { href: '/work', label: t('nav.work') },
-    { href: '/apps', label: t('nav.apps') },
+    { href: '/apps', label: t('nav.products') },
     { href: '/projects', label: t('nav.publications') },
     { href: '/cases', label: t('nav.useCases') },
     { href: '/kit', label: t('nav.kit') },
