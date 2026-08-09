@@ -1,15 +1,30 @@
 'use client'
 
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import { useLocale } from './components/LocaleProvider'
 import WelcomeDinoScene from './components/WelcomeDinoScene'
+import { fetchHuman } from '../lib/gestalt-auth'
 
 export default function HomePage() {
-  const { t, locale } = useLocale()
+  const { t } = useLocale()
 
-  // Hero title = the role being pursued (not the personal name, which stays the
-  // brand in the header). Easy to reword here.
-  const roleTitle = locale === 'pt' ? 'Engenheiro UX' : 'UX Engineer'
+  // Hero title = the owner's role, sourced only from `portfolio.human`
+  // (single source of truth). No hardcoded fallback — see
+  // gestalt-kit/partials/portfolio-content-governance.md.
+  const [roleTitle, setRoleTitle] = useState(null)
+
+  useEffect(() => {
+    let active = true
+    fetchHuman()
+      .then((human) => {
+        if (active && human?.roleTitle) setRoleTitle(human.roleTitle)
+      })
+      .catch(() => {})
+    return () => {
+      active = false
+    }
+  }, [])
 
   return (
     <section className="home-lp">
