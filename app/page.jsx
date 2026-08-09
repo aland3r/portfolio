@@ -28,8 +28,8 @@ export default function HomePage() {
   return (
     <section className="home-lp">
       <div className="home-lp__copy panel">
-        <p className="eyebrow">{t('home.eyebrow')}</p>
         <h1>{roleTitle}</h1>
+        <p className="eyebrow">{t('home.eyebrow')}</p>
         <p className="lead">{t('home.lead')}</p>
 
         <div className="actions">

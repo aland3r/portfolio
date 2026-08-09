@@ -52,16 +52,18 @@
 }
 
 .home-lp__copy .lead {
-  font-family: var(--font-prose);
-  font-variation-settings: 'slnt' 0;
+  font-family: var(--font-carbonot);
   font-synthesis: none;
   font-style: normal;
   text-transform: none;
-  font-size: var(--cases-type-body-size);
-  line-height: var(--cases-type-line);
-  font-weight: var(--cases-type-body-weight);
-  letter-spacing: var(--cases-body-track);
+  font-size: clamp(0.95rem, 2.1vw, 1.5rem);
+  line-height: 1.1;
+  font-weight: 500;
+  letter-spacing: var(--carbonot-letter-spacing);
   color: var(--arcadia-muted);
+  /* One line, no wrap — override the generic .lead max-width. */
+  max-width: none;
+  white-space: nowrap;
 }
 
 .welcome-scene {
