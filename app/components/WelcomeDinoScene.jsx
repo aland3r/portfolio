@@ -15,12 +15,12 @@ function drawCactus(ctx, baseX, baseY, u, bright) {
   ctx.fillStyle = body
   // trunk
   ctx.fillRect(baseX - u, baseY - u * 9, u * 2, u * 9)
-  // left arm
-  ctx.fillRect(baseX - u * 3, baseY - u * 6, u, u * 3)
-  ctx.fillRect(baseX - u * 3, baseY - u * 6, u * 2, u)
-  // right arm
-  ctx.fillRect(baseX + u * 2, baseY - u * 7, u, u * 4)
+  // left arm — elbow out from trunk, then the limb rises up
+  ctx.fillRect(baseX - u * 3, baseY - u * 6, u * 3, u)
+  ctx.fillRect(baseX - u * 3, baseY - u * 8, u, u * 2)
+  // right arm — elbow out, rising a touch taller
   ctx.fillRect(baseX + u, baseY - u * 7, u * 2, u)
+  ctx.fillRect(baseX + u * 2, baseY - u * 10, u, u * 3)
   // shade column
   ctx.fillStyle = shade
   ctx.fillRect(baseX + u * 0.4, baseY - u * 9, u * 0.6, u * 9)
@@ -32,30 +32,18 @@ function drawDino(ctx, cx, groundY, u, step, moving, facing) {
   ctx.translate(cx, 0)
   if (facing < 0) ctx.scale(-1, 1)
 
-  const body = '#74c46a'
-  const belly = '#a7e29c'
-  const dark = '#2f5a2c'
+  // White pixel silhouette on the transparent (black) ground — no belly, no eye.
+  ctx.fillStyle = '#ffffff'
 
   // tail
-  ctx.fillStyle = body
   ctx.fillRect(-u * 8, groundY - u * 7, u * 4, u * 3)
   ctx.fillRect(-u * 9, groundY - u * 6, u * 2, u * 2)
   // body
   ctx.fillRect(-u * 6, groundY - u * 9, u * 10, u * 6)
-  // belly
-  ctx.fillStyle = belly
-  ctx.fillRect(-u * 4, groundY - u * 6, u * 6, u * 3)
   // head
-  ctx.fillStyle = body
   ctx.fillRect(u * 2, groundY - u * 13, u * 6, u * 6)
   ctx.fillRect(u * 7, groundY - u * 11, u * 2, u * 2) // snout
-  // eye
-  ctx.fillStyle = '#ffffff'
-  ctx.fillRect(u * 5, groundY - u * 12, u * 1.6, u * 1.6)
-  ctx.fillStyle = '#12240f'
-  ctx.fillRect(u * 6, groundY - u * 12, u * 0.9, u * 1.2)
   // legs (animate only while moving)
-  ctx.fillStyle = dark
   const swing = moving ? step : 0
   ctx.fillRect(-u * 2, groundY - u * 3, u * 1.8, u * 3 + swing)
   ctx.fillRect(u * 1.5, groundY - u * 3, u * 1.8, u * 3 - swing)
@@ -124,7 +112,7 @@ export default function WelcomeDinoScene() {
         world.current.facing = dir
       }
 
-      const u = Math.max(2, Math.round(Math.min(w / 230, h / 120)))
+      const u = Math.max(2, Math.round(Math.min(w / 300, h / 165)))
       const horizonY = h * 0.6
       const groundY = h * 0.72
       const t = now / 1000
@@ -145,23 +133,8 @@ export default function WelcomeDinoScene() {
       ctx.arc(w * 0.7, horizonY - sunR * 0.3, sunR, 0, Math.PI * 2)
       ctx.fill()
 
-      // --- far dunes (slow parallax) ---
-      ctx.fillStyle = '#5a2b3a'
-      const duneOff = (wx * 0.2) % (w)
-      for (let i = -1; i <= 2; i += 1) {
-        const dx = i * w - duneOff
-        ctx.beginPath()
-        ctx.moveTo(dx, horizonY)
-        ctx.quadraticCurveTo(dx + w * 0.5, horizonY - h * 0.12, dx + w, horizonY)
-        ctx.fill()
-      }
-
-      // --- sand ground ---
-      const sand = ctx.createLinearGradient(0, horizonY, 0, h)
-      sand.addColorStop(0, '#c98a44')
-      sand.addColorStop(1, '#7c4a22')
-      ctx.fillStyle = sand
-      ctx.fillRect(0, horizonY, w, h - horizonY)
+      // --- ground: intentionally transparent below the horizon so the black
+      //     page shows through (no sand color); sky stays violet above. ---
 
       // --- far cacti (behind dino, dim, small, medium parallax) ---
       cactusLayer(w, wx * 0.55, u * 34, horizonY + h * 0.06, u * 0.7, false, 3.1)
