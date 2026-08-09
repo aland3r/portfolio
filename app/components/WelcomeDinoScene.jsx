@@ -10,20 +10,25 @@ function hash(n) {
 
 /* Chunky pixel saguaro standing on (baseX, baseY). `f` = brightness factor. */
 function drawCactus(ctx, baseX, baseY, u, bright) {
-  const body = bright ? '#5fae52' : '#3f6b45'
-  const shade = bright ? '#3f7d3a' : '#2f5133'
-  ctx.fillStyle = body
-  // trunk
-  ctx.fillRect(baseX - u, baseY - u * 9, u * 2, u * 9)
-  // left arm — elbow out from trunk, then the limb rises up
-  ctx.fillRect(baseX - u * 3, baseY - u * 6, u * 3, u)
-  ctx.fillRect(baseX - u * 3, baseY - u * 8, u, u * 2)
-  // right arm — elbow out, rising a touch taller
-  ctx.fillRect(baseX + u, baseY - u * 7, u * 2, u)
-  ctx.fillRect(baseX + u * 2, baseY - u * 10, u, u * 3)
-  // shade column
-  ctx.fillStyle = shade
-  ctx.fillRect(baseX + u * 0.4, baseY - u * 9, u * 0.6, u * 9)
+  // Saguaro as a single outline: black interior, white contour line only.
+  const pts = [
+    [-1, 0], [-1, 4], [-3, 4], [-3, 7], [-2, 7], [-2, 5], [-1, 5],
+    [-1, 9], [1, 9], [1, 6], [2, 6], [2, 9], [3, 9], [3, 5], [1, 5], [1, 0],
+  ]
+  ctx.beginPath()
+  for (let i = 0; i < pts.length; i += 1) {
+    const x = baseX + pts[i][0] * u
+    const y = baseY - pts[i][1] * u
+    if (i === 0) ctx.moveTo(x, y)
+    else ctx.lineTo(x, y)
+  }
+  ctx.closePath()
+  ctx.fillStyle = '#000000'
+  ctx.fill()
+  ctx.lineJoin = 'round'
+  ctx.lineWidth = Math.max(1, u * 0.5)
+  ctx.strokeStyle = bright ? '#ffffff' : 'rgba(255,255,255,0.5)'
+  ctx.stroke()
 }
 
 /* Little pixel dinosaur, feet centered on (cx, groundY). `step` toggles legs. */
@@ -32,21 +37,34 @@ function drawDino(ctx, cx, groundY, u, step, moving, facing) {
   ctx.translate(cx, 0)
   if (facing < 0) ctx.scale(-1, 1)
 
-  // White pixel silhouette on the transparent (black) ground — no belly, no eye.
-  ctx.fillStyle = '#ffffff'
-
-  // tail
-  ctx.fillRect(-u * 8, groundY - u * 7, u * 4, u * 3)
-  ctx.fillRect(-u * 9, groundY - u * 6, u * 2, u * 2)
-  // body
-  ctx.fillRect(-u * 6, groundY - u * 9, u * 10, u * 6)
-  // head
-  ctx.fillRect(u * 2, groundY - u * 13, u * 6, u * 6)
-  ctx.fillRect(u * 7, groundY - u * 11, u * 2, u * 2) // snout
-  // legs (animate only while moving)
   const swing = moving ? step : 0
-  ctx.fillRect(-u * 2, groundY - u * 3, u * 1.8, u * 3 + swing)
-  ctx.fillRect(u * 1.5, groundY - u * 3, u * 1.8, u * 3 - swing)
+  // Chrome-style T-Rex silhouette in white, facing right.
+  // R(xLeft, yBottom, xRight, yTop) in `u` units, y measured up from the ground.
+  const R = (xL, yB, xR, yT) =>
+    ctx.fillRect(xL * u, groundY - yT * u, (xR - xL) * u, (yT - yB) * u)
+
+  ctx.fillStyle = '#ffffff'
+  // tail — steps up to the left
+  R(-6, 6, -4, 9)
+  R(-4, 5, -1, 8)
+  // body
+  R(-1, 3, 6, 8)
+  // neck
+  R(4, 8, 6, 10)
+  // head
+  R(5, 9, 11, 14)
+  // snout / lower jaw
+  R(11, 9, 13, 11)
+  // little arm
+  R(5.5, 5, 7.5, 6)
+  // legs (animate only while moving)
+  ctx.fillRect(0, groundY - u * 3, u * 1.6, u * 3 + swing)
+  ctx.fillRect(u * 3, groundY - u * 3, u * 1.6, u * 3 - swing)
+
+  // eye + mouth punched out in black
+  ctx.fillStyle = '#000000'
+  R(9, 11.9, 10.2, 13.2) // eye
+  R(9.4, 9.5, 12.4, 10.3) // mouth
 
   ctx.restore()
 }
@@ -80,6 +98,14 @@ export default function WelcomeDinoScene() {
     resize()
     const observer = new ResizeObserver(resize)
     observer.observe(canvas)
+
+    // Arrow keys drive the dino whenever the hero is on screen. It only ever
+    // captures Left/Right, so vertical page scrolling is unaffected.
+    const io = new IntersectionObserver(
+      (entries) => { world.current.active = entries[0]?.isIntersecting ?? false },
+      { threshold: 0.35 },
+    )
+    io.observe(canvas)
 
     // Draw one parallax cactus layer given its world offset + styling.
     function cactusLayer(w, offset, spacing, baseY, u, bright, seed) {
@@ -126,12 +152,6 @@ export default function WelcomeDinoScene() {
       sky.addColorStop(1, '#7a3350')
       ctx.fillStyle = sky
       ctx.fillRect(0, 0, w, horizonY)
-      // sun
-      ctx.fillStyle = '#ffb463'
-      const sunR = Math.min(w, h) * 0.09
-      ctx.beginPath()
-      ctx.arc(w * 0.7, horizonY - sunR * 0.3, sunR, 0, Math.PI * 2)
-      ctx.fill()
 
       // --- ground: intentionally transparent below the horizon so the black
       //     page shows through (no sand color); sky stays violet above. ---
@@ -167,6 +187,7 @@ export default function WelcomeDinoScene() {
 
     return () => {
       observer.disconnect()
+      io.disconnect()
       cancelAnimationFrame(rafRef.current)
       window.removeEventListener('keydown', onKeyDown)
       window.removeEventListener('keyup', onKeyUp)
@@ -196,9 +217,7 @@ export default function WelcomeDinoScene() {
   return (
     <div
       className="welcome-scene"
-      onPointerEnter={() => { world.current.active = true }}
       onPointerLeave={() => {
-        world.current.active = false
         keys.current.left = false
         keys.current.right = false
       }}
