@@ -306,7 +306,7 @@ a {
   color: transparent;
   filter: drop-shadow(0 0 5px var(--brand-copper-glow))
     drop-shadow(0 0 14px var(--brand-copper-flame))
-    drop-shadow(0 0 28px rgba(150, 60, 22, 0.45));
+    drop-shadow(0 0 28px rgba(60, 5, 10, 0.5));
   animation: brand-flame 2.6s ease-in-out infinite;
 }
 
@@ -321,19 +321,19 @@ a {
   100% {
     filter: drop-shadow(0 0 5px var(--brand-copper-glow))
       drop-shadow(0 0 14px var(--brand-copper-flame))
-      drop-shadow(0 0 26px rgba(150, 60, 22, 0.4));
+      drop-shadow(0 0 26px rgba(60, 5, 10, 0.45));
   }
 
   45% {
     filter: drop-shadow(0 0 9px var(--brand-copper-glow))
-      drop-shadow(0 0 20px rgba(255, 120, 55, 0.75))
-      drop-shadow(0 0 34px rgba(185, 78, 30, 0.55));
+      drop-shadow(0 0 20px rgba(150, 12, 18, 0.8))
+      drop-shadow(0 0 34px rgba(85, 8, 12, 0.6));
   }
 
   70% {
     filter: drop-shadow(0 0 6px var(--brand-copper-glow))
       drop-shadow(0 0 16px var(--brand-copper-flame))
-      drop-shadow(0 0 30px rgba(135, 52, 20, 0.48));
+      drop-shadow(0 0 30px rgba(55, 6, 10, 0.5));
   }
 }
 
