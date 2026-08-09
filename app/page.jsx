@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useLocale } from './components/LocaleProvider'
-import WelcomeDinoScene from './components/WelcomeDinoScene'
 import { fetchHuman } from '../lib/gestalt-auth'
 
 export default function HomePage() {
@@ -28,7 +27,6 @@ export default function HomePage() {
 
   return (
     <section className="home-lp">
-      <WelcomeDinoScene />
       <div className="home-lp__copy panel">
         <p className="eyebrow">{t('home.eyebrow')}</p>
         <h1>{roleTitle}</h1>
