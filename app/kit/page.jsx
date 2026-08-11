@@ -6,13 +6,22 @@ import { useAuth } from '../components/AuthProvider'
 import { useLocale } from '../components/LocaleProvider'
 
 function KitPageContent() {
-  const { loading } = useAuth()
+  const { loading, authReady, isOwner } = useAuth()
   const { t } = useLocale()
 
-  if (loading) {
+  if (loading || !authReady) {
     return (
       <section className="panel">
         <p className="muted">{t('misc.loading')}</p>
+      </section>
+    )
+  }
+
+  // Owner-only while the kit content is being reviewed for consistency.
+  if (!isOwner) {
+    return (
+      <section className="panel">
+        <p className="muted">{t('kit.ownerOnly') || t('misc.notFound') || 'Not available.'}</p>
       </section>
     )
   }

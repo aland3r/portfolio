@@ -8,6 +8,7 @@ import { useLocale } from './LocaleProvider'
 import { NavLocaleSwitcher } from './NavResumeMenu'
 import MobileNavMenu from './MobileNavMenu'
 import SiteFooter from './SiteFooter'
+import AccessRequestsNotice from './AccessRequestsNotice'
 import AdminGovernanceAvatar from './AdminGovernanceAvatar'
 import { useCompactHeaderNav } from './useCompactHeaderNav'
 import { loginHref } from '../../lib/auth-intent'
@@ -45,7 +46,8 @@ export default function GestaltShell({ children }) {
     { href: '/apps', label: t('nav.products') },
     { href: '/projects', label: t('nav.publications') },
     { href: '/cases', label: t('nav.useCases') },
-    { href: '/kit', label: t('nav.kit') },
+    // Kit is owner-only until the content is reviewed and approved.
+    ...(isOwner ? [{ href: '/kit', label: t('nav.kit') }] : []),
   ]
 
   const compactNav = useCompactHeaderNav(
@@ -237,7 +239,10 @@ export default function GestaltShell({ children }) {
       ) : null}
 
       <div id="root">
-        <main className={hideNav ? 'gestalt-main gestalt-main--auth' : 'gestalt-main'}>{children}</main>
+        <main className={hideNav ? 'gestalt-main gestalt-main--auth' : 'gestalt-main'}>
+          {!hideNav ? <AccessRequestsNotice /> : null}
+          {children}
+        </main>
       </div>
       {!hideNav ? <SiteFooter /> : null}
     </div>
