@@ -888,6 +888,98 @@ a {
   overflow-x: clip;
 }
 
+/* Owner-only access-request heads-up (AccessRequestsNotice) */
+.access-notice {
+  position: relative;
+  margin: 0 0 2rem;
+  border: 1px solid var(--arcadia-line);
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--arcadia-fg) 6%, transparent);
+}
+
+.access-notice__head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  padding: 0.75rem 2.5rem 0.75rem 0.9rem;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  color: var(--arcadia-fg);
+  font-family: var(--font-carbonot);
+  font-size: var(--type-small-size);
+  letter-spacing: var(--type-small-letter-spacing);
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.access-notice__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.4rem;
+  height: 1.4rem;
+  padding: 0 0.4rem;
+  border-radius: 999px;
+  background: var(--arcadia-fg);
+  color: var(--arcadia-bg);
+  font-size: 0.75rem;
+}
+
+.access-notice__label { flex: 1; }
+.access-notice__chevron { color: var(--arcadia-muted); }
+
+.access-notice__list {
+  list-style: none;
+  margin: 0;
+  padding: 0 0.9rem 0.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.access-notice__item {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--arcadia-line);
+  border-radius: 3px;
+  font-family: var(--font-prose);
+}
+
+.access-notice__email {
+  display: block;
+  color: var(--arcadia-fg);
+  font-size: var(--type-body-size);
+}
+
+.access-notice__message {
+  margin: 0.35rem 0;
+  color: var(--arcadia-muted);
+  font-size: var(--type-small-size);
+  line-height: 1.5;
+}
+
+.access-notice__date {
+  color: var(--arcadia-muted);
+  font-size: 0.75rem;
+}
+
+.access-notice__dismiss {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 1.6rem;
+  height: 1.6rem;
+  border: 0;
+  background: none;
+  color: var(--arcadia-muted);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.access-notice__dismiss:hover { color: var(--arcadia-fg); }
+
 /* Page titles stay on the #root column ? not the owner avatar / INSERT COIN anchor */
 .gestalt-main:not(.gestalt-main--auth) :is(.eyebrow, h1, .work-hero, .work-hero__title) {
   text-align: left;
