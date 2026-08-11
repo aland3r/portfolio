@@ -26,8 +26,8 @@ function flowSectionLabel(kind, labels) {
   return labels.stepsMain ?? labels.steps ?? 'Main path'
 }
 
-function DescriptionBlock({ why, what, bounds, summary, labels, folio = false }) {
-  const paragraph = composeDescriptionParagraph(why, what, bounds, summary)
+function DescriptionBlock({ why, what, bounds, summary, description, labels, folio = false }) {
+  const paragraph = composeDescriptionParagraph(why, what, bounds, summary, description)
   if (!paragraph) return null
 
   const className = folio ? 'uc-folio__description' : 'uc-vault__description'
@@ -306,6 +306,7 @@ export default function UseCaseVaultView({ useCase, labels, layout = 'default', 
           what={useCase.descriptionWhat}
           bounds={useCase.descriptionBounds}
           summary={useCase.summary}
+          description={useCase.description}
           labels={labels}
           folio
         />
@@ -328,6 +329,7 @@ export default function UseCaseVaultView({ useCase, labels, layout = 'default', 
         what={useCase.descriptionWhat}
         bounds={useCase.descriptionBounds}
         summary={useCase.summary}
+        description={useCase.description}
         labels={labels}
       />
       <MetadataTable useCase={useCase} labels={labels} />

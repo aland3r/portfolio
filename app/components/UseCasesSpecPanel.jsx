@@ -20,6 +20,7 @@ import UseCaseEditor from './UseCaseEditor'
 export function getUseCaseLabels(t) {
   return {
     description: t('useCasesSpec.description'),
+    descriptionHint: t('useCasesSpec.descriptionHint'),
     why: t('useCasesSpec.why'),
     what: t('useCasesSpec.what'),
     bounds: t('useCasesSpec.bounds'),

@@ -7,17 +7,15 @@ export default function UseCaseProductFilter({ value, onChange }) {
   const { t } = useLocale()
   const products = getActiveGestaltProducts()
 
+  // Same visual language as the Projects filter (.article-filter) — identical
+  // height and typography — wrapped so the /cases toolbar layout still applies.
   return (
-    <div className="uc-product-filter" role="tablist" aria-label={t('cases.filterLabel')}>
+    <div className="uc-product-filter article-filter" role="tablist" aria-label={t('cases.filterLabel')}>
       <button
         type="button"
         role="tab"
         aria-selected={value === 'all'}
-        className={
-          value === 'all'
-            ? 'uc-product-filter__btn uc-product-filter__btn--all uc-product-filter__btn--active'
-            : 'uc-product-filter__btn uc-product-filter__btn--all'
-        }
+        className={value === 'all' ? 'article-filter__btn article-filter__btn--active' : 'article-filter__btn'}
         onClick={() => onChange('all')}
       >
         {t('progress.filterAll')}
@@ -28,16 +26,11 @@ export default function UseCaseProductFilter({ value, onChange }) {
           type="button"
           role="tab"
           aria-selected={value === product.code}
-          className={
-            value === product.code
-              ? 'uc-product-filter__btn uc-product-filter__btn--code uc-product-filter__btn--active'
-              : 'uc-product-filter__btn uc-product-filter__btn--code'
-          }
+          className={value === product.code ? 'article-filter__btn article-filter__btn--active' : 'article-filter__btn'}
           onClick={() => onChange(product.code)}
           title={product.name}
         >
-          <span className="uc-product-filter__code">{product.code}</span>
-          <span className="uc-product-filter__name">{product.name}</span>
+          {product.name}
         </button>
       ))}
     </div>

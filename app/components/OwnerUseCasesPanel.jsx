@@ -25,8 +25,8 @@ function productFilterFromParams(searchParams) {
   if (!fromUrl) return 'all'
   const roadmapCode = Object.entries(FILTER_TO_SPEC).find(([, code]) => code === fromUrl)?.[0]
   if (!roadmapCode) return 'all'
-  // Active scope: IO + DV only
-  if (roadmapCode !== 'IO' && roadmapCode !== 'DV') return 'all'
+  // Active UC scope: Deviante + Milebrick (portfolio dropped 11/08/2026)
+  if (roadmapCode !== 'DV' && roadmapCode !== 'MB') return 'all'
   return roadmapCode
 }
 

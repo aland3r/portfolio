@@ -1880,6 +1880,34 @@ a {
   grid-column: 1 / -1;
 }
 
+/* Older, unlinked roles: smaller footprint in the gallery */
+.experience-card--compact {
+  background: color-mix(in srgb, var(--arcadia-fg) 2%, var(--arcadia-bg));
+}
+
+.experience-card--compact .experience-card__link {
+  gap: 0.6rem;
+  padding: 1.05rem 1.2rem;
+}
+
+.experience-card--compact .experience-card__headline {
+  font-size: var(--type-body-size);
+}
+
+.experience-card--compact .experience-card__story {
+  font-size: var(--type-small-size);
+  line-height: var(--type-small-line-height);
+}
+
+.experience-card__link--static {
+  cursor: default;
+}
+
+.experience-card__location {
+  font-size: var(--type-small-size);
+  color: var(--arcadia-muted);
+}
+
 .experience-card__link {
   display: flex;
   flex-direction: column;
@@ -4952,6 +4980,14 @@ code {
   letter-spacing: var(--carbonot-letter-spacing);
   text-transform: uppercase;
   color: color-mix(in srgb, var(--work-accent-purple) 55%, var(--arcadia-fg));
+}
+
+.uc-editor__description-hint {
+  margin: 0;
+  font-family: var(--font-prose);
+  font-size: var(--type-small-size);
+  line-height: var(--type-small-line-height);
+  color: var(--arcadia-muted);
 }
 
 .uc-editor__description-fields {

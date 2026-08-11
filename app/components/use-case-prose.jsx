@@ -14,8 +14,15 @@ export function cleanDescriptionText(text) {
     .trim()
 }
 
-/** Merge why/what/bounds into one readable paragraph (labels stay in the editor only). */
-export function composeDescriptionParagraph(why, what, bounds, summary) {
+/**
+ * One readable description paragraph. Prefers the single `description` field;
+ * falls back to merging the legacy why/what/bounds trio (still written by the
+ * vault sync) so older rows keep rendering.
+ */
+export function composeDescriptionParagraph(why, what, bounds, summary, description) {
+  const single = cleanDescriptionText(description)
+  if (single) return single
+
   const parts = [
     cleanDescriptionText(why),
     cleanDescriptionText(what || summary),

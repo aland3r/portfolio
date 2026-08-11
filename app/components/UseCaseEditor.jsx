@@ -288,29 +288,14 @@ export default function UseCaseEditor({
 
         <aside className="uc-editor__description" aria-label={labels.description}>
           <p className="uc-editor__description-label">{labels.description}</p>
-          <div className="uc-editor__description-fields">
-            <label className="uc-editor__description-row">
-              <span className="uc-editor__description-key">{labels.why}</span>
-              <AutoGrowTextarea
-                value={form.descriptionWhy ?? ''}
-                onChange={(e) => patch('descriptionWhy', e.target.value)}
-              />
-            </label>
-            <label className="uc-editor__description-row">
-              <span className="uc-editor__description-key">{labels.what}</span>
-              <AutoGrowTextarea
-                value={form.descriptionWhat ?? ''}
-                onChange={(e) => patch('descriptionWhat', e.target.value)}
-              />
-            </label>
-            <label className="uc-editor__description-row">
-              <span className="uc-editor__description-key">{labels.bounds}</span>
-              <AutoGrowTextarea
-                value={form.descriptionBounds ?? ''}
-                onChange={(e) => patch('descriptionBounds', e.target.value)}
-              />
-            </label>
-          </div>
+          {labels.descriptionHint ? (
+            <p className="uc-editor__description-hint">{labels.descriptionHint}</p>
+          ) : null}
+          <AutoGrowTextarea
+            value={form.description ?? ''}
+            onChange={(e) => patch('description', e.target.value)}
+            aria-label={labels.description}
+          />
         </aside>
 
         <div className="uc-editor__table-wrap">

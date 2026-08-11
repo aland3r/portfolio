@@ -1,18 +1,36 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
-import experienceCatalog from '../../content/experience.json'
-import { getMessage } from '../../lib/i18n'
-import { formatExperiencePeriod } from '../../lib/experience.js'
+import { fetchExperiences, localizeExperience } from '@gestalt/auth'
+import { STATIC_EXPERIENCES } from '../../lib/experience.js'
 import { useLocale } from './LocaleProvider'
+
+function yearRange(entry, presentLabel) {
+  const start = entry.start_date?.slice(0, 4)
+  if (!start) return null
+  const end = entry.end_date ? entry.end_date.slice(0, 4) : presentLabel
+  return `${start} – ${end}`
+}
 
 export default function ExperienceDetail() {
   const { id } = useParams()
-  const { t, locale, messages } = useLocale()
-  const entry = experienceCatalog.find((item) => item.id === id)
+  const { t, locale } = useLocale()
+  const [rows, setRows] = useState(null)
 
-  if (!entry) {
+  useEffect(() => {
+    let active = true
+    fetchExperiences()
+      .then((data) => { if (active) setRows(data && data.length ? data : STATIC_EXPERIENCES) })
+      .catch(() => { if (active) setRows(STATIC_EXPERIENCES) })
+    return () => { active = false }
+  }, [])
+
+  const source = rows ?? STATIC_EXPERIENCES
+  const raw = source.find((item) => item.id === id)
+
+  if (!raw) {
     return (
       <section className="panel">
         <p className="muted">{t('work.notFound')}</p>
@@ -25,16 +43,8 @@ export default function ExperienceDetail() {
     )
   }
 
-  const roleLabel = t(`work.items.${entry.id}.role`)
-  const orgLabel = t(`work.items.${entry.id}.org`)
-  const headline = t(`work.items.${entry.id}.headline`)
-  const teaser = t(`work.items.${entry.id}.teaser`)
-  const kindLabel = t(`work.kinds.${entry.kind}`)
-  const periodLabel = formatExperiencePeriod(entry, locale, t('work.present'))
-  const presenceLabel = entry.presence ? t(`work.presence.${entry.presence}`) : null
-  const locationLabel = entry.locationKey ? t(`work.locations.${entry.locationKey}`) : null
-  const bodyRaw = getMessage(messages, `work.items.${entry.id}.body`)
-  const bodyParagraphs = Array.isArray(bodyRaw) ? bodyRaw : bodyRaw ? [bodyRaw] : []
+  const entry = localizeExperience(raw, locale)
+  const periodLabel = yearRange(entry, t('work.now'))
 
   return (
     <article className="panel experience-detail">
@@ -42,41 +52,28 @@ export default function ExperienceDetail() {
         ← {t('work.back')}
       </Link>
 
-      <p className="eyebrow">{kindLabel}</p>
-      <h1 className="work-prose experience-detail__title">{headline}</h1>
-      <p className="experience-detail__org">{orgLabel} · {roleLabel}</p>
+      <h1 className="work-prose experience-detail__title">{entry.title}</h1>
+      <p className="experience-detail__org">{entry.org}</p>
 
       <p className="experience-card__meta experience-detail__meta">
         {periodLabel ? <span>{periodLabel}</span> : null}
-        {presenceLabel ? (
+        {entry.employment_type ? (
           <>
-            <span className="experience-card__dot" aria-hidden="true">
-              ·
-            </span>
-            <span>{presenceLabel}</span>
+            <span className="experience-card__dot" aria-hidden="true">·</span>
+            <span>{entry.employment_type}</span>
           </>
         ) : null}
-        {locationLabel ? (
+        {entry.location ? (
           <>
-            <span className="experience-card__dot" aria-hidden="true">
-              ·
-            </span>
-            <span>{locationLabel}</span>
+            <span className="experience-card__dot" aria-hidden="true">·</span>
+            <span>{entry.location}</span>
           </>
         ) : null}
       </p>
 
-      <p className="work-prose work-prose--lead">{teaser}</p>
+      <p className="work-prose work-prose--lead">{entry.description}</p>
 
-      {bodyParagraphs.length > 0 ? (
-        <div className="work-prose work-prose--body">
-          {bodyParagraphs.map((paragraph) => (
-            <p key={paragraph.slice(0, 48)}>{paragraph}</p>
-          ))}
-        </div>
-      ) : (
-        <p className="muted experience-detail__empty">{t('work.bodySoon')}</p>
-      )}
+      <p className="muted experience-detail__empty">{t('work.bodySoon')}</p>
     </article>
   )
 }

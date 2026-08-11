@@ -15,6 +15,12 @@ function StoryArrowIcon() {
   )
 }
 
+function spanClass(span) {
+  if (span === 'wide') return 'experience-card experience-card--wide'
+  if (span === 'compact') return 'experience-card experience-card--compact'
+  return 'experience-card'
+}
+
 export default function ExperienceCard({
   periodLabel,
   isCurrentRole,
@@ -22,29 +28,45 @@ export default function ExperienceCard({
   headline,
   story,
   orgHandle,
+  location,
   detailHref,
-  span = 'compact',
+  span = 'default',
 }) {
-  return (
-    <article className={span === 'wide' ? 'experience-card experience-card--wide' : 'experience-card'}>
-      <Link href={detailHref} className="experience-card__link">
-        <div className="experience-card__top">
-          {periodLabel ? <p className="experience-card__period">{periodLabel}</p> : null}
-          {isCurrentRole ? (
-            <span className="experience-card__badge">{currentRoleLabel}</span>
-          ) : null}
-        </div>
+  const isLinked = Boolean(detailHref)
 
-        <h2 className="experience-card__headline">{headline}</h2>
-        <p className="experience-card__story">{story}</p>
+  const body = (
+    <>
+      <div className="experience-card__top">
+        {periodLabel ? <p className="experience-card__period">{periodLabel}</p> : null}
+        {isCurrentRole ? (
+          <span className="experience-card__badge">{currentRoleLabel}</span>
+        ) : null}
+      </div>
 
-        <div className="experience-card__foot">
-          <span className="experience-card__org">{orgHandle}</span>
+      <h2 className="experience-card__headline">{headline}</h2>
+      <p className="experience-card__story">{story}</p>
+
+      <div className="experience-card__foot">
+        <span className="experience-card__org">{orgHandle}</span>
+        {location ? <span className="experience-card__location">{location}</span> : null}
+        {isLinked ? (
           <span className="experience-card__arrow" aria-hidden="true">
             <StoryArrowIcon />
           </span>
-        </div>
-      </Link>
+        ) : null}
+      </div>
+    </>
+  )
+
+  return (
+    <article className={spanClass(span)} role="listitem">
+      {isLinked ? (
+        <Link href={detailHref} className="experience-card__link">
+          {body}
+        </Link>
+      ) : (
+        <div className="experience-card__link experience-card__link--static">{body}</div>
+      )}
     </article>
   )
 }
