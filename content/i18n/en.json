@@ -2,7 +2,7 @@
   "nav": {
     "work": "Work",
     "apps": "Apps",
-    "publications": "Publications",
+    "publications": "Projects",
     "products": "Products",
     "cases": "Cases",
     "useCases": "Cases",
@@ -184,12 +184,12 @@
     }
   },
   "publications": {
-    "eyebrow": "Publications",
-    "title": "Publications",
+    "eyebrow": "Projects",
+    "title": "Projects",
     "lead": "Social posts, university work, and scientific research — grouped by type.",
     "filterLabel": "Filter by type",
     "productEyebrow": "{0}",
-    "productTitle": "Publications · {0}",
+    "productTitle": "Projects · {0}",
     "productLead": "Writing and deliverables about {0}.",
     "empty": "Nothing here yet for this filter.",
     "emptyProduct": "No publications for this product yet.",
@@ -241,7 +241,7 @@
     "developing": "Developing",
     "soon": "Soon",
     "offline": "Host not live yet",
-    "publications": "Publications",
+    "publications": "Projects",
     "try": "Try this app",
     "contact": "Contact for access",
     "inOpen": "In → open",
@@ -439,6 +439,7 @@
     }
   },
   "kit": {
+    "ownerOnly": "This section is under review and is not available yet.",
     "heading": "Gestalt Kit",
     "lede": "Agents, skills, partials, and architecture — the AI toolkit that powers this report. Public evidence; owner can edit like Cases.",
     "kindsNav": "Kit kinds",

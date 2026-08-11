@@ -2,7 +2,7 @@
   "nav": {
     "work": "Work",
     "apps": "Apps",
-    "publications": "Publicações",
+    "publications": "Projetos",
     "products": "Produtos",
     "cases": "Cases",
     "useCases": "Casos",
@@ -184,12 +184,12 @@
     }
   },
   "publications": {
-    "eyebrow": "Publicações",
-    "title": "Publicações",
+    "eyebrow": "Projetos",
+    "title": "Projetos",
     "lead": "Redes sociais, trabalhos universitários e pesquisa científica — organizados por tipo.",
     "filterLabel": "Filtrar por tipo",
     "productEyebrow": "{0}",
-    "productTitle": "Publicações · {0}",
+    "productTitle": "Projetos · {0}",
     "productLead": "Textos e entregas sobre o {0}.",
     "empty": "Nada neste filtro ainda.",
     "emptyProduct": "Ainda não há publicações para este produto.",
@@ -241,7 +241,7 @@
     "developing": "Developing",
     "soon": "Em breve",
     "offline": "Host ainda não no ar",
-    "publications": "Publicações",
+    "publications": "Projetos",
     "try": "Try this app",
     "contact": "Contato para acesso",
     "inOpen": "Entrar → abrir",
@@ -439,6 +439,7 @@
     }
   },
   "kit": {
+    "ownerOnly": "Esta seção está em revisão e ainda não está disponível.",
     "heading": "Gestalt Kit",
     "lede": "Agentes, skills, partials e arquitetura — o toolkit de IA deste relatório. Evidência pública; dono edita como em Casos.",
     "kindsNav": "Tipos do kit",
