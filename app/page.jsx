@@ -57,7 +57,7 @@ export default function HomePage() {
 
         {statements?.values?.length > 0 && (
           <div className="home-lp__values">
-            <p className="eyebrow">{t('home.values')}</p>
+            {/* Title left implicit — the list stands on its own. */}
             <ul>
               {statements.values.map((value) => (
                 <li key={value}>{value}</li>

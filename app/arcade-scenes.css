@@ -67,18 +67,39 @@
   white-space: nowrap;
 }
 
+/* Statements read as prose (GT Planar), not the Carbonot pixel display
+   font that `body` imposes site-wide. Only the "product engineer" role
+   title (h1) and the "portfolio" wordmark stay Carbonot. */
 .home-lp__vision {
   margin-top: 1.75rem;
   max-width: 34rem;
+  font-family: var(--font-prose);
+  font-variation-settings: var(--font-prose-variation, 'slnt' 0);
+  font-synthesis: none;
+  font-style: normal;
+  text-transform: none;
+  font-weight: 500;
+  letter-spacing: var(--prose-body-letter-spacing);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   font-size: clamp(1.15rem, 2.4vw, 1.6rem);
-  line-height: 1.2;
+  line-height: 1.3;
   color: var(--text-h, inherit);
 }
 
 .home-lp__mission {
   margin-top: 0.75rem;
   max-width: 34rem;
-  line-height: 1.4;
+  font-family: var(--font-prose);
+  font-variation-settings: var(--font-prose-variation, 'slnt' 0);
+  font-synthesis: none;
+  font-style: normal;
+  text-transform: none;
+  font-weight: var(--prose-body-weight);
+  letter-spacing: var(--prose-body-letter-spacing);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
   color: var(--arcadia-muted);
 }
 
@@ -98,7 +119,16 @@
 .home-lp__values li {
   padding-left: 0.9rem;
   border-left: 2px solid var(--arcadia-line);
-  line-height: 1.35;
+  font-family: var(--font-prose);
+  font-variation-settings: var(--font-prose-variation, 'slnt' 0);
+  font-synthesis: none;
+  font-style: normal;
+  text-transform: none;
+  font-weight: var(--prose-body-weight);
+  letter-spacing: var(--prose-body-letter-spacing);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
 }
 
 .welcome-scene {
