@@ -5046,6 +5046,43 @@ code {
   border-bottom-color: color-mix(in srgb, var(--work-accent-purple) 55%, var(--cases-border-color));
 }
 
+/* Primary description field — this textarea lives outside any table, so it
+   inherits none of the field rules below. Give it a real well. */
+.uc-editor__description textarea {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0.15rem 0 0;
+  min-height: 5.5rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--cases-field-border);
+  background: color-mix(in srgb, var(--arcadia-fg) 4%, var(--arcadia-bg));
+  color: var(--cases-text-color);
+  font-family: var(--font-prose);
+  font-size: var(--cases-type-body-size);
+  line-height: var(--cases-read-line);
+  font-weight: var(--cases-type-body-weight);
+  letter-spacing: var(--cases-body-track);
+  font-style: normal;
+  font-variation-settings: 'slnt' 0;
+  font-synthesis: none;
+  text-transform: none;
+  outline: none;
+  resize: none;
+  overflow: hidden;
+  transition: border-color 0.16s ease, background-color 0.16s ease, box-shadow 0.16s ease;
+}
+
+.uc-editor__description textarea:hover {
+  border-color: color-mix(in srgb, var(--arcadia-fg) 20%, var(--cases-field-border));
+}
+
+.uc-editor__description textarea:focus {
+  border-color: var(--cases-field-border-focus);
+  background: color-mix(in srgb, var(--work-accent-purple) 6%, var(--arcadia-bg));
+  box-shadow: var(--cases-field-glow-focus);
+}
+
 .uc-editor__table-wrap {
   width: 100%;
   max-width: 100%;
@@ -5108,7 +5145,7 @@ code {
   vertical-align: middle;
   padding-block: 0.3rem;
   border-color: color-mix(in srgb, var(--cases-border-color) 55%, transparent);
-  color: color-mix(in srgb, var(--arcadia-fg) 42%, var(--arcadia-muted));
+  color: var(--cases-label-color);
   font-weight: 700;
 }
 
@@ -5270,6 +5307,24 @@ code {
   text-align: left;
 }
 
+/* Empty fields must read as fields, not blank grid cells. */
+.uc-editor__table input::placeholder,
+.uc-editor__table textarea::placeholder,
+.uc-editor__description textarea::placeholder {
+  color: var(--cases-placeholder-color);
+  opacity: 1;
+  font-style: normal;
+  letter-spacing: var(--cases-body-track);
+}
+
+/* Faint well tint on editable cells so the input area is legible against the
+   flat label cells — affordance by color/contrast, not opacity. */
+.uc-editor__table--identity tbody td,
+.uc-editor__table--meta td,
+.uc-editor__table--steps td:not(.uc-editor__col--action) {
+  background: color-mix(in srgb, var(--arcadia-fg) 3.5%, transparent);
+}
+
 .uc-editor__select {
   position: relative;
   width: 100%;
@@ -5327,7 +5382,7 @@ code {
 .uc-editor__table td:focus-within {
   outline: 1px solid color-mix(in srgb, var(--cases-field-border-focus) 70%, transparent);
   outline-offset: -1px;
-  background: transparent;
+  background: color-mix(in srgb, var(--work-accent-purple) 7%, transparent);
 }
 
 .uc-editor__table--steps td.uc-editor__col--step input {

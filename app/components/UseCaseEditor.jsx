@@ -220,6 +220,7 @@ export default function UseCaseEditor({
                   <input
                     value={form.title}
                     onChange={(e) => patch('title', e.target.value)}
+                    placeholder={labels.phTitle}
                     required
                     spellCheck={false}
                   />
@@ -294,6 +295,7 @@ export default function UseCaseEditor({
           <AutoGrowTextarea
             value={form.description ?? ''}
             onChange={(e) => patch('description', e.target.value)}
+            placeholder={labels.phDescription}
             aria-label={labels.description}
           />
         </aside>
@@ -313,6 +315,7 @@ export default function UseCaseEditor({
                   <input
                     value={form.actor ?? ''}
                     onChange={(e) => patch('actor', e.target.value)}
+                    placeholder={labels.phActor}
                     spellCheck={false}
                   />
                 </td>
@@ -321,6 +324,7 @@ export default function UseCaseEditor({
                   <input
                     value={form.objectName ?? ''}
                     onChange={(e) => patch('objectName', e.target.value)}
+                    placeholder={labels.phObject}
                     spellCheck={false}
                   />
                 </td>
@@ -331,6 +335,7 @@ export default function UseCaseEditor({
                   <AutoGrowTextarea
                     value={form.preCondition ?? ''}
                     onChange={(e) => patch('preCondition', e.target.value)}
+                    placeholder={labels.phPre}
                   />
                 </td>
               </tr>
@@ -340,6 +345,7 @@ export default function UseCaseEditor({
                   <AutoGrowTextarea
                     value={form.postCondition ?? ''}
                     onChange={(e) => patch('postCondition', e.target.value)}
+                    placeholder={labels.phPost}
                   />
                 </td>
               </tr>
@@ -399,6 +405,7 @@ export default function UseCaseEditor({
                         <AutoGrowTextarea
                           value={step.actorAction}
                           onChange={(e) => patchStep(index, 'actorAction', e.target.value)}
+                          placeholder={labels.phActorAction}
                           aria-label={labels.actorAction}
                         />
                       </td>
@@ -406,6 +413,7 @@ export default function UseCaseEditor({
                         <AutoGrowTextarea
                           value={step.systemResponse}
                           onChange={(e) => patchStep(index, 'systemResponse', e.target.value)}
+                          placeholder={labels.phSystemResponse}
                           aria-label={labels.systemResponse}
                         />
                       </td>
