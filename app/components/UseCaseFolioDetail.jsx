@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import {
@@ -141,6 +141,14 @@ export default function UseCaseFolioDetail({
   const [error, setError] = useState('')
   const saveReady = createParam || formDirty
 
+  // Stable draft reference. Recreating this object every render made the
+  // editor's `initial`-keyed reset effect fire on the first dirty flip,
+  // wiping the first edit (e.g. picking a product snapped back to default).
+  const draft = useMemo(
+    () => buildDefaultUseCase(productCode ?? 'deviante', nextUcNumber),
+    [productCode, nextUcNumber],
+  )
+
   function buildHref({ uc, slug, edit = false, create = false, product = productCode } = {}) {
     const params = new URLSearchParams()
     const resolvedProduct = product ?? productCode
@@ -196,7 +204,6 @@ export default function UseCaseFolioDetail({
   }
 
   if (createParam && ownerDbAccess) {
-    const draft = buildDefaultUseCase(productCode ?? 'deviante', nextUcNumber)
     return (
       <EditingShell
         saveReady={saveReady}
