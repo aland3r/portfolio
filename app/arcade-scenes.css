@@ -67,6 +67,40 @@
   white-space: nowrap;
 }
 
+.home-lp__vision {
+  margin-top: 1.75rem;
+  max-width: 34rem;
+  font-size: clamp(1.15rem, 2.4vw, 1.6rem);
+  line-height: 1.2;
+  color: var(--text-h, inherit);
+}
+
+.home-lp__mission {
+  margin-top: 0.75rem;
+  max-width: 34rem;
+  line-height: 1.4;
+  color: var(--arcadia-muted);
+}
+
+.home-lp__values {
+  margin-top: 2rem;
+}
+
+.home-lp__values ul {
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.6rem;
+  max-width: 34rem;
+}
+
+.home-lp__values li {
+  padding-left: 0.9rem;
+  border-left: 2px solid var(--arcadia-line);
+  line-height: 1.35;
+}
+
 .welcome-scene {
   position: relative;
   /* Full-bleed band — height must keep pace with viewport width or it reads as a ribbon. */

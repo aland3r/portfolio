@@ -43,7 +43,8 @@
   "home": {
     "eyebrow": "Portfólio",
     "lead": "Design UX/UI · inteligência de dados · full-stack",
-    "apps": "Apps"
+    "apps": "Apps",
+    "values": "Valores"
   },
   "progress": {
     "label": "Progresso do build Gestalt 1.0",

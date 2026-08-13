@@ -43,7 +43,8 @@
   "home": {
     "eyebrow": "Portfolio",
     "lead": "UX/UI design · data intelligence · full-stack dev",
-    "apps": "Apps"
+    "apps": "Apps",
+    "values": "Values"
   },
   "progress": {
     "label": "Gestalt 1.0 build progress",
