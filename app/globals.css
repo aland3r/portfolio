@@ -1,3 +1,4 @@
+@import './typography-tokens.css';
 @import './portfolio-tokens.css';
 @import './work-prose.css';
 @import './publication-prose.css';
@@ -156,6 +157,10 @@ a {
   flex-shrink: 0;
 }
 
+/* =========================================================
+   SITE HEADER
+   ========================================================= */
+
 .gestalt-header {
   display: flex;
   align-items: center;
@@ -171,11 +176,121 @@ a {
   --nav-header-text-letter-spacing: var(--type-body-letter-spacing);
 }
 
+.gestalt-header__primary {
+  display: flex;
+  align-items: center;
+  gap: var(--nav-header-brand-gap);
+  flex-wrap: nowrap;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* =========================================================
+   PORTFOLIO BRAND
+   ========================================================= */
+
 .gestalt-brand-mark {
   display: inline-flex;
   justify-content: center;
   flex-shrink: 0;
 }
+
+.gestalt-brand {
+  flex-shrink: 0;
+  text-decoration: none;
+  font-family: var(--font-carbonot);
+  font-size: var(--type-brand-size);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: var(--type-brand-letter-spacing);
+  background: linear-gradient(
+    180deg,
+    var(--brand-copper-hot) 0%,
+    var(--brand-copper-bright) 38%,
+    var(--brand-copper-core) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter:
+    drop-shadow(0 0 5px var(--brand-copper-glow))
+    drop-shadow(0 0 14px var(--brand-copper-flame))
+    drop-shadow(0 0 28px rgba(60, 5, 10, 0.5));
+  animation: brand-flame 2.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gestalt-brand {
+    animation: none;
+  }
+}
+
+@keyframes brand-flame {
+  0%,
+  100% {
+    filter:
+      drop-shadow(0 0 5px var(--brand-copper-glow))
+      drop-shadow(0 0 14px var(--brand-copper-flame))
+      drop-shadow(0 0 26px rgba(60, 5, 10, 0.45));
+  }
+
+  45% {
+    filter:
+      drop-shadow(0 0 9px var(--brand-copper-glow))
+      drop-shadow(0 0 20px rgba(150, 12, 18, 0.8))
+      drop-shadow(0 0 34px rgba(85, 8, 12, 0.6));
+  }
+
+  70% {
+    filter:
+      drop-shadow(0 0 6px var(--brand-copper-glow))
+      drop-shadow(0 0 16px var(--brand-copper-flame))
+      drop-shadow(0 0 30px rgba(55, 6, 10, 0.5));
+  }
+}
+
+/* =========================================================
+   HEADER UTILITIES
+   ========================================================= */
+
+.gestalt-header__utilities {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--nav-header-utilities-gap);
+  flex-wrap: nowrap;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.gestalt-util__auth-slot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 0 0 var(--nav-auth-slot-width);
+  min-width: var(--nav-auth-slot-width);
+  max-width: var(--nav-auth-slot-width);
+}
+
+.gestalt-util__auth-slot .gestalt-util__link,
+.gestalt-util__auth-slot .gestalt-util__button {
+  text-align: right;
+}
+
+.gestalt-util__auth-placeholder {
+  display: block;
+  width: 100%;
+  height: 1em;
+  visibility: hidden;
+}
+
+.gestalt-header__utilities .nav-locale {
+  flex: 0 0 var(--nav-locale-width);
+}
+
+/* =========================================================
+   OWNER / ADMIN AVATAR
+   ========================================================= */
 
 .gestalt-admin-avatar-float {
   position: absolute;
@@ -193,15 +308,6 @@ a {
 
 .gestalt-admin-avatar-float .gestalt-admin-avatar {
   pointer-events: auto;
-}
-
-.gestalt-header__primary {
-  display: flex;
-  align-items: center;
-  gap: var(--nav-header-brand-gap);
-  flex-wrap: nowrap;
-  flex: 1 1 auto;
-  min-width: 0;
 }
 
 .gestalt-admin-avatar {
@@ -250,91 +356,6 @@ a {
   letter-spacing: 0.04em;
   line-height: 1;
   color: var(--arcadia-muted);
-}
-
-.gestalt-header__utilities {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: var(--nav-header-utilities-gap);
-  flex-wrap: nowrap;
-  flex-shrink: 0;
-  margin-left: auto;
-}
-
-.gestalt-util__auth-slot {
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-end;
-  flex: 0 0 var(--nav-auth-slot-width);
-  min-width: var(--nav-auth-slot-width);
-  max-width: var(--nav-auth-slot-width);
-}
-
-.gestalt-util__auth-slot .gestalt-util__link,
-.gestalt-util__auth-slot .gestalt-util__button {
-  text-align: right;
-}
-
-.gestalt-util__auth-placeholder {
-  display: block;
-  width: 100%;
-  height: 1em;
-  visibility: hidden;
-}
-
-.gestalt-header__utilities .nav-locale {
-  flex: 0 0 var(--nav-locale-width);
-}
-
-.gestalt-brand {
-  flex-shrink: 0;
-  text-decoration: none;
-  font-family: var(--font-carbonot);
-  font-size: var(--type-brand-size);
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: var(--type-brand-letter-spacing);
-  background: linear-gradient(
-    180deg,
-    var(--brand-copper-hot) 0%,
-    var(--brand-copper-bright) 38%,
-    var(--brand-copper-core) 100%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  filter: drop-shadow(0 0 5px var(--brand-copper-glow))
-    drop-shadow(0 0 14px var(--brand-copper-flame))
-    drop-shadow(0 0 28px rgba(60, 5, 10, 0.5));
-  animation: brand-flame 2.6s ease-in-out infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .gestalt-brand {
-    animation: none;
-  }
-}
-
-@keyframes brand-flame {
-  0%,
-  100% {
-    filter: drop-shadow(0 0 5px var(--brand-copper-glow))
-      drop-shadow(0 0 14px var(--brand-copper-flame))
-      drop-shadow(0 0 26px rgba(60, 5, 10, 0.45));
-  }
-
-  45% {
-    filter: drop-shadow(0 0 9px var(--brand-copper-glow))
-      drop-shadow(0 0 20px rgba(150, 12, 18, 0.8))
-      drop-shadow(0 0 34px rgba(85, 8, 12, 0.6));
-  }
-
-  70% {
-    filter: drop-shadow(0 0 6px var(--brand-copper-glow))
-      drop-shadow(0 0 16px var(--brand-copper-flame))
-      drop-shadow(0 0 30px rgba(55, 6, 10, 0.5));
-  }
 }
 
 /* Publication status beacon — flame-like dot (UC + kit docs) */

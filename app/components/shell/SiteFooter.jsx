@@ -1,6 +1,6 @@
 'use client'
 
-import NavSocialLinks from './NavSocialLinks'
+import NavSocialLinks from '../NavSocialLinks'
 
 export default function SiteFooter() {
   return (

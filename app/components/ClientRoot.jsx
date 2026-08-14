@@ -5,7 +5,7 @@ import { AuthProvider } from './AuthProvider'
 import { LocaleProvider } from './LocaleProvider'
 import FloatingCvDownload from './FloatingCvDownload'
 import FloatingGamifierHud from './FloatingGamifierHud'
-import GestaltShell from './GestaltShell'
+import SiteShell from './shell/SiteShell'
 import { RoadmapProvider } from './RoadmapProvider'
 import '../globals.css'
 import '../gamifier.css'
@@ -32,7 +32,7 @@ export default function ClientRoot({ children }) {
     <LocaleProvider>
       <AuthProvider>
         <RoadmapProvider>
-          <GestaltShell>{children}</GestaltShell>
+          <SiteShell>{children}</SiteShell>
           <FloatingDock />
         </RoadmapProvider>
       </AuthProvider>

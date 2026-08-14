@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { NavLocaleSwitcher } from './NavResumeMenu'
+import { NavLocaleSwitcher } from '../NavResumeMenu'
 
 export default function MobileNavMenu({
   navLinks,

@@ -1,18 +1,4 @@
-@font-face {
-  font-family: Carbonot;
-  src:
-    url('/fonts/Carbonot-Bold.woff2') format('woff2'),
-    url('/fonts/Carbonot-Bold.woff') format('woff');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root {
-  --font-carbonot: Carbonot, monospace;
-  /* Code / markdown — JetBrains Mono via next/font (--font-jetbrains-mono on <html>) */
-  --font-mono: var(--font-jetbrains-mono), 'JetBrains Mono', ui-monospace, Consolas, monospace;
-
   --arcadia-bg: #000;
   --arcadia-fg: #f0f0f0;
   --arcadia-muted: #666;
@@ -22,40 +8,6 @@
   /* Work accent — purple / icy blue (work hero, cases hover) */
   --work-accent-purple: #b59cf8;
   --work-accent-blue: #7ec8e8;
-
-  /* Type scale (Portfolio contract — gestalt-kit/partials/portfolio-typography.md)
-     Carbonot: ONLY display (brand / currently @TCEPR / h1) + chrome (tables & UI).
-     Prose/read: GT Planar via --font-prose / --prose-body-* / --cases-read-*. */
-  --type-display-size: 2rem;
-  --type-display-line-height: 1.1;
-  --type-display-letter-spacing: 0.06em;
-
-  --type-body-size: 1rem;
-  --type-body-line-height: 1.5;
-  --type-body-letter-spacing: 0.1em;
-
-  /* small aliases body — no third Carbonot step */
-  --type-small-size: var(--type-body-size);
-  --type-small-line-height: var(--type-body-line-height);
-  --type-small-letter-spacing: var(--type-body-letter-spacing);
-
-  /* Brand name = display size (same large Carbonot as currently @TCEPR) */
-  --type-brand-size: var(--type-display-size);
-  --type-brand-letter-spacing: var(--type-display-letter-spacing);
-
-  /* Carbonot — display + chrome only */
-  --carbonot-display-size: var(--type-display-size);
-  --carbonot-display-line-height: var(--type-display-line-height);
-  --carbonot-display-letter-spacing: var(--type-display-letter-spacing);
-
-  --carbonot-size: calc(var(--type-body-size) * 1.06);
-  --carbonot-line-height: var(--type-body-line-height);
-  --carbonot-letter-spacing: var(--type-body-letter-spacing);
-
-  /* Cap/label aliases chrome — never a separate size */
-  --carbonot-cap-size: var(--carbonot-size);
-  --carbonot-cap-line-height: var(--carbonot-line-height);
-  --carbonot-cap-letter-spacing: var(--carbonot-letter-spacing);
 
   --brand-copper-core: #5c0a12;
   --brand-copper-bright: #a31621;
@@ -99,19 +51,28 @@
   --nav-mobile-toggle-bar-thickness: 1px;
   --nav-mobile-toggle-bar-gap: 0.38rem;
   --nav-mobile-overlay-z: 10060;
+
   --site-inline-pad: clamp(1.25rem, 3vw, 2.5rem);
   --site-column-max: 960px;
+
   /* Primary content column — work, tracks, floating dock */
   --content-max: 50rem;
+
   /* Cases folio needs more horizontal room for the 3-col step table */
   --content-max-cases: min(60rem, calc(100vw - 2 * var(--site-inline-pad)));
   --content-narrow: 28rem;
+
   --floating-dock-width: var(--content-max);
   --welcome-insert-coin-gap: clamp(2rem, 6vw, 4.5rem);
-  --header-bar-height: calc(var(--nav-chrome-edge-gap) * 2 + var(--type-brand-size));
+
+  --header-bar-height: calc(
+    var(--nav-chrome-edge-gap) * 2 + var(--type-brand-size)
+  );
   --header-block-height: var(--header-bar-height);
+
   --floating-stack-gap: 0.75rem;
   --floating-player-stack-height: 4.95rem;
+
   /* Floater harmony (ui-designer): quest left · dock center · save FAB right */
   --floating-overlay-z: 10050;
   --floating-quest-z: 10040;
@@ -119,6 +80,7 @@
   --floating-edge: max(1rem, env(safe-area-inset-left, 0px));
   --floating-edge-right: max(1rem, env(safe-area-inset-right, 0px));
   --floating-bottom: max(1.25rem, env(safe-area-inset-bottom, 0px));
+
   /* Keep page copy clear of centered dock (CV + player) */
   --floating-clearance-bottom: calc(
     var(--floating-player-stack-height)
@@ -126,6 +88,7 @@
     + 3.25rem
     + var(--floating-bottom)
   );
+
   --cases-uc-overlay-z: 10000;
   --nav-portal-width: 3.5rem;
   --nav-portal-height: 4.25rem;
@@ -173,7 +136,7 @@
   --cases-uc-title-weight: 520;
   --cases-uc-title-track: 0.048em;
 
-  /* Carbonot cap — editor field labels (O QUÊ:, POR QUÊ:, …) */
+  /* Carbonot cap — editor field labels */
   --cases-cap-size: var(--carbonot-cap-size);
   --cases-cap-track: var(--carbonot-cap-letter-spacing);
   --cases-cap-line: var(--carbonot-cap-line-height);
@@ -249,6 +212,7 @@
     minmax(0, 1fr)
     minmax(3rem, var(--cases-uc-bar-width))
     minmax(2.25rem, var(--cases-uc-xp-width));
+
   --cases-uc-grid-columns-product:
     minmax(4.5rem, auto)
     minmax(0, 1fr)
@@ -272,20 +236,27 @@
     --nav-mobile-toggle-bar-thickness: 2px;
     --nav-mobile-toggle-bar-gap: 0.42rem;
     --floating-sc-player-art-size-mobile: clamp(5.5rem, 22vw, 7rem);
-    --floating-player-stack-height: calc(var(--floating-sc-player-art-size-mobile) + 0.35rem);
-    /* Quest log is now a full-width bar on the true bottom edge — dock
-       (audio player) and page content clearance both stack above it. */
-    --floating-questlog-bar-height: calc(2.6rem + env(safe-area-inset-bottom, 0px));
+    --floating-player-stack-height: calc(
+      var(--floating-sc-player-art-size-mobile) + 0.35rem
+    );
+
+    /* Quest log is now a full-width bar on the true bottom edge */
+    --floating-questlog-bar-height: calc(
+      2.6rem + env(safe-area-inset-bottom, 0px)
+    );
+
     --cases-uc-grid-columns:
       minmax(0, 1fr)
       minmax(2.25rem, 5.5rem)
       minmax(2rem, var(--cases-uc-xp-width));
+
     --cases-uc-grid-columns-product:
       minmax(0, 1fr)
       var(--cases-uc-action-slot-size)
       var(--cases-uc-action-slot-size)
       minmax(2.25rem, 5.5rem)
       minmax(2rem, var(--cases-uc-xp-width));
+
     --cases-table-key-col-width: 4.5rem;
     --cases-table-meta-key-width: 10.75rem;
     --cases-table-meta-inline-key-width: 6rem;
@@ -295,8 +266,6 @@
 
 @media (min-width: 768px) {
   :root {
-    --type-display-size: 2.75rem;
-    --type-body-size: 1.125rem;
     --nav-locale-width: 6.15rem;
     --nav-locale-btn-width: 1.5rem;
     --app-hub-col-gap: clamp(1.75rem, 5vw, 4rem);
@@ -306,17 +275,22 @@
 @media (min-width: 1024px) {
   :root {
     --site-column-max: min(68rem, calc(100vw - 2.5rem));
-    --content-max-cases: min(68rem, calc(100vw - 2 * var(--site-inline-pad)));
+    --content-max-cases: min(
+      68rem,
+      calc(100vw - 2 * var(--site-inline-pad))
+    );
     --nav-admin-avatar-size: 3rem;
     --nav-chrome-edge-gap: clamp(0.65rem, 1.1vw, 0.95rem);
     --nav-header-brand-gap: clamp(2.75rem, 5vw, 4.5rem);
     --nav-header-link-gap: clamp(1.35rem, 2.2vw, 2rem);
     --app-hub-col-gap: clamp(2.5rem, 7vw, 5.5rem);
+
     --cases-uc-grid-columns:
       minmax(5.75rem, auto)
       minmax(0, 1fr)
       minmax(4rem, var(--cases-uc-bar-width))
       minmax(2.25rem, var(--cases-uc-xp-width));
+
     --cases-uc-grid-columns-product:
       minmax(5.75rem, auto)
       minmax(0, 1fr)
@@ -330,7 +304,10 @@
 @media (min-width: 1200px) {
   :root {
     --site-column-max: min(72rem, calc(100vw - 2.5rem));
-    --content-max-cases: min(72rem, calc(100vw - 2 * var(--site-inline-pad)));
+    --content-max-cases: min(
+      72rem,
+      calc(100vw - 2 * var(--site-inline-pad))
+    );
     --nav-admin-avatar-size: 3.35rem;
     --nav-header-brand-gap: clamp(3.25rem, 6vw, 5.5rem);
     --nav-header-link-gap: clamp(1.5rem, 2.5vw, 2.75rem);
@@ -341,7 +318,10 @@
 @media (min-width: 1600px) {
   :root {
     --site-column-max: min(80rem, calc(100vw - 3rem));
-    --content-max-cases: min(80rem, calc(100vw - 2 * var(--site-inline-pad)));
+    --content-max-cases: min(
+      80rem,
+      calc(100vw - 2 * var(--site-inline-pad))
+    );
     --nav-admin-avatar-size: 3.65rem;
     --nav-chrome-edge-gap: clamp(0.7rem, 1vw, 1rem);
     --nav-header-brand-gap: clamp(3.5rem, 7vw, 6.5rem);

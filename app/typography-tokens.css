@@ -1,0 +1,61 @@
+@font-face {
+  font-family: Carbonot;
+  src:
+    url('/fonts/Carbonot-Bold.woff2') format('woff2'),
+    url('/fonts/Carbonot-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-carbonot: Carbonot, monospace;
+
+  /* Code / markdown — JetBrains Mono via next/font */
+  --font-mono:
+    var(--font-jetbrains-mono),
+    'JetBrains Mono',
+    ui-monospace,
+    Consolas,
+    monospace;
+
+  /* Type scale */
+  --type-display-size: 2rem;
+  --type-display-line-height: 1.1;
+  --type-display-letter-spacing: 0.06em;
+
+  --type-body-size: 1rem;
+  --type-body-line-height: 1.5;
+  --type-body-letter-spacing: 0.1em;
+
+  /* Small aliases body — no third Carbonot step */
+  --type-small-size: var(--type-body-size);
+  --type-small-line-height: var(--type-body-line-height);
+  --type-small-letter-spacing: var(--type-body-letter-spacing);
+
+  /* Brand = display */
+  --type-brand-size: var(--type-display-size);
+  --type-brand-letter-spacing: var(--type-display-letter-spacing);
+
+  /* Carbonot display */
+  --carbonot-display-size: var(--type-display-size);
+  --carbonot-display-line-height: var(--type-display-line-height);
+  --carbonot-display-letter-spacing: var(--type-display-letter-spacing);
+
+  /* Carbonot body / UI */
+  --carbonot-size: calc(var(--type-body-size) * 1.06);
+  --carbonot-line-height: var(--type-body-line-height);
+  --carbonot-letter-spacing: var(--type-body-letter-spacing);
+
+  /* Carbonot cap / label */
+  --carbonot-cap-size: var(--carbonot-size);
+  --carbonot-cap-line-height: var(--carbonot-line-height);
+  --carbonot-cap-letter-spacing: var(--carbonot-letter-spacing);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --type-display-size: 2.75rem;
+    --type-body-size: 1.125rem;
+  }
+}

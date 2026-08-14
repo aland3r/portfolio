@@ -30,6 +30,14 @@ export function LocaleProvider({ children }) {
 
   const messages = MESSAGES[locale] ?? MESSAGES.en
 
+  useEffect(() => {
+  document.title = translate(
+    messages,
+    'site.title',
+    'Alander de Ávila • Product Portfolio'
+  )
+}, [messages])
+
   const value = useMemo(() => ({
     locale,
     ready,
