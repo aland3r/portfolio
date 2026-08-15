@@ -42,6 +42,7 @@
 /* ── Home arcade dino scene ─────────────────────────────────────────────── */
 
 .home-lp {
+  position: relative;
   display: grid;
   gap: 2rem;
 }
@@ -51,6 +52,15 @@
   z-index: 1;
 }
 
+/* Bloco intro (título + lead) colado à esquerda: anula a centralização do
+   item para o texto encostar na borda esquerda da coluna. */
+.home-lp .home-lp__intro {
+  justify-self: start;
+  margin-inline: 0;
+  max-width: none;
+  width: 100%;
+}
+
 /* Título de papel (role) alinhado ao tamanho da logo da marca. */
 .home-lp__copy h1 {
   font-size: var(--type-brand-size);
@@ -58,22 +68,39 @@
   letter-spacing: var(--type-brand-letter-spacing);
 }
 
-/* Flow-field do tweet como faixa horizontal full-bleed: varre toda a
-   extensão da tela e acompanha a largura do viewport de forma responsiva. */
+/* Espaçador em fluxo: reserva o mesmo espaço vertical de antes para preservar
+   layout e espaçamento; o desenho em si mora na camada de fundo abaixo. */
 .home-flowfield {
-  position: relative;
-  width: 100vw;
-  max-width: 100vw;
-  left: 50%;
-  margin-left: -50vw;
   height: clamp(16rem, 34vw, 28rem);
+}
+
+/* Camada de fundo: cobre a seção inteira, full-bleed, atrás do texto. A figura
+   pode sangrar para fora do quadro e aparecer como plano de fundo do conteúdo. */
+.home-flowfield-bg {
+  /* Fixed p/ escapar do `overflow-x: clip` do .gestalt-main — só assim o canvas
+     encosta nas BORDAS REAIS da tela em qualquer largura de janela. Ocupa a
+     tela inteira abaixo do header (--hero-anim-top = altura do header, medida
+     em JS e responsiva). */
+  position: fixed;
+  top: var(--hero-anim-top, 3.94rem);
+  left: 0;
+  width: 100vw;
+  height: calc(100svh - var(--hero-anim-top, 3.94rem));
+  z-index: 0;
   overflow: hidden;
+  pointer-events: none;
 }
 
 .home-flowfield__canvas {
   display: block;
   width: 100%;
   height: 100%;
+}
+
+/* /apps: mantém o AppHub acima do fundo de animação (mesmo padrão da home). */
+.panel--apps > :not(.home-flowfield-bg) {
+  position: relative;
+  z-index: 1;
 }
 
 .home-lp__copy .lead {

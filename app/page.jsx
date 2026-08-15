@@ -1,6 +1,5 @@
 'use client'
 
-import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useLocale } from './components/LocaleProvider'
 import { fetchHuman, fetchHumanStatements } from '../lib/gestalt-auth'
@@ -44,7 +43,7 @@ export default function HomePage() {
 
   return (
     <section className="home-lp">
-      <div className="home-lp__copy panel">
+      <div className="home-lp__copy home-lp__intro panel">
         <h1>{roleTitle}</h1>
         <p className="lead">{t('home.lead')}</p>
       </div>
@@ -70,12 +69,6 @@ export default function HomePage() {
             </ul>
           </div>
         )}
-
-        <div className="actions">
-          <Link href="/apps" className="button">
-            {t('nav.products')}
-          </Link>
-        </div>
       </div>
     </section>
   )

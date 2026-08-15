@@ -7,6 +7,7 @@ const authDir = path.resolve(rootDir, 'lib/gestalt-auth')
 
 const nextConfig = {
   output: 'export',
+  devIndicators: false,
   allowedDevOrigins: ['100.101.66.105'],
   turbopack: {
     resolveAlias: {
