@@ -52,24 +52,19 @@
 }
 
 .home-lp__copy .lead {
-  font-family: var(--font-carbonot);
-  font-synthesis: none;
-  font-style: normal;
   /* Carbonot is always uppercase — never smallcase. */
-  text-transform: uppercase;
-  font-size: clamp(0.85rem, 1.95vw, 1.4rem);
-  line-height: 1.1;
-  font-weight: 500;
-  letter-spacing: var(--carbonot-letter-spacing);
+  font-size: var(--type-small-size);
+  line-height: var(--type-small-line-height);
+  letter-spacing: var(--type-small-letter-spacing);
   color: var(--arcadia-muted);
+  margin-bottom: 1rem;
   /* One line, no wrap — override the generic .lead max-width. */
   max-width: none;
   white-space: nowrap;
 }
 
-/* Statements read as prose (GT Planar), not the Carbonot pixel display
-   font that `body` imposes site-wide. Only the "product engineer" role
-   title (h1) and the "portfolio" wordmark stay Carbonot. */
+/* Statements read as prose (GT Planar), while the role title and capability
+   lead stay Carbonot. */
 .home-lp__vision {
   margin-top: 1.75rem;
   max-width: 34rem;
