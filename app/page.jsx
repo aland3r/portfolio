@@ -47,7 +47,11 @@ export default function HomePage() {
       <div className="home-lp__copy panel">
         <h1>{roleTitle}</h1>
         <p className="lead">{t('home.lead')}</p>
+      </div>
 
+      <HeroFlowField />
+
+      <div className="home-lp__copy panel">
         {(statements?.vision || statements?.mission) && (
           <p className="home-lp__statement">
             {[statements?.vision, statements?.mission]
@@ -73,8 +77,6 @@ export default function HomePage() {
           </Link>
         </div>
       </div>
-
-      <HeroFlowField />
     </section>
   )
 }

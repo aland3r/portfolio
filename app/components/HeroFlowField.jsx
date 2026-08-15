@@ -3,9 +3,10 @@
 import { useEffect, useRef } from 'react'
 
 // Flow-field ponto-a-ponto do tweet, reimplementado em canvas 2D puro
-// (mesma fórmula, sem depender do p5). A figura original é um "cometa"
-// vertical num espaço 400×400; aqui ela é girada 90° e esticada para varrer
-// a extensão HORIZONTAL da tela, ocupando uma faixa full-bleed responsiva.
+// (mesma fórmula, sem depender do p5). A figura e o movimento são fiéis ao
+// original — SEM rotação e SEM distorção: aplicamos apenas uma escala
+// UNIFORME para que a extensão horizontal que a animação varre alcance as
+// bordas laterais da tela. O excedente vertical é recortado pela faixa.
 export default function HeroFlowField() {
   const holderRef = useRef(null)
   const canvasRef = useRef(null)
@@ -21,6 +22,20 @@ export default function HeroFlowField() {
     const reduceMotion = window.matchMedia(
       '(prefers-reduced-motion: reduce)',
     ).matches
+
+    // Meia-extensão horizontal máxima da nuvem de pontos. Como
+    // x = amp·sin(c) + 200, o maior |x-200| possível é o maior `amp` sobre i
+    // (sin varia em [-1,1] ao longo do tempo). Serve para escalar de modo que
+    // a área varrida encoste nas duas bordas.
+    let halfExtent = 1
+    for (let i = 1e4; i--; ) {
+      const y = i / 253
+      const k = 5 * Math.cos(i / 56)
+      const e = y / 3 - 16
+      const d = Math.hypot(k, e) / 3
+      const amp = d * 19 + 29 + k * k
+      if (amp > halfExtent) halfExtent = amp
+    }
 
     let t = 0
     let raf = 0
@@ -44,11 +59,10 @@ export default function HeroFlowField() {
       const H = canvas.height
       const dot = Math.max(1, Math.round(dpr))
 
-      // Eixo longo (0..400 original, na vertical) preenche a largura;
-      // eixo curto é comprimido para caber na altura da faixa → elipse
-      // deitada. Uma folga de 0.9 evita encostar nas bordas.
-      const sx = (W / 400) * 0.9
-      const sy = sx * 0.5
+      // Escala UNIFORME: a meia-largura da figura vira a meia-largura da tela,
+      // então a varredura horizontal toca as bordas. Mesmo fator no vertical
+      // preserva a proporção (fidelidade do movimento).
+      const s = W / 2 / halfExtent
       const cx = W / 2
       const cy = H / 2
 
@@ -70,13 +84,7 @@ export default function HeroFlowField() {
           (d ** 3 / 3) * Math.sin(t * 3 - d * d / 4) +
           (y / (y < 9 ? 7 : 203 * Math.sin(e / 2))) * k * e +
           200
-
-        // Centraliza no espaço 400, gira 90° (vertical → horizontal) e escala.
-        const lx = x - 200
-        const ly = yy - 200
-        const px = cx + ly * sx // eixo longo → horizontal
-        const py = cy - lx * sy // eixo curto → vertical
-        ctx.fillRect(px, py, dot, dot)
+        ctx.fillRect(cx + (x - 200) * s, cy + (yy - 200) * s, dot, dot)
       }
     }
 
