@@ -50,7 +50,7 @@ export default function HomePage() {
 
       <HeroFlowField />
 
-      <div className="home-lp__copy panel">
+      <div className="home-lp__copy home-lp__body panel">
         {(statements?.vision || statements?.mission) && (
           <p className="home-lp__statement">
             {[statements?.vision, statements?.mission]

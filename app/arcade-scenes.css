@@ -52,13 +52,37 @@
   z-index: 1;
 }
 
-/* Bloco intro (título + lead) colado à esquerda: anula a centralização do
-   item para o texto encostar na borda esquerda da coluna. */
-.home-lp .home-lp__intro {
-  justify-self: start;
+/* Home: alinha o conteúdo com a logo vermelha (bordas do header), não com a
+   coluna centralizada — assim o parágrafo cola na logo à esquerda e o
+   título/lead na borda direita da tela, em qualquer largura. */
+#root:has(.home-lp) {
+  max-width: none;
+}
+
+/* Intro (título + lead): grudado à DIREITA. Body (parágrafo + valores):
+   grudado à ESQUERDA. Ambos ocupam a coluna toda (anulam a centralização). */
+.home-lp .home-lp__intro,
+.home-lp .home-lp__body {
+  justify-self: stretch;
   margin-inline: 0;
   max-width: none;
   width: 100%;
+  /* Mais respiro lateral pros textos, dos dois lados. */
+  padding-inline: clamp(2rem, 5vw, 5rem);
+}
+
+.home-lp .home-lp__intro {
+  text-align: right;
+}
+
+/* O h1 tem text-align:left global (títulos de página) — força à direita no
+   intro da home, com especificidade de id pra vencer aquela regra. */
+#root:has(.home-lp) .home-lp__intro h1 {
+  text-align: right;
+}
+
+.home-lp .home-lp__body {
+  text-align: left;
 }
 
 /* Título de papel (role) alinhado ao tamanho da logo da marca. */
@@ -89,6 +113,18 @@
   z-index: 0;
   overflow: hidden;
   pointer-events: none;
+  /* Máscara: a animação se concentra no centro e some suavemente rumo às
+     bordas, onde fica o texto — vira um fundo discreto que não o invade. */
+  -webkit-mask-image: radial-gradient(
+    ellipse 60% 58% at 50% 50%,
+    #000 35%,
+    transparent 86%
+  );
+  mask-image: radial-gradient(
+    ellipse 60% 58% at 50% 50%,
+    #000 35%,
+    transparent 86%
+  );
 }
 
 .home-flowfield__canvas {
@@ -97,11 +133,6 @@
   height: 100%;
 }
 
-/* /apps: mantém o AppHub acima do fundo de animação (mesmo padrão da home). */
-.panel--apps > :not(.home-flowfield-bg) {
-  position: relative;
-  z-index: 1;
-}
 
 .home-lp__copy .lead {
   /* Carbonot is always uppercase — never smallcase. */

@@ -48,47 +48,43 @@ const FIELDS = {
   },
 }
 
+// Zoom < 1: a figura não alcança a amplitude completa da tela (deixa margem
+// pro texto respirar). O peixe fica um pouco maior — linhas horizontais mais
+// longas — que a água-viva.
 const VARIANTS = {
-  peixe: { field: FIELDS.peixe, fit: 'contain', zoom: 1 },
-  aguaVivaCompleta: { field: FIELDS.aguaViva, fit: 'contain', zoom: 0.85 },
-  // água-viva zoom vive na tela /apps, de cabeça pra baixo (flipY).
-  aguaVivaZoom: { field: FIELDS.aguaViva, fit: 'cover', zoom: 0.85, flipY: true },
+  peixe: { field: FIELDS.peixe, fit: 'contain', zoom: 0.95 },
+  aguaVivaCompleta: { field: FIELDS.aguaViva, fit: 'contain', zoom: 0.88 },
 }
 
-// Home sorteia entre estas 2; /apps passa variant="aguaVivaZoom".
+// Home sorteia entre estas 2.
 const HOME_POOL = ['peixe', 'aguaVivaCompleta']
 
 // Centro + spans por percentil [lo, hi] no espaço da figura (independente da
-// tela → responsivo). Percentil fechado (núcleo denso) para cover, largo para
-// contain. O centro/extensão horizontal usa só os pontos dentro da banda
-// vertical, mantendo a figura centrada e as laterais sem folga.
+// tela → responsivo). Amostra t o bastante pra cobrir a rotação completa da
+// figura, então o bounding-box VARRIDO fica simétrico e a figura centraliza —
+// margens laterais iguais dos dois lados.
 function bounds(field, lo, hi) {
   const pts = []
-  for (let s = 0; s < 90; s++) {
-    const tt = s * field.tStep * 3
-    for (let i = COUNT; i > 0; i -= 7) {
+  for (let s = 0; s < 220; s++) {
+    const tt = s * field.tStep * 4
+    for (let i = COUNT; i > 0; i -= 9) {
       const p = field.point(i, tt)
       if (Number.isFinite(p[0]) && Number.isFinite(p[1])) pts.push(p)
     }
   }
   const q = (a, p) =>
     a[Math.min(a.length - 1, Math.max(0, Math.round(p * (a.length - 1))))]
+  const xs = pts.map((p) => p[0]).sort((a, b) => a - b)
   const ys = pts.map((p) => p[1]).sort((a, b) => a - b)
-  const cy = (q(ys, lo) + q(ys, hi)) / 2
-  const spanY = Math.max(1, q(ys, hi) - q(ys, lo))
-  const xs = pts
-    .filter((p) => Math.abs(p[1] - cy) <= spanY)
-    .map((p) => p[0])
-    .sort((a, b) => a - b)
   return {
     cx: (q(xs, lo) + q(xs, hi)) / 2,
-    cy,
+    cy: (q(ys, lo) + q(ys, hi)) / 2,
     spanX: Math.max(1, q(xs, hi) - q(xs, lo)),
-    spanY,
+    spanY: Math.max(1, q(ys, hi) - q(ys, lo)),
   }
 }
 
-export default function HeroFlowField({ variant, spacer = true }) {
+export default function HeroFlowField() {
   const canvasRef = useRef(null)
   const bgRef = useRef(null)
 
@@ -107,16 +103,12 @@ export default function HeroFlowField({ variant, spacer = true }) {
     syncTop()
     window.addEventListener('resize', syncTop)
 
-    const key = variant || HOME_POOL[Math.floor(Math.random() * HOME_POOL.length)]
+    const key = HOME_POOL[Math.floor(Math.random() * HOME_POOL.length)]
     const v = VARIANTS[key]
     canvas.dataset.sketch = key
-    // contain (completas) → largo (0.01–0.99): figura inteira.
-    // cover (zoom) → núcleo denso (0.15–0.85): o corpo preenche a tela.
-    const { cx, cy, spanX, spanY } =
-      v.fit === 'contain' ? bounds(v.field, 0.01, 0.99) : bounds(v.field, 0.15, 0.85)
-    const { point, tStep, alpha } = v.field
-    const fill = `rgba(255,255,255,${alpha})`
-    const fy = v.flipY ? -1 : 1 // de cabeça pra baixo
+    // Figura inteira (percentil largo).
+    const { cx, cy, spanX, spanY } = bounds(v.field, 0.01, 0.99)
+    const { point, tStep } = v.field
 
     let t = 0
     let raf = 0
@@ -125,18 +117,21 @@ export default function HeroFlowField({ variant, spacer = true }) {
       const dpr = Math.min(window.devicePixelRatio || 1, 2)
       const W = (canvas.width = Math.max(1, Math.round(canvas.clientWidth * dpr)))
       const H = (canvas.height = Math.max(1, Math.round(canvas.clientHeight * dpr)))
-      const dot = Math.max(1, dpr * 1.5) // meio-termo: visível sem ficar grosso
-      const s =
-        (v.fit === 'contain'
-          ? Math.min(W / spanX, H / spanY) * 0.95
-          : Math.max(W / spanX, H / spanY)) * v.zoom
+      const dot = Math.max(1, dpr * 1.5)
+      const s = Math.min(W / spanX, H / spanY) * 0.95 * v.zoom
+
+      // Fundo discreto: gradiente cinza → cinza escuro, opacidade baixa, pra
+      // dar menos destaque e não competir com o texto.
+      const grad = ctx.createLinearGradient(0, 0, 0, H)
+      grad.addColorStop(0, 'rgba(205,205,205,0.55)')
+      grad.addColorStop(1, 'rgba(115,115,115,0.34)')
 
       ctx.clearRect(0, 0, W, H)
-      ctx.fillStyle = fill
+      ctx.fillStyle = grad
       t += tStep
       for (let i = COUNT; i--; ) {
         const [x, y] = point(i, t)
-        ctx.fillRect(W / 2 + (x - cx) * s, H / 2 + (y - cy) * s * fy, dot, dot)
+        ctx.fillRect(W / 2 + (x - cx) * s, H / 2 + (y - cy) * s, dot, dot)
       }
     }
 
@@ -159,7 +154,7 @@ export default function HeroFlowField({ variant, spacer = true }) {
       cancelAnimationFrame(raf)
       window.removeEventListener('resize', syncTop)
     }
-  }, [variant])
+  }, [])
 
   return (
     <>
@@ -167,8 +162,8 @@ export default function HeroFlowField({ variant, spacer = true }) {
       <div ref={bgRef} className="home-flowfield-bg" aria-hidden="true">
         <canvas ref={canvasRef} className="home-flowfield__canvas" />
       </div>
-      {/* Espaçador em fluxo (só na home): mantém o layout/espaçamento. */}
-      {spacer && <div className="home-flowfield" aria-hidden="true" />}
+      {/* Espaçador em fluxo: mantém o layout/espaçamento. */}
+      <div className="home-flowfield" aria-hidden="true" />
     </>
   )
 }
