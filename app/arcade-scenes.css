@@ -51,6 +51,31 @@
   z-index: 1;
 }
 
+/* Título de papel (role) alinhado ao tamanho da logo da marca. */
+.home-lp__copy h1 {
+  font-size: var(--type-brand-size);
+  line-height: 1;
+  letter-spacing: var(--type-brand-letter-spacing);
+}
+
+/* Flow-field do tweet como faixa horizontal full-bleed: varre toda a
+   extensão da tela e acompanha a largura do viewport de forma responsiva. */
+.home-flowfield {
+  position: relative;
+  width: 100vw;
+  max-width: 100vw;
+  left: 50%;
+  margin-left: -50vw;
+  height: clamp(11rem, 24vw, 20rem);
+  overflow: hidden;
+}
+
+.home-flowfield__canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .home-lp__copy .lead {
   /* Carbonot is always uppercase — never smallcase. */
   font-size: var(--type-small-size);
@@ -63,9 +88,9 @@
   white-space: nowrap;
 }
 
-/* Statements read as prose (GT Planar), while the role title and capability
-   lead stay Carbonot. */
-.home-lp__vision {
+/* Visão + missão como UM texto só, um estilo só: prose (GT Planar), cor
+   cinza (muted) e no tamanho maior da visão. */
+.home-lp__statement {
   margin-top: 1.75rem;
   max-width: 34rem;
   font-family: var(--font-prose);
@@ -78,23 +103,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-size: clamp(1.15rem, 2.4vw, 1.6rem);
-  line-height: 1.3;
-  color: var(--text-h, inherit);
-}
-
-.home-lp__mission {
-  margin-top: 0.75rem;
-  max-width: 34rem;
-  font-family: var(--font-prose);
-  font-variation-settings: var(--font-prose-variation, 'slnt' 0);
-  font-synthesis: none;
-  font-style: normal;
-  text-transform: none;
-  font-weight: var(--prose-body-weight);
-  letter-spacing: var(--prose-body-letter-spacing);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  line-height: 1.6;
+  line-height: 1.4;
   color: var(--arcadia-muted);
 }
 

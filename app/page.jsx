@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useLocale } from './components/LocaleProvider'
 import { fetchHuman, fetchHumanStatements } from '../lib/gestalt-auth'
+import HeroFlowField from './components/HeroFlowField'
 
 export default function HomePage() {
   const { t, locale } = useLocale()
@@ -47,11 +48,12 @@ export default function HomePage() {
         <h1>{roleTitle}</h1>
         <p className="lead">{t('home.lead')}</p>
 
-        {statements?.vision && (
-          <p className="home-lp__vision">{statements.vision}</p>
-        )}
-        {statements?.mission && (
-          <p className="home-lp__mission">{statements.mission}</p>
+        {(statements?.vision || statements?.mission) && (
+          <p className="home-lp__statement">
+            {[statements?.vision, statements?.mission]
+              .filter(Boolean)
+              .join(' ')}
+          </p>
         )}
 
         {statements?.values?.length > 0 && (
@@ -71,6 +73,8 @@ export default function HomePage() {
           </Link>
         </div>
       </div>
+
+      <HeroFlowField />
     </section>
   )
 }

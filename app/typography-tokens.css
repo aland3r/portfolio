@@ -33,8 +33,8 @@
   --type-small-line-height: var(--type-body-line-height);
   --type-small-letter-spacing: var(--type-body-letter-spacing);
 
-  /* Brand = display */
-  --type-brand-size: var(--type-display-size);
+  /* Brand = display, escalado um pouco menor (logo + título da home) */
+  --type-brand-size: calc(var(--type-display-size) * 0.78);
   --type-brand-letter-spacing: var(--type-display-letter-spacing);
 
   /* Carbonot display */
