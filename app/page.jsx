@@ -45,7 +45,6 @@ export default function HomePage() {
     <section className="home-lp">
       <div className="home-lp__copy panel">
         <h1>{roleTitle}</h1>
-        <p className="eyebrow">{t('home.eyebrow')}</p>
         <p className="lead">{t('home.lead')}</p>
 
         {statements?.vision && (

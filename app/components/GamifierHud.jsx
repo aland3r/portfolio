@@ -119,9 +119,6 @@ export default function GamifierHud({ products, label = 'QUEST LOG', gestaltVers
         <div className="gamifier-hud__panel">
           <header className="gamifier-hud__header">
             <div>
-              <p className="gamifier-hud__eyebrow">
-                GESTALT <span className="gamifier-hud__version">{versionLabel}</span>
-              </p>
               <h3>Progressão dos produtos</h3>
             </div>
             <p className="gamifier-hud__score">{done}/{total} quests</p>

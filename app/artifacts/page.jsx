@@ -55,7 +55,6 @@ export default function ArtifactsPage() {
 
   return (
     <section className="panel">
-      <p className="eyebrow">{t('artifacts.eyebrow')}</p>
       <h1>{t('artifacts.title')}</h1>
 
       {loading ? (

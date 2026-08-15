@@ -1002,7 +1002,7 @@ a {
 .access-notice__dismiss:hover { color: var(--arcadia-fg); }
 
 /* Page titles stay on the #root column ? not the owner avatar / INSERT COIN anchor */
-.gestalt-main:not(.gestalt-main--auth) :is(.eyebrow, h1, .work-hero, .work-hero__title) {
+.gestalt-main:not(.gestalt-main--auth) :is(h1, .work-hero, .work-hero__title) {
   text-align: left;
   margin-inline: 0;
   max-width: 100%;
@@ -1145,13 +1145,6 @@ a {
   padding: 0.25rem 0.5rem;
   border: 1px dashed var(--arcadia-muted);
   background: var(--arcadia-bg);
-}
-
-.eyebrow {
-  font-size: var(--type-small-size);
-  letter-spacing: var(--type-small-letter-spacing);
-  color: var(--arcadia-muted);
-  margin-bottom: 1rem;
 }
 
 .lead {
@@ -1840,14 +1833,6 @@ a {
 
 .work-hero {
   margin-bottom: 2rem;
-}
-
-.work-hero__eyebrow {
-  margin: 0 0 0.75rem;
-  font-size: var(--type-small-size);
-  letter-spacing: var(--type-small-letter-spacing);
-  text-transform: uppercase;
-  color: var(--arcadia-muted);
 }
 
 .work-hero__title {
@@ -2769,14 +2754,6 @@ a {
 .floating-cv__meta {
   grid-area: meta;
   min-width: 0;
-}
-
-.floating-cv__eyebrow {
-  margin: 0;
-  font-size: var(--type-small-size);
-  letter-spacing: var(--type-small-letter-spacing);
-  color: var(--arcadia-muted);
-  text-transform: none;
 }
 
 .floating-cv__title {

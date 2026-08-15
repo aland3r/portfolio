@@ -35,7 +35,6 @@
     "panelLabel": "CV download",
     "openPanel": "Open CV download",
     "closePanel": "Close CV download",
-    "eyebrow": "Download CV",
     "title": "Curriculum vitae",
     "localeHintUnavailable": "Pick a language below when a PDF is ready.",
     "localeHint": {
@@ -44,7 +43,6 @@
     }
   },
   "home": {
-    "eyebrow": "Portfolio",
     "lead": "UX/UI design · data intelligence · full-stack dev",
     "apps": "Apps",
     "values": "Values"
@@ -69,7 +67,6 @@
     }
   },
   "work": {
-    "eyebrow": "Work",
     "title": "Work",
     "currently": "Currently",
     "now": "Now",
@@ -189,11 +186,9 @@
     }
   },
   "publications": {
-    "eyebrow": "Projects",
     "title": "Projects",
     "lead": "Social posts, university work, and scientific research — grouped by type.",
     "filterLabel": "Filter by type",
-    "productEyebrow": "{0}",
     "productTitle": "Projects · {0}",
     "productLead": "Writing and deliverables about {0}.",
     "empty": "Nothing here yet for this filter.",
@@ -253,7 +248,6 @@
     "open": "Open"
   },
   "cases": {
-    "eyebrow": "Owner",
     "title": "Cases",
     "filterLabel": "Filter by product",
     "items": {
@@ -272,7 +266,6 @@
     }
   },
   "artifacts": {
-    "eyebrow": "Archive",
     "title": "Artifacts",
     "empty": "No public artifacts yet. Owner marks entries public in portfolio.artifacts.",
     "open": "Open",
@@ -289,7 +282,6 @@
     }
   },
   "tracks": {
-    "eyebrow": "Music",
     "title": "Tracks",
     "lead": "Public releases on SoundCloud.",
     "playerHint": "Press play — the track keeps going while you browse the site.",
@@ -306,7 +298,6 @@
     "nowPlayingIndexed": "Now playing {0}/{1}"
   },
   "products": {
-    "eyebrow": "Products",
     "title": "Products",
     "soon": "Soon",
     "designing": "Designing",
@@ -317,12 +308,10 @@
     "contact": "Contact for access"
   },
   "contact": {
-    "eyebrow": "Access",
     "title": "Contact",
     "lead": "Product access is by invitation. Reach out and I will grant access manually."
   },
   "welcome": {
-    "eyebrow": "Owner",
     "title": "Welcome",
     "lead": "You are signed in with full owner permissions on Gestalt.",
     "productOffline": "Cannot open yet — host not configured:",
@@ -336,13 +325,11 @@
     "apps": "Apps"
   },
   "login": {
-    "eyebrow": "Access",
     "title": "Sign in",
     "google": "Google",
     "loading": "…"
   },
   "request": {
-    "eyebrow": "Access",
     "title": "Request",
     "note": "Note",
     "send": "Send",
@@ -350,11 +337,9 @@
     "loading": "…"
   },
   "admin": {
-    "eyebrow": "Owner",
     "title": "Admin"
   },
   "useCasesSpec": {
-    "eyebrow": "Specs",
     "title": "Use cases",
     "lead": "Structured user stories for IO and each Gestalt product — same shape as the vault template.",
     "backHub": "All products",

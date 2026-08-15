@@ -67,9 +67,6 @@ function PublicationsPageContent() {
 
   return (
     <section className="panel panel--publications">
-      <p className="eyebrow">
-        {product ? t('publications.productEyebrow').replace('{0}', product.name) : t('publications.eyebrow')}
-      </p>
       <h1>{product ? t('publications.productTitle').replace('{0}', product.name) : t('publications.title')}</h1>
       <p className="publication-prose publication-prose--lead">
         {product ? t('publications.productLead').replace('{0}', product.name) : t('publications.lead')}

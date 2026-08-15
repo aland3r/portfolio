@@ -54,7 +54,6 @@ export default function FloatingCvDownload() {
       </span>
 
       <div className="floating-cv__meta">
-        <p className="floating-cv__eyebrow">{t('resume.eyebrow')}</p>
         <p className="floating-cv__title">{t('resume.title')}</p>
         {current?.available ? (
           <p className="floating-cv__hint">{t(`resume.localeHint.${locale}`)}</p>

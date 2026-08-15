@@ -88,7 +88,6 @@ export default function AdminPage() {
 
   return (
     <section className="panel">
-      <p className="eyebrow">{t('admin.eyebrow')}</p>
       <h1>{t('admin.title')}</h1>
 
       {error ? <p className="alert">{error}</p> : null}

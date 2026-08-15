@@ -41,7 +41,6 @@ export default function WorkPage() {
   return (
     <section className="panel work-page">
       <header className="work-hero">
-        <p className="work-hero__eyebrow">{t('work.eyebrow')}</p>
         {currentHandle ? (
           <h1 className="work-hero__title">
             <span className="work-hero__accent">{t('work.currently')}</span>{' '}

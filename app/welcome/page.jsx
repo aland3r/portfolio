@@ -33,7 +33,6 @@ function WelcomeContent() {
 
   return (
     <section className="panel">
-      <p className="eyebrow">{t('welcome.eyebrow')}</p>
       <h1>{t('welcome.title')}</h1>
       <p className="lead">{t('welcome.lead')}</p>
 

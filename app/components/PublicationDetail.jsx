@@ -7,7 +7,6 @@ import { fetchPublicationDetail, isSupabaseConfigured } from '@gestalt/auth'
 import {
   getPublicationExternal,
   getPublicationExternalSoon,
-  getPublicationVenueLabel,
   loadStaticPublications,
 } from '../../lib/publications.js'
 import { useLocale } from './LocaleProvider'
@@ -77,7 +76,6 @@ export default function PublicationDetail() {
     )
   }
 
-  const venueLabel = getPublicationVenueLabel(entry, t)
   const dateText = formatDate(entry.publishedAt, locale)
   const isPublished = entry.status === 'published'
   const external = getPublicationExternal(entry, t)
@@ -89,7 +87,6 @@ export default function PublicationDetail() {
         ← {t('publications.back')}
       </Link>
 
-      <p className="eyebrow">{venueLabel}</p>
       <h1 className="publication-prose publication-detail__title">{entry.title}</h1>
 
       <p className="publication-card__meta publication-detail__meta">

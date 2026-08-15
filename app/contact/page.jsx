@@ -9,7 +9,6 @@ export default function ContactPage() {
 
   return (
     <section className="panel">
-      <p className="eyebrow">{t('contact.eyebrow')}</p>
       <h1>{t('contact.title')}</h1>
       <p className="lead">{t('contact.lead')}</p>
       <p>

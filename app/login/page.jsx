@@ -46,7 +46,6 @@ function LoginForm() {
 
   return (
     <section className="panel panel--auth">
-      <p className="eyebrow">{t('login.eyebrow')}</p>
       <h1>{t('login.title')}</h1>
 
       {error ? <p className="alert">{error}</p> : null}
