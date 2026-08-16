@@ -19,38 +19,42 @@
     Consolas,
     monospace;
 
-  /* Type scale */
+  /* ── Carbonot: SÓ 3 tamanhos (o resto é clutter e aponta pra estes) ──
+     1) TÍTULO da página  → --type-display-size
+     2) LOGO da marca      → --type-brand-size (display × 0.78)
+     3) GERAL (menu/UI/CTA)→ --type-body-size
+     Todos os tokens antigos (small / carbonot / cap) agora = GERAL. */
+
+  /* 1) Título da página */
   --type-display-size: 2rem;
   --type-display-line-height: 1.1;
   --type-display-letter-spacing: 0.06em;
 
+  /* 3) Geral (menu / UI / CTA) */
   --type-body-size: 1rem;
   --type-body-line-height: 1.5;
   --type-body-letter-spacing: 0.1em;
 
-  /* Small aliases body — no third Carbonot step */
+  /* 2) Logo da marca (+ título da home usam este) — um pouco menor. */
+  --type-brand-size: calc(var(--type-display-size) * 0.68);
+  --type-brand-letter-spacing: var(--type-display-letter-spacing);
+
+  /* Aliases → mapeiam pros 3 acima (mantidos só pra não quebrar referências) */
   --type-small-size: var(--type-body-size);
   --type-small-line-height: var(--type-body-line-height);
   --type-small-letter-spacing: var(--type-body-letter-spacing);
 
-  /* Brand = display, escalado um pouco menor (logo + título da home) */
-  --type-brand-size: calc(var(--type-display-size) * 0.78);
-  --type-brand-letter-spacing: var(--type-display-letter-spacing);
-
-  /* Carbonot display */
   --carbonot-display-size: var(--type-display-size);
   --carbonot-display-line-height: var(--type-display-line-height);
   --carbonot-display-letter-spacing: var(--type-display-letter-spacing);
 
-  /* Carbonot body / UI */
-  --carbonot-size: calc(var(--type-body-size) * 1.06);
+  --carbonot-size: var(--type-body-size);
   --carbonot-line-height: var(--type-body-line-height);
   --carbonot-letter-spacing: var(--type-body-letter-spacing);
 
-  /* Carbonot cap / label */
-  --carbonot-cap-size: var(--carbonot-size);
-  --carbonot-cap-line-height: var(--carbonot-line-height);
-  --carbonot-cap-letter-spacing: var(--carbonot-letter-spacing);
+  --carbonot-cap-size: var(--type-body-size);
+  --carbonot-cap-line-height: var(--type-body-line-height);
+  --carbonot-cap-letter-spacing: var(--type-body-letter-spacing);
 }
 
 @media (min-width: 768px) {

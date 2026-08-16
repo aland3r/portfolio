@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { useLocale } from './components/LocaleProvider'
 import { fetchHuman, fetchHumanStatements } from '../lib/gestalt-auth'
 import HeroFlowField from './components/HeroFlowField'
+import ResumeButton from './components/ResumeButton'
 
 export default function HomePage() {
   const { t, locale } = useLocale()
@@ -50,25 +51,27 @@ export default function HomePage() {
 
       <HeroFlowField />
 
-      <div className="home-lp__copy home-lp__body panel">
-        {(statements?.vision || statements?.mission) && (
-          <p className="home-lp__statement">
-            {[statements?.vision, statements?.mission]
-              .filter(Boolean)
-              .join(' ')}
-          </p>
-        )}
+      {(statements?.vision || statements?.mission) && (
+        <p className="home-lp__statement">
+          {[statements?.vision, statements?.mission]
+            .filter(Boolean)
+            .join(' ')}
+        </p>
+      )}
 
-        {statements?.values?.length > 0 && (
-          <div className="home-lp__values">
-            {/* Title left implicit — the list stands on its own. */}
-            <ul>
-              {statements.values.map((value) => (
-                <li key={value}>{value}</li>
-              ))}
-            </ul>
-          </div>
-        )}
+      {statements?.values?.length > 0 && (
+        <div className="home-lp__values">
+          {/* Title left implicit — the list stands on its own. */}
+          <ul>
+            {statements.values.map((value) => (
+              <li key={value}>{value}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <div className="home-lp__cta">
+        <ResumeButton />
       </div>
     </section>
   )

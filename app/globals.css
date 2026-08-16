@@ -1019,13 +1019,44 @@ a {
   width: 100%;
   max-width: none;
   flex-shrink: 0;
-  padding: 1.5rem var(--site-inline-pad) calc(2.5rem + var(--floating-clearance-bottom, 0px));
+  /* Compacto: só o necessário pro conteúdo (múltiplo de 8: 16px vertical). */
+  padding: 1rem var(--site-inline-pad);
   border-top: 1px solid var(--arcadia-line);
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .gestalt-footer .nav-social__list {
   justify-content: flex-start;
+}
+
+/* Crédito da arte — fonte prose (não Carbonot), fina e discreta. */
+.gestalt-footer__credit {
+  margin: 0;
+  font-family: var(--font-prose);
+  font-variation-settings: var(--font-prose-variation, 'slnt' 0);
+  font-synthesis: none;
+  font-weight: 400; /* body é 700 (grosso) — aqui fica fino */
+  text-transform: none;
+  letter-spacing: normal;
+  font-size: var(--type-small-size);
+  color: var(--arcadia-muted);
+}
+
+.gestalt-footer__credit-link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition: color 0.15s ease;
+}
+
+.gestalt-footer__credit-link:hover {
+  color: var(--arcadia-fg);
 }
 
 @media (max-width: 767px) {
@@ -1289,13 +1320,21 @@ a {
 }
 
 .app-hub {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(9rem, 1fr));
-  gap: var(--app-hub-col-gap);
-  align-items: start;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  /* Mais espaço entre os apps no centro (múltiplo de 8: 64→160px). */
+  gap: clamp(4rem, 12.5vw, 10rem);
   width: 100%;
   max-width: 100%;
   margin-inline: 0;
+}
+
+/* Mantém a dimensão original do slot/CTA (18rem = 288px, múltiplo de 8) —
+   o grupo é centralizado pelo flex pai, sem alterar o tamanho do botão. */
+.app-hub__slot {
+  flex: 0 1 18rem;
 }
 
 .app-hub__slot {
@@ -2720,6 +2759,30 @@ a {
 .floating-cv__chip-icon {
   display: block;
   flex-shrink: 0;
+}
+
+/* Mobile: o CV vira uma barra retangular full-width embaixo, alcançando as
+   laterais (compacta), com label + ícone centralizados. */
+@media (max-width: 767px) {
+  .floating-dock:has(.floating-cv) {
+    width: calc(100vw - 2 * var(--site-inline-pad));
+    max-width: none;
+  }
+
+  .floating-cv--compact {
+    align-self: stretch;
+  }
+
+  .floating-cv,
+  .floating-cv__chip {
+    width: 100%;
+  }
+
+  .floating-cv__chip {
+    justify-content: center;
+    box-sizing: border-box;
+    padding-block: 0.55rem;
+  }
 }
 
 .floating-cv--expanded {

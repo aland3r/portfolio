@@ -1,25 +1,11 @@
 'use client'
 
-import { usePathname } from 'next/navigation'
 import { AuthProvider } from './AuthProvider'
 import { LocaleProvider } from './LocaleProvider'
-import FloatingCvDownload from './FloatingCvDownload'
 import SiteShell from './shell/SiteShell'
 import { RoadmapProvider } from './RoadmapProvider'
 import '../globals.css'
 import '../gamifier.css'
-
-function FloatingDock() {
-  const pathname = usePathname()
-  const hide = pathname === '/login' || pathname === '/auth/callback'
-  if (hide) return null
-
-  return (
-    <div className="floating-dock">
-      <FloatingCvDownload />
-    </div>
-  )
-}
 
 export default function ClientRoot({ children }) {
   return (
@@ -27,7 +13,6 @@ export default function ClientRoot({ children }) {
       <AuthProvider>
         <RoadmapProvider>
           <SiteShell>{children}</SiteShell>
-          <FloatingDock />
         </RoadmapProvider>
       </AuthProvider>
     </LocaleProvider>

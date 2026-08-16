@@ -52,8 +52,10 @@ const FIELDS = {
 // pro texto respirar). O peixe fica um pouco maior — linhas horizontais mais
 // longas — que a água-viva.
 const VARIANTS = {
-  peixe: { field: FIELDS.peixe, fit: 'contain', zoom: 0.95 },
-  aguaVivaCompleta: { field: FIELDS.aguaViva, fit: 'contain', zoom: 0.88 },
+  // A arte é limitada à banda (bottom: 0 = topo do texto), então pode preencher
+  // sem invadir o parágrafo.
+  peixe: { field: FIELDS.peixe, fit: 'contain', zoom: 1.15 },
+  aguaVivaCompleta: { field: FIELDS.aguaViva, fit: 'contain', zoom: 1.05 },
 }
 
 // Home sorteia entre estas 2.
@@ -86,22 +88,11 @@ function bounds(field, lo, hi) {
 
 export default function HeroFlowField() {
   const canvasRef = useRef(null)
-  const bgRef = useRef(null)
 
   useEffect(() => {
     const canvas = canvasRef.current
-    const bg = bgRef.current
     const ctx = canvas?.getContext('2d')
-    if (!ctx || !bg) return
-
-    // Altura do header → topo do canvas (responsivo, sem número mágico).
-    const header = document.querySelector('.gestalt-header')
-    const syncTop = () => {
-      const h = header ? Math.round(header.getBoundingClientRect().height) : 63
-      bg.style.setProperty('--hero-anim-top', `${h}px`)
-    }
-    syncTop()
-    window.addEventListener('resize', syncTop)
+    if (!ctx) return
 
     const key = HOME_POOL[Math.floor(Math.random() * HOME_POOL.length)]
     const v = VARIANTS[key]
@@ -117,14 +108,18 @@ export default function HeroFlowField() {
       const dpr = Math.min(window.devicePixelRatio || 1, 2)
       const W = (canvas.width = Math.max(1, Math.round(canvas.clientWidth * dpr)))
       const H = (canvas.height = Math.max(1, Math.round(canvas.clientHeight * dpr)))
-      const dot = Math.max(1, dpr * 1.5)
+      // Tamanho do ponto por breakpoint de viewport: levemente menor em telas
+      // menores (3 faixas), sem distorcer demais.
+      const vw = window.innerWidth
+      const base = vw >= 1280 ? 1.9 : vw >= 768 ? 1.6 : 1.3
+      const dot = Math.max(1, base * dpr)
       const s = Math.min(W / spanX, H / spanY) * 0.95 * v.zoom
 
       // Fundo discreto: gradiente cinza → cinza escuro, opacidade baixa, pra
       // dar menos destaque e não competir com o texto.
       const grad = ctx.createLinearGradient(0, 0, 0, H)
-      grad.addColorStop(0, 'rgba(205,205,205,0.55)')
-      grad.addColorStop(1, 'rgba(115,115,115,0.34)')
+      grad.addColorStop(0, 'rgba(215,215,215,0.62)')
+      grad.addColorStop(1, 'rgba(175,175,175,0.5)')
 
       ctx.clearRect(0, 0, W, H)
       ctx.fillStyle = grad
@@ -140,30 +135,23 @@ export default function HeroFlowField() {
       draw()
       const ro = new ResizeObserver(draw)
       ro.observe(canvas)
-      return () => {
-        ro.disconnect()
-        window.removeEventListener('resize', syncTop)
-      }
+      return () => ro.disconnect()
     }
     const loop = () => {
       draw()
       raf = requestAnimationFrame(loop)
     }
     loop()
-    return () => {
-      cancelAnimationFrame(raf)
-      window.removeEventListener('resize', syncTop)
-    }
+    return () => cancelAnimationFrame(raf)
   }, [])
 
   return (
-    <>
-      {/* Fundo fixo: preenche a tela (exceto header), atrás do conteúdo. */}
-      <div ref={bgRef} className="home-flowfield-bg" aria-hidden="true">
+    // Banda em fluxo: a arte vive aqui (escala com a página) e termina no topo
+    // do texto abaixo — nunca invade o parágrafo, em qualquer tela.
+    <div className="home-flowfield" aria-hidden="true">
+      <div className="home-flowfield-bg">
         <canvas ref={canvasRef} className="home-flowfield__canvas" />
       </div>
-      {/* Espaçador em fluxo: mantém o layout/espaçamento. */}
-      <div className="home-flowfield" aria-hidden="true" />
-    </>
+    </div>
   )
 }
