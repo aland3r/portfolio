@@ -1,7 +1,7 @@
-export default function WireframeSlot({ label = 'Image', className = '' }) {
+export default function WireframeSlot({ label, className = '' }) {
   return (
     <div className={`wireframe-slot ${className}`.trim()} aria-hidden="true">
-      <span className="wireframe-slot__label">{label}</span>
+      {label ? <span className="wireframe-slot__label">{label}</span> : null}
     </div>
   )
 }

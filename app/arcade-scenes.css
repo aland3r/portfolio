@@ -62,22 +62,21 @@
   padding-inline: 0;
 }
 
-/* Remove o vazio abaixo do texto na home: sem a folga do dock flutuante no
-   desktop (o CV é um botão de canto). No mobile mantém a folga, já que ali o CV
-   é uma barra full-width no rodapé. */
+/* Home: CV inline no fluxo — folga mínima antes do footer (grid 8px). */
 .gestalt-main:has(.home-lp) {
-  padding-bottom: 3rem;
+  padding-bottom: 2rem;
 }
 
 @media (max-width: 767px) {
   .gestalt-main:has(.home-lp) {
-    padding-bottom: calc(3rem + var(--floating-clearance-bottom, 0px));
+    padding-bottom: 3rem;
   }
 }
 
 /* Base (coluna única, mobile-first): intro à direita, statement + valores à
    esquerda; gap lateral igual dos dois lados. */
 .home-lp .home-lp__intro,
+.home-lp .home-lp__body,
 .home-lp .home-lp__statement,
 .home-lp .home-lp__values,
 .home-lp .home-lp__cta {
@@ -86,6 +85,11 @@
   max-width: none;
   width: 100%;
   padding-inline: clamp(2rem, 10.75vw, 8.5rem);
+}
+
+/* Desktop grid: wrapper transparente — filhos continuam nas áreas statement/values. */
+.home-lp__body {
+  display: contents;
 }
 
 .home-lp .home-lp__intro {
@@ -103,7 +107,8 @@
   text-align: right;
 }
 
-/* Só no mobile: título e label centralizados, gap menor. */
+/* Só no mobile: título centralizado; parágrafo logo abaixo do intro; animação
+   depois (água-viva ancorada embaixo); valores + CTA em sequência — só múltiplos de 8. */
 @media (max-width: 767px) {
   .home-lp .home-lp__intro,
   #root:has(.home-lp) .home-lp__intro h1 {
@@ -111,10 +116,98 @@
   }
 
   .home-lp .home-lp__intro,
-  .home-lp .home-lp__statement,
-  .home-lp .home-lp__values,
+  .home-lp .home-lp__body,
   .home-lp .home-lp__cta {
-    padding-inline: 1.5rem;
+    padding-inline: 1rem 2rem;
+  }
+
+  /* Filhos do body herdam a largura do wrapper — sem padding/max-width extra. */
+  .home-lp .home-lp__statement,
+  .home-lp .home-lp__values {
+    padding-inline: 0;
+    max-width: none;
+    width: 100%;
+  }
+
+  .home-lp .home-lp__intro.panel {
+    max-width: none;
+  }
+
+  .home-lp {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    min-height: 0;
+  }
+
+  .home-lp__intro {
+    order: 1;
+    margin: 0;
+  }
+
+  .home-flowfield {
+    order: 2;
+    height: 9rem; /* 144px — mais banda pra ilustração */
+    margin-top: 1.5rem;
+    margin-bottom: -4rem; /* 64px — overlap leve, texto não sobe demais */
+  }
+
+  .home-flowfield-bg {
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    -webkit-mask-image: radial-gradient(
+      ellipse 64% 56% at 50% 78%,
+      #000 32%,
+      transparent 88%
+    );
+    mask-image: radial-gradient(
+      ellipse 64% 56% at 50% 78%,
+      #000 32%,
+      transparent 88%
+    );
+  }
+
+  .home-flowfield__canvas {
+    width: 100%;
+    height: 88%;
+  }
+
+  .home-flowfield-bg:has(.home-flowfield__canvas[data-sketch='aguaVivaCompleta']) {
+    align-items: flex-end;
+    padding-bottom: 0;
+  }
+
+  /* Grupo statement + valores — overlap moderado com a animação. */
+  .home-lp__body {
+    display: flex;
+    flex-direction: column;
+    order: 3;
+    gap: 0.5rem; /* 8px — parágrafo colado nos valores */
+    margin-top: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .home-lp__statement {
+    margin-top: 0;
+  }
+
+  .home-lp__values {
+    margin-top: 0;
+  }
+
+  .home-lp__values ul {
+    margin: 0;
+    max-width: none;
+    gap: 1rem; /* 16px entre itens */
+  }
+
+  .home-lp .home-lp__cta {
+    order: 4;
+    margin-top: 2rem; /* 32px antes do CTA */
   }
 }
 
@@ -129,7 +222,9 @@
    arte (position: relative). */
 .home-flowfield {
   position: relative;
-  height: clamp(13rem, 26vw, 20rem);
+  /* Banda (mobile/tablet-portrait) — maior, pra a arte se expandir e ocupar
+     melhor o espaço. No desktop 2-col a arte usa min-height (não esta). */
+  height: clamp(20rem, 58vw, 30rem);
 }
 
 .home-flowfield-bg {
@@ -171,7 +266,7 @@
    DIREITA. Vem DEPOIS das regras-base de propósito, pra vencer no desktop.
 
    ─ KNOBS (o que mexer manualmente) ─────────────────────────────────────────
-   • Tamanho da coluna de texto → o "26rem" em grid-template-columns
+   • Tamanho da coluna de texto → o "34rem" em grid-template-columns
      (menor = mais espaço pra arte).
    • Respiro entre arte e texto → column-gap (maior = mais afastado).
    • Tamanho da arte → .home-flowfield min-height (maior = arte maior);
@@ -181,46 +276,60 @@
    • Alinhamento do texto → text-align: right | left | center.
    ═══════════════════════════════════════════════════════════════════════════ */
 @media (min-width: 768px) {
-  /* Respiro nas bordas da tela (arte à esquerda, texto à direita). */
+  /* Respiro nas bordas: esquerda normal, direita 2× (só margem da viewport —
+     não alarga a coluna de texto). */
   #root:has(.home-lp) {
-    padding-inline: clamp(1.5rem, 3vw, 3rem);
+    padding-inline: clamp(1.5rem, 3vw, 3rem) clamp(3rem, 6vw, 6rem);
   }
 
   .home-lp {
-    grid-template-columns: minmax(0, 1fr) minmax(18rem, 26rem);
+    /* Arte flexível; coluna de texto um pouco mais larga. */
+    grid-template-columns: minmax(0, 1.15fr) minmax(20rem, 34rem);
     grid-template-areas:
       'stage intro'
       'stage statement'
       'stage values'
       'stage cv';
-    column-gap: clamp(2.5rem, 6vw, 7rem);
+    column-gap: clamp(3rem, 8vw, 9rem);
     align-content: center;
     align-items: start;
   }
 
-  /* Todo o texto na coluna da direita, alinhado à direita. */
+  /* Todo o texto na coluna da direita. */
   .home-lp .home-lp__intro {
     grid-area: intro;
     padding-inline: 0;
     text-align: right;
     margin-top: 2rem;
+    max-width: 34rem;
+    justify-self: end;
+    width: 100%;
   }
   .home-lp .home-lp__statement {
     grid-area: statement;
     padding-inline: 0;
-    max-width: none;
+    max-width: 38rem;
+    justify-self: end;
+    width: 100%;
     text-align: right;
   }
   .home-lp .home-lp__values {
     grid-area: values;
     padding-inline: 0;
-    /* Valores sempre à ESQUERDA (mais legível que ragged-left). */
+    max-width: 38rem;
+    justify-self: end;
+    width: 100%;
     text-align: left;
+  }
+  .home-lp .home-lp__values ul {
+    max-width: 38rem;
   }
   .home-lp .home-lp__cta {
     grid-area: cv;
     padding-inline: 0;
-    justify-self: stretch; /* CTA ocupa a largura da coluna de texto */
+    justify-self: end;
+    width: 100%;
+    max-width: 34rem;
     margin-top: 1.5rem;
   }
   #root:has(.home-lp) .home-lp__intro h1 {
@@ -232,30 +341,32 @@
     grid-area: stage;
     position: relative;
     height: 100%;
-    min-height: clamp(30rem, 62vh, 46rem);
+    min-height: clamp(32rem, 64vh, 48rem);
+    min-width: 0;
   }
   .home-flowfield-bg {
     top: 0;
     bottom: 0;
+    left: 0;
     right: 0;
     /* Máscara mais aberta no desktop → mostra mais da figura. */
     -webkit-mask-image: radial-gradient(
-      ellipse 66% 72% at 50% 50%,
-      #000 48%,
-      transparent 94%
+      ellipse 72% 78% at 52% 50%,
+      #000 42%,
+      transparent 92%
     );
     mask-image: radial-gradient(
-      ellipse 66% 72% at 50% 50%,
-      #000 48%,
-      transparent 94%
+      ellipse 72% 78% at 52% 50%,
+      #000 42%,
+      transparent 92%
     );
   }
 }
 
 
 .home-lp__copy .lead {
-  /* Carbonot is always uppercase — never smallcase. */
-  font-size: var(--type-small-size);
+  /* Carbonot is always uppercase — never smallcase. Um pouco maior. */
+  font-size: calc(var(--type-small-size) * 1.15);
   line-height: var(--type-small-line-height);
   letter-spacing: var(--type-small-letter-spacing);
   color: var(--arcadia-muted);
@@ -269,7 +380,7 @@
    cinza (muted) e no tamanho maior da visão. */
 .home-lp__statement {
   margin-top: 0;
-  max-width: 34rem;
+  max-width: 38rem;
   font-family: var(--font-prose);
   font-variation-settings: var(--font-prose-variation, 'slnt' 0);
   font-synthesis: none;
@@ -279,13 +390,14 @@
   letter-spacing: var(--prose-body-letter-spacing);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: clamp(1.15rem, 2.4vw, 1.6rem);
+  /* Claramente maior que os valores. */
+  font-size: clamp(1.3125rem, 2.5vw, 1.6875rem);
   line-height: 1.4;
   color: var(--arcadia-muted);
 }
 
 .home-lp__values {
-  margin-top: 2rem;
+  margin-top: 1rem; /* 16px — desktop; mobile zera no breakpoint */
 }
 
 .home-lp__values ul {
@@ -294,7 +406,7 @@
   list-style: none;
   display: grid;
   gap: 0.6rem;
-  max-width: 34rem;
+  max-width: 38rem;
 }
 
 .home-lp__values li {
@@ -307,8 +419,8 @@
   letter-spacing: var(--prose-body-letter-spacing);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* Mesma cor cinza do parágrafo, mas um passo MENOR (token geral). */
-  font-size: var(--type-body-size);
+  /* Mesma cor cinza do parágrafo, um passo abaixo do statement. */
+  font-size: clamp(1.1875rem, 2.6vw, 1.3125rem);
   line-height: 1.5;
   color: var(--arcadia-muted);
 }

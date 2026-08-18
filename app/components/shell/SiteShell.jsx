@@ -56,10 +56,12 @@ export default function SiteShell({ children }) {
   const navLinks = [
     { href: '/work', label: t('nav.work') },
     { href: '/apps', label: t('nav.products') },
-    { href: '/projects', label: t('nav.publications') },
-    { href: '/cases', label: t('nav.useCases') },
+    { href: '/projects', label: t('nav.projects') },
     ...(isOwner
-      ? [{ href: '/kit', label: t('nav.kit') }]
+      ? [
+          { href: '/cases', label: t('nav.useCases') },
+          { href: '/kit', label: t('nav.kit') },
+        ]
       : []),
   ]
 

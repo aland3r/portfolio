@@ -6,6 +6,7 @@
     "work": "Work",
     "apps": "Apps",
     "publications": "Projetos",
+    "projects": "Projetos",
     "products": "Apps",
     "cases": "Cases",
     "useCases": "Casos",
@@ -184,6 +185,24 @@
         "story": "Passei dez meses como au-pair em Haag, Baviera — morando com uma família anfitriã enquanto estudava alemão. Choque cultural, conversa do dia a dia e a decisão de manter o alemão na vida profissional depois.",
         "teaser": "Dez meses em Haag, Alemanha — imersão linguística, choque cultural e a decisão de manter o alemão na vida profissional."
       }
+    }
+  },
+  "projects": {
+    "title": "Projetos",
+    "lead": "Histórias de produto — pesquisa, design e desenvolvimento.",
+    "eyebrow": "Projeto",
+    "productTitle": "Projetos · {0}",
+    "productLead": "Histórias sobre a construção do {0}.",
+    "empty": "Ainda não há projetos.",
+    "open": "Ler",
+    "openExternal": "Abrir original",
+    "back": "Todos os projetos",
+    "notFound": "Projeto não encontrado.",
+    "bodySoon": "Texto completo em breve.",
+    "heroImage": "Imagem de destaque",
+    "fromDb": "Sincronizado do Supabase",
+    "statusLabel": {
+      "draft": "Rascunho"
     }
   },
   "publications": {

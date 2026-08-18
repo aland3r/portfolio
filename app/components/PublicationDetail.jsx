@@ -3,12 +3,22 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
-import { fetchPublicationDetail, isSupabaseConfigured } from '@gestalt/auth'
+import {
+  fetchProjectDetail,
+  fetchPublicationDetail,
+  isSupabaseConfigured,
+} from '@gestalt/auth'
 import {
   getPublicationExternal,
   getPublicationExternalSoon,
   loadStaticPublications,
 } from '../../lib/publications.js'
+import {
+  loadStaticProjectAsPublication,
+  mapProjectAsPublication,
+  resolveProjectCode,
+} from '../../lib/project-publication.js'
+import ProjectHero from './ProjectHero'
 import { useLocale } from './LocaleProvider'
 import { formatDate } from './PublicationCard'
 
@@ -22,6 +32,7 @@ export default function PublicationDetail() {
   useEffect(() => {
     let cancelled = false
     const slug = String(id ?? '')
+    const projectCode = resolveProjectCode(slug)
 
     async function load() {
       setLoading(true)
@@ -29,9 +40,21 @@ export default function PublicationDetail() {
 
       if (isSupabaseConfigured()) {
         try {
+          const project = await fetchProjectDetail(projectCode, locale)
+          if (!cancelled && project) {
+            setEntry(mapProjectAsPublication(project))
+            setResolved(true)
+            setLoading(false)
+            return
+          }
+        } catch {
+          // fall through
+        }
+
+        try {
           const row = await fetchPublicationDetail(slug, locale)
           if (!cancelled && row) {
-            setEntry(row)
+            setEntry({ ...row, detailKind: 'publication' })
             setResolved(true)
             setLoading(false)
             return
@@ -42,8 +65,16 @@ export default function PublicationDetail() {
       }
 
       if (!cancelled) {
+        const staticProject = loadStaticProjectAsPublication(projectCode, locale)
+        if (staticProject) {
+          setEntry(staticProject)
+          setResolved(true)
+          setLoading(false)
+          return
+        }
+
         const staticEntry = loadStaticPublications(messages).find((item) => item.id === slug) ?? null
-        setEntry(staticEntry)
+        setEntry(staticEntry ? { ...staticEntry, detailKind: 'publication' } : null)
         setResolved(Boolean(staticEntry))
         setLoading(false)
       }
@@ -54,6 +85,9 @@ export default function PublicationDetail() {
       cancelled = true
     }
   }, [id, locale, messages])
+
+  const copyNs = entry?.detailKind === 'publication' ? 'publications' : 'projects'
+  const isProject = entry?.detailKind !== 'publication'
 
   if (loading) {
     return (
@@ -66,10 +100,10 @@ export default function PublicationDetail() {
   if (!resolved || !entry) {
     return (
       <section className="panel panel--publications">
-        <p className="muted">{t('publications.notFound')}</p>
+        <p className="muted">{t(`${copyNs}.notFound`)}</p>
         <p>
           <Link href="/projects" className="publication-detail__back">
-            {t('publications.back')}
+            {t(`${copyNs}.back`)}
           </Link>
         </p>
       </section>
@@ -82,9 +116,17 @@ export default function PublicationDetail() {
   const externalSoon = getPublicationExternalSoon(entry, t)
 
   return (
-    <article className="panel panel--publications publication-detail">
+    <article className={`publication-detail${isProject ? ' publication-detail--project' : ''}`}>
+      {isProject ? (
+        <ProjectHero
+          coverUrl={entry.coverUrl}
+          label={t('projects.heroImage')}
+        />
+      ) : null}
+
+      <div className="panel panel--publications publication-detail__content">
       <Link href="/projects" className="publication-detail__back">
-        ← {t('publications.back')}
+        ← {t(`${copyNs}.back`)}
       </Link>
 
       <h1 className="publication-prose publication-detail__title">{entry.title}</h1>
@@ -102,7 +144,7 @@ export default function PublicationDetail() {
         {!isPublished ? (
           <>
             <span className="publication-card__dot" aria-hidden="true">·</span>
-            <span className="publication-card__status">{t('publications.statusLabel.draft')}</span>
+            <span className="publication-card__status">{t(`${copyNs}.statusLabel.draft`)}</span>
           </>
         ) : null}
       </p>
@@ -116,7 +158,7 @@ export default function PublicationDetail() {
           ))}
         </div>
       ) : (
-        <p className="muted publication-detail__empty">{t('publications.bodySoon')}</p>
+        <p className="muted publication-detail__empty">{t(`${copyNs}.bodySoon`)}</p>
       )}
 
       {external ? (
@@ -133,6 +175,7 @@ export default function PublicationDetail() {
       ) : externalSoon ? (
         <p className="publication-detail__external-soon">{externalSoon}</p>
       ) : null}
+      </div>
     </article>
   )
 }

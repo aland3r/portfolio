@@ -11,8 +11,8 @@ function formatDate(iso, locale) {
 }
 
 export default function PublicationCard({
-  id,
   venueLabel,
+  coverLabel,
   title,
   excerpt,
   dateLabel,
@@ -21,58 +21,62 @@ export default function PublicationCard({
   detailHref,
   externalHref,
   externalLabel,
-  readLabelText,
 }) {
   return (
     <article className="publication-card">
-      <WireframeSlot label={venueLabel} className="publication-card__cover" />
+      <Link href={detailHref} className="publication-card__surface publication-card--interactive">
+        <WireframeSlot label={coverLabel || venueLabel} className="publication-card__cover" />
 
-      <div className="publication-card__body">
-        <p className="publication-card__meta">
-          <span className="publication-card__venue">{venueLabel}</span>
-          {dateLabel ? (
-            <>
-              <span className="publication-card__dot" aria-hidden="true">·</span>
-              <time dateTime={dateLabel.iso}>{dateLabel.text}</time>
-            </>
+        <div className="publication-card__body">
+          {venueLabel || dateLabel || readLabel || statusLabel ? (
+            <p className="publication-card__meta">
+              {venueLabel ? (
+                <span className="publication-card__venue">{venueLabel}</span>
+              ) : null}
+              {dateLabel ? (
+                <>
+                  {venueLabel ? (
+                    <span className="publication-card__dot" aria-hidden="true">·</span>
+                  ) : null}
+                  <time dateTime={dateLabel.iso}>{dateLabel.text}</time>
+                </>
+              ) : null}
+              {readLabel ? (
+                <>
+                  {venueLabel || dateLabel ? (
+                    <span className="publication-card__dot" aria-hidden="true">·</span>
+                  ) : null}
+                  <span>{readLabel}</span>
+                </>
+              ) : null}
+              {statusLabel ? (
+                <>
+                  {venueLabel || dateLabel || readLabel ? (
+                    <span className="publication-card__dot" aria-hidden="true">·</span>
+                  ) : null}
+                  <span className="publication-card__status">{statusLabel}</span>
+                </>
+              ) : null}
+            </p>
           ) : null}
-          {readLabel ? (
-            <>
-              <span className="publication-card__dot" aria-hidden="true">·</span>
-              <span>{readLabel}</span>
-            </>
-          ) : null}
-          {statusLabel ? (
-            <>
-              <span className="publication-card__dot" aria-hidden="true">·</span>
-              <span className="publication-card__status">{statusLabel}</span>
-            </>
-          ) : null}
-        </p>
 
-        <h2 className="publication-prose publication-prose--title">
-          <Link href={detailHref} className="publication-card__title-link">
-            {title}
-          </Link>
-        </h2>
-        <p className="publication-prose publication-prose--excerpt">{excerpt}</p>
-
-        <div className="publication-card__foot">
-          <Link href={detailHref} className="publication-card__read">
-            {readLabelText}
-          </Link>
-          {externalHref ? (
-            <a
-              href={externalHref}
-              className="publication-card__external"
-              target="_blank"
-              rel="noreferrer"
-            >
-              {externalLabel}
-            </a>
-          ) : null}
+          <h2 className="publication-prose publication-prose--title">{title}</h2>
+          <p className="publication-prose publication-prose--excerpt">{excerpt}</p>
         </div>
-      </div>
+      </Link>
+
+      {externalHref ? (
+        <div className="publication-card__foot">
+          <a
+            href={externalHref}
+            className="publication-card__external"
+            target="_blank"
+            rel="noreferrer"
+          >
+            {externalLabel}
+          </a>
+        </div>
+      ) : null}
     </article>
   )
 }

@@ -1,10 +1,19 @@
-import publications from '../../../content/projects.json'
+import { fetchProjects } from '../../../lib/gestalt-auth/projects.js'
 import PublicationDetail from '../../components/PublicationDetail'
 
-export function generateStaticParams() {
-  return publications.map((entry) => ({ id: entry.id }))
+export async function generateStaticParams() {
+  try {
+    const rows = await fetchProjects()
+    if (rows?.length) {
+      return rows.map((entry) => ({ id: entry.code }))
+    }
+  } catch {
+    // Supabase may be unavailable at build time — fall back to known codes.
+  }
+
+  return [{ id: 'deviante' }, { id: 'milebrick' }, { id: 'asteroids' }]
 }
 
-export default function PublicationDetailPage() {
+export default function ProjectDetailPage() {
   return <PublicationDetail />
 }
