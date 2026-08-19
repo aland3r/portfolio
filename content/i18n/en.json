@@ -8,8 +8,8 @@
     "publications": "Projects",
     "projects": "Projects",
     "products": "Apps",
-    "cases": "Cases",
-    "useCases": "Cases",
+    "cases": "Use cases",
+    "useCases": "Use cases",
     "kit": "Kit",
     "artifacts": "Artifacts",
     "tracks": "Tracks",
@@ -263,12 +263,13 @@
     "offline": "Host not live yet",
     "publications": "Projects",
     "try": "Try this app",
+    "visitLanding": "Visit landing page",
     "contact": "Contact for access",
     "inOpen": "In → open",
     "open": "Open"
   },
   "cases": {
-    "title": "Cases",
+    "title": "Use cases",
     "filterLabel": "Filter by product",
     "items": {
       "deviante": {

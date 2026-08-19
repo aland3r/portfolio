@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { GESTALT_PRODUCTS, fetchAppProducts, isProductEntryLive } from '@gestalt/auth'
+import { GESTALT_PRODUCTS, fetchAppProducts, getProductLandingUrl, isProductEntryLive } from '@gestalt/auth'
 import AppIcon from './AppIcon'
 import { useLocale } from './LocaleProvider'
 import { useLaunchProduct } from './useLaunchProduct'
@@ -62,7 +62,14 @@ export default function AppHub() {
                     {t('apps.try')}
                   </button>
                 ) : null}
-                {/* Deviante shows a single primary CTA (login/launch) only. */}
+                {live && !product.comingSoon ? (
+                  <a
+                    href={getProductLandingUrl(product.code)}
+                    className="app-hub__action app-hub__action--secondary"
+                  >
+                    {t('apps.visitLanding')}
+                  </a>
+                ) : null}
                 {product.code !== 'deviante' ? (
                   <a
                     href={getProductArticlesUrl(product.code)}
