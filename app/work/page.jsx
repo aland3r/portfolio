@@ -62,7 +62,7 @@ export default function WorkPage() {
             story={entry.description}
             orgHandle={entry.org_handle ?? entry.org}
             location={entry.location}
-            detailHref={entry.featured ? entry.href : null}
+            detailHref={entry.href ?? null}
             span={entry.card_span ?? 'default'}
           />
         ))}

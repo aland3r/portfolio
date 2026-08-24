@@ -38,6 +38,7 @@
     "openPanel": "Abrir download de CV",
     "closePanel": "Fechar download de CV",
     "title": "Currículo",
+    "altLink": "Baixar CV em inglês",
     "localeHintUnavailable": "Escolha um idioma abaixo quando o PDF estiver pronto.",
     "localeHint": {
       "en": "PDF em inglês disponível para o idioma atual do site.",
@@ -47,7 +48,8 @@
   "home": {
     "lead": "UX/UI · dados · full-stack",
     "apps": "Apps",
-    "values": "Valores"
+    "values": "Valores",
+    "currentWork": "Atualmente"
   },
   "progress": {
     "label": "Progresso do build Gestalt 1.0",
@@ -76,6 +78,14 @@
     "readStory": "Ler história",
     "back": "Todo o work",
     "notFound": "Experiência não encontrada.",
+    "sectionSoon": "Em breve.",
+    "related": "Experiências relacionadas",
+    "caseSections": {
+      "context": "Contexto",
+      "problem": "Problema",
+      "hypotheses": "Hipóteses",
+      "solution": "Solução"
+    },
     "bodySoon": "História em breve — esta página está reservada para a versão narrativa deste papel.",
     "present": "Atual",
     "kinds": {

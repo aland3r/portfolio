@@ -32,15 +32,28 @@ export default function ResumeButton() {
   const current = getResumeByLocale(locale)
   if (!current?.available) return null
 
+  const alt = getResumeByLocale(locale === 'pt' ? 'en' : 'pt')
+
   return (
-    <a
-      href={current.href}
-      download={current.downloadName}
-      className="resume-btn"
-      aria-label={t('nav.resume')}
-    >
-      <span className="resume-btn__label">{t('nav.resume')}</span>
-      <DownloadIcon />
-    </a>
+    <>
+      <a
+        href={current.href}
+        download={current.downloadName}
+        className="resume-btn"
+        aria-label={t('nav.resume')}
+      >
+        <span className="resume-btn__label">{t('nav.resume')}</span>
+        <DownloadIcon />
+      </a>
+      {alt?.available && (
+        <a
+          href={alt.href}
+          download={alt.downloadName}
+          className="resume-btn__alt"
+        >
+          {t('resume.altLink')}
+        </a>
+      )}
+    </>
   )
 }

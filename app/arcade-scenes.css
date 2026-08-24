@@ -79,12 +79,24 @@
 .home-lp .home-lp__body,
 .home-lp .home-lp__statement,
 .home-lp .home-lp__values,
-.home-lp .home-lp__cta {
+.home-lp .home-lp__cta,
+.home-lp .home-lp__work {
   justify-self: stretch;
   margin-inline: 0;
   max-width: none;
   width: 100%;
   padding-inline: clamp(2rem, 10.75vw, 8.5rem);
+}
+
+/* Bloco de experiências atuais: abaixo da arte, largura cheia. Cards reusam o
+   mesmo .work-board / ExperienceCard do /work (consistência entre páginas). */
+.home-lp__work-title {
+  margin: 0 0 1rem;
+  font-family: var(--font-carbonot);
+  font-size: var(--type-small-size);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--arcadia-muted);
 }
 
 /* Desktop grid: wrapper transparente — filhos continuam nas áreas statement/values. */
@@ -289,10 +301,19 @@
       'stage intro'
       'stage statement'
       'stage values'
-      'stage cv';
+      'stage cv'
+      'work work';
     column-gap: clamp(3rem, 8vw, 9rem);
     align-content: center;
     align-items: start;
+  }
+
+  /* Experiências atuais: linha cheia abaixo da arte + textos. */
+  .home-lp .home-lp__work {
+    grid-area: work;
+    padding-inline: 0;
+    width: 100%;
+    margin-top: clamp(2rem, 5vw, 4rem);
   }
 
   /* Todo o texto na coluna da direita. */
@@ -465,6 +486,25 @@
 .resume-btn:hover {
   color: var(--arcadia-fg);
   border-color: var(--arcadia-fg);
+}
+
+/* Sublegenda discreta: baixa o CV no outro idioma. */
+.resume-btn__alt {
+  display: block;
+  text-align: center;
+  margin-top: 0.6rem;
+  color: var(--arcadia-muted);
+  text-decoration: none;
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+  opacity: 0.7;
+  transition: opacity 0.15s ease, color 0.15s ease;
+}
+
+.resume-btn__alt:hover {
+  color: var(--arcadia-fg);
+  opacity: 1;
+  text-decoration: underline;
 }
 
 .welcome-scene {

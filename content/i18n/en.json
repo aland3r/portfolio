@@ -38,6 +38,7 @@
     "openPanel": "Open CV download",
     "closePanel": "Close CV download",
     "title": "Curriculum vitae",
+    "altLink": "Download CV in Portuguese",
     "localeHintUnavailable": "Pick a language below when a PDF is ready.",
     "localeHint": {
       "en": "English PDF ready for this site language.",
@@ -47,7 +48,8 @@
   "home": {
     "lead": "UX/UI · data · full-stack dev",
     "apps": "Apps",
-    "values": "Values"
+    "values": "Values",
+    "currentWork": "Currently"
   },
   "progress": {
     "label": "Gestalt 1.0 build progress",
@@ -76,6 +78,14 @@
     "readStory": "Read story",
     "back": "All work",
     "notFound": "Experience not found.",
+    "sectionSoon": "Coming soon.",
+    "related": "Related experiences",
+    "caseSections": {
+      "context": "Context",
+      "problem": "Problem",
+      "hypotheses": "Hypotheses",
+      "solution": "Solution"
+    },
     "bodySoon": "Story coming soon — this page is reserved for the narrative version of this role.",
     "present": "Present",
     "kinds": {

@@ -2,9 +2,24 @@
 
 import { useEffect, useState } from 'react'
 import { useLocale } from './components/LocaleProvider'
-import { fetchHuman, fetchHumanStatements, localizeRoleTitle } from '../lib/gestalt-auth'
+import {
+  fetchHuman,
+  fetchHumanStatements,
+  localizeRoleTitle,
+  fetchExperiences,
+  localizeExperience,
+} from '../lib/gestalt-auth'
+import { STATIC_EXPERIENCES } from '../lib/experience.js'
 import HeroFlowField from './components/HeroFlowField'
 import ResumeButton from './components/ResumeButton'
+import ExperienceCard from './components/ExperienceCard'
+
+function yearRange(entry, presentLabel) {
+  const start = entry.start_date?.slice(0, 4)
+  if (!start) return null
+  const end = entry.end_date ? entry.end_date.slice(0, 4) : presentLabel
+  return `${start} – ${end}`
+}
 
 export default function HomePage() {
   const { t, locale } = useLocale()
@@ -17,6 +32,10 @@ export default function HomePage() {
   // Vision / mission / values come from `portfolio.statements` (Model B,
   // language as data) for the active locale — same governance: DB only.
   const [statements, setStatements] = useState(null)
+
+  // Current work experiences (max 3) shown below the art, each linking to its
+  // case study. DB-first with the static mirror as fallback.
+  const [experiences, setExperiences] = useState(null)
 
   useEffect(() => {
     let active = true
@@ -41,6 +60,26 @@ export default function HomePage() {
       active = false
     }
   }, [locale])
+
+  useEffect(() => {
+    let active = true
+    fetchExperiences()
+      .then((data) => {
+        if (active) setExperiences(data && data.length ? data : STATIC_EXPERIENCES)
+      })
+      .catch(() => {
+        if (active) setExperiences(STATIC_EXPERIENCES)
+      })
+    return () => {
+      active = false
+    }
+  }, [])
+
+  const currentWork = (experiences ?? STATIC_EXPERIENCES)
+    .filter((entry) => entry.is_current && entry.show_on_page !== false)
+    .sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0))
+    .slice(0, 3)
+    .map((entry) => localizeExperience(entry, locale))
 
   return (
     <section className="home-lp">
@@ -79,6 +118,28 @@ export default function HomePage() {
       <div className="home-lp__cta">
         <ResumeButton />
       </div>
+
+      {currentWork.length > 0 && (
+        <div className="home-lp__work">
+          <h2 className="home-lp__work-title">{t('home.currentWork')}</h2>
+          <div className="work-board home-lp__work-board" role="list">
+            {currentWork.map((entry) => (
+              <ExperienceCard
+                key={entry.id}
+                periodLabel={yearRange(entry, t('work.now'))}
+                isCurrentRole={Boolean(entry.is_current)}
+                currentRoleLabel={t('work.currentRoleBadge')}
+                headline={entry.title}
+                story={entry.description}
+                orgHandle={entry.org_handle ?? entry.org}
+                location={entry.location}
+                detailHref={entry.href ?? null}
+                span={entry.card_span ?? 'default'}
+              />
+            ))}
+          </div>
+        </div>
+      )}
     </section>
   )
 }
