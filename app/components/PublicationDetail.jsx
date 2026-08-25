@@ -115,66 +115,113 @@ export default function PublicationDetail() {
   const external = getPublicationExternal(entry, t)
   const externalSoon = getPublicationExternalSoon(entry, t)
 
-  return (
-    <article className={`publication-detail${isProject ? ' publication-detail--project' : ''}`}>
-      {isProject ? (
-        <ProjectHero
-          coverUrl={entry.coverUrl}
-          label={t('projects.heroImage')}
-        />
-      ) : null}
+  const externalNode = external ? (
+    <p className="publication-detail__external-wrap">
+      <a
+        href={external.href}
+        className="publication-detail__external"
+        target="_blank"
+        rel="noreferrer"
+      >
+        {external.label}
+      </a>
+    </p>
+  ) : externalSoon ? (
+    <p className="publication-detail__external-soon">{externalSoon}</p>
+  ) : null
 
-      <div className="panel panel--publications publication-detail__content">
-      <Link href="/projects" className="publication-detail__back">
-        ← {t(`${copyNs}.back`)}
-      </Link>
+  const bodyNode =
+    entry.body.length > 0 ? (
+      <div className="publication-prose publication-prose--body">
+        {entry.body.map((paragraph) => (
+          <p key={paragraph.slice(0, 48)}>{paragraph}</p>
+        ))}
+      </div>
+    ) : (
+      <p className="muted publication-detail__empty">{t(`${copyNs}.bodySoon`)}</p>
+    )
 
-      <h1 className="publication-prose publication-detail__title">{entry.title}</h1>
+  if (isProject) {
+    const facts = [
+      { key: 'stack', label: t('projects.stack'), value: entry.stack },
+      { key: 'role', label: t('projects.role'), value: entry.role },
+      { key: 'client', label: t('projects.client'), value: entry.client },
+    ].filter((fact) => fact.value)
 
-      <p className="publication-card__meta publication-detail__meta">
-        {dateText ? (
-          <>
-            <time dateTime={entry.publishedAt}>{dateText}</time>
-            <span className="publication-card__dot" aria-hidden="true">·</span>
-          </>
-        ) : null}
-        {entry.readMinutes ? (
-          <span>{t('publications.readTime').replace('{0}', String(entry.readMinutes))}</span>
-        ) : null}
-        {!isPublished ? (
-          <>
-            <span className="publication-card__dot" aria-hidden="true">·</span>
-            <span className="publication-card__status">{t(`${copyNs}.statusLabel.draft`)}</span>
-          </>
-        ) : null}
-      </p>
+    return (
+      <article className="publication-detail publication-detail--project">
+        <ProjectHero coverUrl={entry.coverUrl} label={t('projects.heroImage')} />
 
-      <p className="publication-prose publication-prose--lead">{entry.excerpt}</p>
+        <div className="publication-detail__layout">
+          <div className="publication-detail__main">
+            {bodyNode}
+            {externalNode}
+          </div>
 
-      {entry.body.length > 0 ? (
-        <div className="publication-prose publication-prose--body">
-          {entry.body.map((paragraph) => (
-            <p key={paragraph.slice(0, 48)}>{paragraph}</p>
-          ))}
+          <aside className="publication-detail__aside">
+            <Link href="/projects" className="publication-detail__back">
+              ← {t('projects.back')}
+            </Link>
+
+            <h1 className="publication-prose publication-detail__title">{entry.title}</h1>
+
+            {!isPublished ? (
+              <p className="publication-card__meta publication-detail__meta">
+                <span className="publication-card__status">
+                  {t('projects.statusLabel.draft')}
+                </span>
+              </p>
+            ) : null}
+
+            <p className="publication-prose publication-detail__intro">{entry.excerpt}</p>
+
+            {facts.length > 0 ? (
+              <dl className="publication-detail__facts">
+                {facts.map((fact) => (
+                  <div key={fact.key} className="publication-detail__fact">
+                    <dt className="publication-detail__fact-label">{fact.label}</dt>
+                    <dd className="publication-detail__fact-value">{fact.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            ) : null}
+          </aside>
         </div>
-      ) : (
-        <p className="muted publication-detail__empty">{t(`${copyNs}.bodySoon`)}</p>
-      )}
+      </article>
+    )
+  }
 
-      {external ? (
-        <p className="publication-detail__external-wrap">
-          <a
-            href={external.href}
-            className="publication-detail__external"
-            target="_blank"
-            rel="noreferrer"
-          >
-            {external.label}
-          </a>
+  return (
+    <article className="publication-detail">
+      <div className="panel panel--publications publication-detail__content">
+        <Link href="/projects" className="publication-detail__back">
+          ← {t(`${copyNs}.back`)}
+        </Link>
+
+        <h1 className="publication-prose publication-detail__title">{entry.title}</h1>
+
+        <p className="publication-card__meta publication-detail__meta">
+          {dateText ? (
+            <>
+              <time dateTime={entry.publishedAt}>{dateText}</time>
+              <span className="publication-card__dot" aria-hidden="true">·</span>
+            </>
+          ) : null}
+          {entry.readMinutes ? (
+            <span>{t('publications.readTime').replace('{0}', String(entry.readMinutes))}</span>
+          ) : null}
+          {!isPublished ? (
+            <>
+              <span className="publication-card__dot" aria-hidden="true">·</span>
+              <span className="publication-card__status">{t(`${copyNs}.statusLabel.draft`)}</span>
+            </>
+          ) : null}
         </p>
-      ) : externalSoon ? (
-        <p className="publication-detail__external-soon">{externalSoon}</p>
-      ) : null}
+
+        <p className="publication-prose publication-prose--lead">{entry.excerpt}</p>
+
+        {bodyNode}
+        {externalNode}
       </div>
     </article>
   )

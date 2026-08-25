@@ -211,6 +211,9 @@
     "bodySoon": "Texto completo em breve.",
     "heroImage": "Imagem de destaque",
     "fromDb": "Sincronizado do Supabase",
+    "stack": "Stack",
+    "role": "Papel",
+    "client": "Cliente",
     "statusLabel": {
       "draft": "Rascunho"
     }

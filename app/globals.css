@@ -1963,6 +1963,81 @@ a {
   padding-inline: var(--site-inline-pad);
 }
 
+/* ── Project detail: main column of body + sticky presentation column on the
+   right (title, description, Stack/Role/Client facts). Mirrors the case-study
+   layout used by experience-detail. ─────────────────────────────────────── */
+.publication-detail--project .publication-detail__layout {
+  box-sizing: border-box;
+  max-width: var(--site-column-max);
+  margin-inline: auto;
+  padding-inline: var(--site-inline-pad);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+
+.publication-detail__main {
+  min-width: 0;
+}
+
+.publication-detail__aside {
+  border-top: 1px solid var(--arcadia-line);
+  padding-top: 1.25rem;
+  order: -1;
+}
+
+.publication-detail__intro {
+  margin: 0.5rem 0 0;
+  color: color-mix(in srgb, var(--arcadia-fg) 82%, var(--arcadia-muted));
+  max-width: none;
+}
+
+.publication-detail__facts {
+  margin: 1.5rem 0 0;
+  display: grid;
+  gap: 0;
+}
+
+.publication-detail__fact {
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.85rem 0;
+  border-top: 1px solid var(--arcadia-line);
+}
+
+.publication-detail__fact-label {
+  margin: 0;
+  font-size: var(--type-small-size);
+  letter-spacing: var(--type-small-letter-spacing);
+  text-transform: uppercase;
+  color: var(--arcadia-muted);
+}
+
+.publication-detail__fact-value {
+  margin: 0;
+  font-family: var(--font-prose);
+  font-size: var(--prose-body-size);
+  line-height: var(--prose-body-line-height);
+  color: var(--arcadia-fg);
+}
+
+@media (min-width: 900px) {
+  .publication-detail--project .publication-detail__layout {
+    grid-template-columns: minmax(0, 1fr) minmax(16rem, 22rem);
+    align-items: start;
+  }
+
+  .publication-detail__aside {
+    order: 0;
+    position: sticky;
+    top: clamp(1.5rem, 6vh, 4rem);
+    border-top: none;
+    padding-top: 0;
+    border-left: 1px solid var(--arcadia-line);
+    padding-left: clamp(1.5rem, 2.5vw, 2.5rem);
+  }
+}
+
 .publication-detail__back {
   display: inline-block;
   margin-bottom: 1rem;

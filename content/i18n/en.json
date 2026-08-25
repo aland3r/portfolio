@@ -211,6 +211,9 @@
     "bodySoon": "Full story coming soon.",
     "heroImage": "Hero image",
     "fromDb": "Synced from Supabase",
+    "stack": "Stack",
+    "role": "Role",
+    "client": "Client",
     "statusLabel": {
       "draft": "Draft"
     }
