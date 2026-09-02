@@ -14,7 +14,6 @@ export default function AppHub() {
     isAuthenticated,
     isOwner,
     hasProductAccess,
-    getProductArticlesUrl,
   } = useLaunchProduct()
 
   // Names/lifecycle come from `portfolio.products` (show_in_apps); the static
@@ -62,20 +61,12 @@ export default function AppHub() {
                     {t('apps.try')}
                   </button>
                 ) : null}
-                {live && !product.comingSoon ? (
+                {!product.comingSoon && product.subdomain ? (
                   <a
-                    href={getProductLandingUrl(product.code)}
+                    href={getProductLandingUrl(product)}
                     className="app-hub__action app-hub__action--secondary"
                   >
                     {t('apps.visitLanding')}
-                  </a>
-                ) : null}
-                {product.code !== 'deviante' ? (
-                  <a
-                    href={getProductArticlesUrl(product.code)}
-                    className="app-hub__action app-hub__action--tertiary"
-                  >
-                    {t('apps.publications')}
                   </a>
                 ) : null}
               </div>
